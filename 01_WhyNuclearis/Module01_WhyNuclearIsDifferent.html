@@ -512,6 +512,38 @@
         .btn-icon { font-size: 1.2rem; }
 
         /* ========================================
+           INLINE TERM DEFINITIONS
+           ======================================== */
+        .term-note {
+            background: linear-gradient(135deg, rgba(0, 176, 240, 0.08) 0%, rgba(146, 208, 80, 0.05) 100%);
+            border-left: 3px solid var(--accent-blue);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: var(--space-md) var(--space-lg);
+            margin: var(--space-md) 0;
+            font-size: 0.9rem;
+        }
+
+        .term-note-label {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            color: var(--accent-blue);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--space-xs);
+        }
+
+        .term-note p {
+            margin: 0;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .term-note strong {
+            color: var(--accent-green);
+        }
+
+        /* ========================================
            CARDS
            ======================================== */
         .card {
@@ -1921,6 +1953,11 @@
                     <div class="comparison-takeaway">
                         <p>A single fuel pellet the size of your fingertip contains the same energy as <strong>1 tonne of coal</strong> or <strong>480 cubic metres of natural gas</strong>.</p>
                     </div>
+                    
+                    <div class="term-note">
+                        <div class="term-note-label">📘 Key Term</div>
+                        <p><strong>Nuclear fission</strong> is splitting heavy atoms (like uranium) to release energy. When a uranium atom splits, it releases millions of times more energy than burning a carbon atom in coal. This extraordinary energy density is what makes nuclear power unique.</p>
+                    </div>
                 </div>
 
                 <!-- Stats Grid -->
@@ -1929,7 +1966,7 @@
                         <div class="stat-value">2,000,000×</div>
                         <div class="stat-label">More Energy Dense Than Coal</div>
                         <div class="stat-comparison">
-                            One kilogram of uranium contains as much energy as 2,000 tonnes of coal
+                            One uranium fuel pellet—the size of a fingertip—contains as much energy as one tonne of coal
                         </div>
                     </div>
                     
@@ -1951,41 +1988,49 @@
                     <!-- Three fuel comparison cards -->
                     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); margin: var(--space-xl) 0;">
                         
-                        <!-- Uranium -->
+                        <!-- Uranium Pellet -->
                         <div style="background: var(--bg-card); border: 2px solid var(--accent-orange); border-radius: var(--radius-lg); padding: var(--space-lg); text-align: center;">
                             <div style="font-size: 2rem; margin-bottom: var(--space-sm);">⚛️</div>
-                            <div style="font-family: 'Rajdhani', sans-serif; font-weight: 600; color: var(--text-heading); margin-bottom: var(--space-xs);">Uranium</div>
-                            <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.75rem; color: var(--accent-orange); font-weight: 700;" id="uraniumAmount">1 kg</div>
+                            <div style="font-family: 'Rajdhani', sans-serif; font-weight: 600; color: var(--text-heading); margin-bottom: var(--space-xs);">Uranium Pellets</div>
+                            <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.75rem; color: var(--accent-orange); font-weight: 700;" id="uraniumAmount">1 pellet</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: var(--space-xs);">(~7 grams each)</div>
                         </div>
                         
                         <!-- Coal -->
                         <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: var(--space-lg); text-align: center;">
                             <div style="font-size: 2rem; margin-bottom: var(--space-sm);">⬛</div>
                             <div style="font-family: 'Rajdhani', sans-serif; font-weight: 600; color: var(--text-heading); margin-bottom: var(--space-xs);">Coal</div>
-                            <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.75rem; color: var(--accent-orange); font-weight: 700;" id="coalAmount">2,000 tonnes</div>
-                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: var(--space-xs);" id="coalContext">80 lorry loads</div>
+                            <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.75rem; color: var(--accent-orange); font-weight: 700;" id="coalAmount">1 tonne</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: var(--space-xs);" id="coalContext">1 bulk bag</div>
                         </div>
                         
                         <!-- Natural Gas -->
                         <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: var(--space-lg); text-align: center;">
                             <div style="font-size: 2rem; margin-bottom: var(--space-sm);">🔥</div>
                             <div style="font-family: 'Rajdhani', sans-serif; font-weight: 600; color: var(--text-heading); margin-bottom: var(--space-xs);">Natural Gas</div>
-                            <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.75rem; color: var(--accent-orange); font-weight: 700;" id="gasAmount">2,400,000 m³</div>
-                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: var(--space-xs);" id="gasContext">960 tanker trucks</div>
+                            <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.75rem; color: var(--accent-orange); font-weight: 700;" id="gasAmount">481 m³</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: var(--space-xs);" id="gasContext">(17,000 cubic feet)</div>
                         </div>
                     </div>
 
                     <!-- Slider -->
                     <div class="slider-control">
-                        <span class="slider-label">Uranium:</span>
+                        <span class="slider-label">Pellets:</span>
                         <input type="range" id="energySlider" min="1" max="100" value="1" oninput="updateEnergyComparison(this.value)">
-                        <span class="slider-label" id="sliderValue">1 kg</span>
+                        <span class="slider-label" id="sliderValue">1 pellet</span>
+                    </div>
+
+                    <!-- Source note -->
+                    <div style="margin-top: var(--space-md); padding: var(--space-sm); background: rgba(0, 176, 240, 0.08); border-radius: var(--radius-sm); text-align: center;">
+                        <p style="margin: 0; color: var(--text-muted); font-size: 0.8rem;">
+                            📊 Source: Nuclear Energy Institute, American Nuclear Society
+                        </p>
                     </div>
 
                     <!-- Real-world context -->
                     <div style="margin-top: var(--space-lg); padding: var(--space-md); background: var(--bg-card); border-radius: var(--radius-md); text-align: center;">
                         <p style="margin: 0; color: var(--text-secondary); font-size: 0.9rem;" id="realWorldContext">
-                            💡 <strong>1 kg of uranium</strong> could power a UK home for <strong>~45 years</strong>
+                            💡 <strong>10 uranium pellets</strong> can power an average UK home for <strong>an entire year</strong>
                         </p>
                     </div>
                 </div>
@@ -2157,6 +2202,11 @@
                         <p>When uranium atoms split (fission), they create smaller atoms called <strong>fission products</strong>. Many of these are radioactive and unstable.</p>
                         <p>As these fission products decay into stable atoms, they release energy — mostly as heat. This process can't be stopped or controlled; it's governed by the laws of physics.</p>
                         <p><strong>Key insight:</strong> Even though you can stop the chain reaction instantly by inserting control rods, you can't stop the decay heat. You can only <strong>remove</strong> it by cooling.</p>
+                        
+                        <div class="term-note">
+                            <div class="term-note-label">📘 Key Term</div>
+                            <p><strong>Control rods</strong> are rods made of neutron-absorbing material (like boron). Push them into the reactor core to slow the reaction; pull them out to speed it up. In an emergency, all rods drop in at once—called a "scram"—to stop fission within seconds.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -2203,6 +2253,11 @@
                             <li><strong>Neutrons</strong> — need water or specialised materials</li>
                         </ul>
                         <p>The key challenge: you can't see, smell, or feel radiation. This is why we need sophisticated monitoring and multiple layers of protection.</p>
+                        
+                        <div class="term-note">
+                            <div class="term-note-label">📘 Key Term</div>
+                            <p><strong>Radioactivity</strong> is the process of unstable atoms releasing energy to become stable. A <strong>half-life</strong> is how long it takes for half the radioactive atoms to decay. Some isotopes have half-lives of seconds; others last thousands of years.</p>
+                        </div>
                     </div>
                     
                     <div class="content-image">
@@ -2528,6 +2583,11 @@
 
                     <div class="comparison-takeaway">
                         <p>Containment isn't just one wall — it's <strong>multiple barriers</strong>: the fuel pellet itself, the fuel cladding, the reactor vessel, and the containment building.</p>
+                    </div>
+                    
+                    <div class="term-note">
+                        <div class="term-note-label">📘 Key Term</div>
+                        <p><strong>Defence in depth</strong> means multiple independent barriers, each capable of preventing a release on its own. If one fails, others remain. <strong>Containment</strong> is the outermost barrier—a massive concrete and steel structure (often over 1 metre thick) designed to keep radioactive material inside even in worst-case scenarios.</p>
                     </div>
                 </div>
 
@@ -3337,7 +3397,7 @@
                     <img src="https://raw.githubusercontent.com/megtomazela-create/DfMDfADfO-Training/main/00_images/Logo_white.png" alt="The Nuclear House" style="height: 40px; opacity: 0.7; margin-bottom: var(--space-md);">
                     <p style="font-size: 0.85rem; color: var(--text-muted);">Module 1 • TNH Intro to Nuclear</p>
                     <p style="font-size: 0.75rem; color: var(--text-muted); opacity: 0.7;">© The Nuclear House Academy</p>
-                    <div style="position: absolute; bottom: 10px; right: 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--text-muted); opacity: 0.5;">v0.5</div>
+                    <div style="position: absolute; bottom: 10px; right: 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--text-muted); opacity: 0.5;">v0.6</div>
                 </div>
             </div>
         </section>
@@ -3471,33 +3531,40 @@
         }
 
         // ==================== ENERGY SLIDER ====================
+        // Source: Nuclear Energy Institute, American Nuclear Society
+        // 1 uranium fuel pellet (~7g) = 1 tonne coal = 17,000 cubic feet natural gas (481 m³) = 149 gallons oil
         function updateEnergyComparison(value) {
-            const uranium = parseInt(value);
-            const coal = uranium * 2000; // tonnes
-            const gas = uranium * 2400000; // cubic metres
-            const lorryLoads = Math.round(coal / 25);
-            const tankerLoads = Math.round(gas / 2500);
+            const pellets = parseInt(value);
+            const coal = pellets; // tonnes (1 pellet = 1 tonne)
+            const gas = pellets * 481; // cubic metres (1 pellet = 481 m³)
             
             // Update amounts
-            document.getElementById('uraniumAmount').textContent = `${uranium} kg`;
-            document.getElementById('coalAmount').textContent = `${coal.toLocaleString()} tonnes`;
+            document.getElementById('uraniumAmount').textContent = pellets === 1 ? '1 pellet' : `${pellets} pellets`;
+            document.getElementById('coalAmount').textContent = pellets === 1 ? '1 tonne' : `${coal.toLocaleString()} tonnes`;
             document.getElementById('gasAmount').textContent = `${gas.toLocaleString()} m³`;
-            document.getElementById('sliderValue').textContent = `${uranium} kg`;
+            document.getElementById('sliderValue').textContent = pellets === 1 ? '1 pellet' : `${pellets} pellets`;
             
             // Update context
-            document.getElementById('coalContext').textContent = `${lorryLoads.toLocaleString()} lorry loads`;
-            document.getElementById('gasContext').textContent = `${tankerLoads.toLocaleString()} tanker trucks`;
+            if (coal === 1) {
+                document.getElementById('coalContext').textContent = '1 bulk bag';
+            } else if (coal <= 25) {
+                document.getElementById('coalContext').textContent = `${coal} bulk bags`;
+            } else {
+                const lorryLoads = Math.round(coal / 25);
+                document.getElementById('coalContext').textContent = `${lorryLoads} lorry loads`;
+            }
+            document.getElementById('gasContext').textContent = `(${(pellets * 17000).toLocaleString()} cubic feet)`;
             
             // Update real-world context
             const realWorldContext = document.getElementById('realWorldContext');
-            if (uranium <= 1) {
-                realWorldContext.innerHTML = '💡 <strong>1 kg of uranium</strong> could power a UK home for <strong>~45 years</strong>';
-            } else if (uranium <= 10) {
-                realWorldContext.innerHTML = `💡 <strong>${uranium} kg of uranium</strong> could power <strong>${(uranium * 45).toLocaleString()} homes</strong> for a year`;
-            } else if (uranium <= 50) {
-                realWorldContext.innerHTML = `💡 <strong>${uranium} kg</strong> = enough to fuel a small modular reactor`;
+            if (pellets <= 10) {
+                realWorldContext.innerHTML = `💡 <strong>${pellets} uranium pellet${pellets > 1 ? 's' : ''}</strong> can power an average UK home for <strong>${pellets === 10 ? 'an entire year' : `${Math.round(pellets * 36.5)} days`}</strong>`;
+            } else if (pellets <= 50) {
+                const years = (pellets / 10).toFixed(1);
+                realWorldContext.innerHTML = `💡 <strong>${pellets} pellets</strong> = enough to power a home for <strong>${years} years</strong>`;
             } else {
-                realWorldContext.innerHTML = `💡 <strong>${uranium} kg</strong> is roughly the annual fuel load for a <strong>power station</strong>`;
+                const homes = Math.round(pellets / 10);
+                realWorldContext.innerHTML = `💡 <strong>${pellets} pellets</strong> could power <strong>${homes} homes</strong> for a year`;
             }
         }
 
