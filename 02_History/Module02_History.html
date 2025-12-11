@@ -723,22 +723,26 @@
 
         .era-year {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            color: var(--text-muted);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
             margin-bottom: var(--space-xs);
         }
 
         .era-label {
             font-family: 'Rajdhani', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
             text-align: center;
             max-width: 80px;
         }
 
         .timeline-era.active .era-label {
             color: var(--accent-orange);
+        }
+
+        .timeline-era.active .era-year {
+            color: var(--text-primary);
         }
 
         .timeline-content {
@@ -2203,6 +2207,10 @@
                 <h3>The Manhattan Project (1942-1945)</h3>
                 <p>In 1939, Albert Einstein signed a letter to President Roosevelt warning that Nazi Germany might be developing an atomic bomb. This sparked what would become the largest scientific project in history—the Manhattan Project.</p>
                 
+                <div class="section-image">
+                    <img src="images/AI_02_manhattan_project.png" alt="The Manhattan Project - scientists working on the first nuclear reactor" style="width: 100%; border-radius: var(--radius-lg); margin: var(--space-lg) 0;">
+                </div>
+                
                 <div class="highlight-box">
                     <p><strong>130,000 people</strong> worked on the project across multiple sites. The cost: <strong>$2 billion</strong> (approximately £28 billion in today's money). Most workers had no idea what they were building.</p>
                 </div>
@@ -2283,6 +2291,10 @@
                 <h3>Atoms for Peace (1953)</h3>
                 <p>On 8th December 1953, President Eisenhower addressed the United Nations with a revolutionary proposal: share nuclear technology with the world for peaceful purposes, in exchange for commitments not to develop weapons.</p>
                 
+                <div class="section-image">
+                    <img src="images/AI_02_atoms_for_peace.png" alt="Atoms for Peace - the transition from weapons to civilian nuclear power" style="width: 100%; border-radius: var(--radius-lg); margin: var(--space-lg) 0;">
+                </div>
+                
                 <div class="highlight-box">
                     <p>"<strong>The United States pledges</strong> before you—and therefore before the world—its determination to help solve the fearful atomic dilemma—to devote its entire heart and mind to find the way by which the miraculous inventiveness of man shall not be dedicated to his death, but consecrated to his life."</p>
                 </div>
@@ -2313,6 +2325,10 @@
                 </div>
                 <h2>Reactor Generations</h2>
                 <p class="section-intro">Click on each generation to explore how reactor technology evolved over seven decades.</p>
+            </div>
+
+            <div class="section-image" style="margin-bottom: var(--space-xl);">
+                <img src="images/AI_02_reactor_evolution.png" alt="Evolution of nuclear reactor designs across four generations" style="width: 100%; border-radius: var(--radius-lg);">
             </div>
 
             <!-- Interactive Generation Timeline -->
@@ -2529,6 +2545,10 @@
                 <h3>What Happened</h3>
                 <p>At 4:00 AM on 28th March 1979, a routine maintenance procedure at Unit 2 triggered a sequence of events that would change the nuclear industry forever. A stuck valve, confusing instruments, and undertrained operators combined to produce a partial core meltdown—the worst accident in US commercial nuclear history.</p>
                 
+                <div class="section-image">
+                    <img src="images/AI_02_three_mile_island.png" alt="Three Mile Island nuclear power plant - site of the 1979 partial meltdown" style="width: 100%; border-radius: var(--radius-lg); margin: var(--space-lg) 0;">
+                </div>
+                
                 <div class="highlight-box">
                     <p><strong>The fundamental problem:</strong> Operators couldn't tell what was actually happening inside the reactor. Instruments showed the relief valve was "closed"—but it was actually stuck open, draining coolant. They turned off emergency cooling, thinking the system was working fine.</p>
                 </div>
@@ -2649,6 +2669,10 @@
                 <h3>A Reactor Unlike Others</h3>
                 <p>The RBMK-1000 was a uniquely Soviet design, optimised for producing both electricity and weapons-grade plutonium. It had a fundamental flaw that made it unstable at low power: a <strong>positive void coefficient</strong>.</p>
                 
+                <div class="section-image">
+                    <img src="images/AI_02_chernobyl.png" alt="Chernobyl nuclear power plant - the site of the world's worst nuclear accident" style="width: 100%; border-radius: var(--radius-lg); margin: var(--space-lg) 0;">
+                </div>
+                
                 <div class="highlight-box">
                     <p><strong>Positive void coefficient:</strong> In most reactors, if coolant boils away, the reaction slows down (a safety feature). In the RBMK, the opposite happened—steam bubbles made the reaction speed up. This created a dangerous feedback loop.</p>
                 </div>
@@ -2659,9 +2683,9 @@
             <!-- RBMK vs PWR Interactive Diagram -->
             <div class="diagram-container">
                 <h4 style="margin-bottom: var(--space-lg);">Reactor Design Comparison</h4>
-                <svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg">
                     <!-- PWR Side -->
-                    <g transform="translate(50, 30)">
+                    <g transform="translate(50, 40)">
                         <text x="170" y="20" fill="#92d050" font-family="Rajdhani" font-size="20" font-weight="700" text-anchor="middle">PWR (Western Design)</text>
                         
                         <!-- Containment dome -->
@@ -2670,28 +2694,28 @@
                         
                         <!-- Reactor vessel -->
                         <rect x="110" y="130" width="120" height="150" rx="8" fill="#4a5d6b" stroke="#6b7d8f" stroke-width="2"/>
-                        <text x="170" y="200" fill="#f7f8fa" font-family="Inter" font-size="12" font-weight="600" text-anchor="middle">Reactor</text>
-                        <text x="170" y="218" fill="#f7f8fa" font-family="Inter" font-size="12" font-weight="600" text-anchor="middle">Vessel</text>
+                        <text x="170" y="195" fill="#f7f8fa" font-family="Inter" font-size="13" font-weight="600" text-anchor="middle">Reactor</text>
+                        <text x="170" y="215" fill="#f7f8fa" font-family="Inter" font-size="13" font-weight="600" text-anchor="middle">Vessel</text>
                         
                         <!-- Water moderator indication -->
                         <rect x="125" y="150" width="90" height="100" fill="rgba(0, 176, 240, 0.35)" rx="4"/>
-                        <text x="170" y="265" fill="#00b0f0" font-family="Inter" font-size="10" font-weight="500" text-anchor="middle">Water Moderator</text>
+                        <text x="170" y="235" fill="#00b0f0" font-family="Inter" font-size="10" font-weight="500" text-anchor="middle">Water Moderator</text>
                         
                         <!-- Negative void label -->
-                        <rect x="55" y="295" width="230" height="40" rx="6" fill="rgba(146, 208, 80, 0.2)" stroke="#92d050" stroke-width="2"/>
-                        <text x="170" y="320" fill="#92d050" font-family="JetBrains Mono" font-size="12" font-weight="600" text-anchor="middle">NEGATIVE VOID COEFFICIENT</text>
+                        <rect x="55" y="320" width="230" height="40" rx="6" fill="rgba(146, 208, 80, 0.2)" stroke="#92d050" stroke-width="2"/>
+                        <text x="170" y="345" fill="#92d050" font-family="JetBrains Mono" font-size="12" font-weight="600" text-anchor="middle">NEGATIVE VOID COEFFICIENT</text>
                         
                         <!-- Safety arrow -->
-                        <text x="170" y="360" fill="#9babc2" font-family="Inter" font-size="11" text-anchor="middle">Steam → Power ↓ (Self-limiting)</text>
+                        <text x="170" y="385" fill="#9babc2" font-family="Inter" font-size="11" text-anchor="middle">Steam → Power ↓ (Self-limiting)</text>
                     </g>
                     
                     <!-- VS Divider -->
-                    <line x1="450" y1="50" x2="450" y2="350" stroke="#4a5d6b" stroke-width="2" stroke-dasharray="10,5"/>
-                    <circle cx="450" cy="200" r="28" fill="#1f2937" stroke="#4a5d6b" stroke-width="2"/>
-                    <text x="450" y="206" fill="#9babc2" font-family="Rajdhani" font-size="16" font-weight="700" text-anchor="middle">VS</text>
+                    <line x1="450" y1="60" x2="450" y2="380" stroke="#4a5d6b" stroke-width="2" stroke-dasharray="10,5"/>
+                    <circle cx="450" cy="220" r="28" fill="#1f2937" stroke="#4a5d6b" stroke-width="2"/>
+                    <text x="450" y="226" fill="#9babc2" font-family="Rajdhani" font-size="16" font-weight="700" text-anchor="middle">VS</text>
                     
                     <!-- RBMK Side -->
-                    <g transform="translate(510, 30)">
+                    <g transform="translate(510, 40)">
                         <text x="170" y="20" fill="#dc2626" font-family="Rajdhani" font-size="20" font-weight="700" text-anchor="middle">RBMK (Soviet Design)</text>
                         
                         <!-- Simple building (no dome) -->
@@ -2700,22 +2724,21 @@
                         
                         <!-- Graphite core -->
                         <rect x="85" y="135" width="170" height="140" rx="8" fill="#6b7280" stroke="#9ca3af" stroke-width="2"/>
-                        <text x="170" y="195" fill="#f7f8fa" font-family="Inter" font-size="12" font-weight="600" text-anchor="middle">Graphite</text>
-                        <text x="170" y="213" fill="#f7f8fa" font-family="Inter" font-size="12" font-weight="600" text-anchor="middle">Core</text>
+                        <text x="170" y="205" fill="#f7f8fa" font-family="Inter" font-size="13" font-weight="600" text-anchor="middle">Graphite Core</text>
                         
                         <!-- Pressure tubes -->
                         <line x1="115" y1="145" x2="115" y2="265" stroke="#00b0f0" stroke-width="6"/>
                         <line x1="150" y1="145" x2="150" y2="265" stroke="#00b0f0" stroke-width="6"/>
                         <line x1="185" y1="145" x2="185" y2="265" stroke="#00b0f0" stroke-width="6"/>
                         <line x1="220" y1="145" x2="220" y2="265" stroke="#00b0f0" stroke-width="6"/>
-                        <text x="170" y="255" fill="#00b0f0" font-family="Inter" font-size="10" font-weight="500" text-anchor="middle">Pressure Tubes</text>
+                        <text x="170" y="295" fill="#00b0f0" font-family="Inter" font-size="10" font-weight="500" text-anchor="middle">Pressure Tubes</text>
                         
                         <!-- Positive void label -->
-                        <rect x="55" y="295" width="230" height="40" rx="6" fill="rgba(220, 38, 38, 0.2)" stroke="#dc2626" stroke-width="2"/>
-                        <text x="170" y="320" fill="#dc2626" font-family="JetBrains Mono" font-size="12" font-weight="600" text-anchor="middle">POSITIVE VOID COEFFICIENT</text>
+                        <rect x="55" y="320" width="230" height="40" rx="6" fill="rgba(220, 38, 38, 0.2)" stroke="#dc2626" stroke-width="2"/>
+                        <text x="170" y="345" fill="#dc2626" font-family="JetBrains Mono" font-size="12" font-weight="600" text-anchor="middle">POSITIVE VOID COEFFICIENT</text>
                         
                         <!-- Danger arrow -->
-                        <text x="170" y="360" fill="#9babc2" font-family="Inter" font-size="11" text-anchor="middle">Steam → Power ↑ (Runaway!)</text>
+                        <text x="170" y="385" fill="#9babc2" font-family="Inter" font-size="11" text-anchor="middle">Steam → Power ↑ (Runaway!)</text>
                     </g>
                 </svg>
             </div>
@@ -2834,6 +2857,10 @@
                 <h3>When Nature Overwhelms</h3>
                 <p>Unlike TMI and Chernobyl, Fukushima wasn't caused by operator error or design flaw. The reactors did exactly what they were supposed to do when the earthquake struck—they shut down safely. The disaster came from what happened next.</p>
                 
+                <div class="section-image">
+                    <img src="images/AI_02_fukushima.png" alt="Fukushima Daiichi - the 2011 nuclear disaster caused by the tsunami" style="width: 100%; border-radius: var(--radius-lg); margin: var(--space-lg) 0;">
+                </div>
+                
                 <div class="highlight-box">
                     <p><strong>The sequence:</strong> Earthquake → Automatic shutdown → Tsunami → Total power loss → No cooling → Three core meltdowns</p>
                 </div>
@@ -2924,6 +2951,10 @@
                 <h3>A Contrast: Onagawa</h3>
                 <p>Just 120 km north, the Onagawa Nuclear Power Plant experienced the same earthquake and a 13-metre tsunami—yet suffered no major damage. Why?</p>
                 
+                <div class="section-image">
+                    <img src="images/AI_02_onagawa_contrast.png" alt="Onagawa vs Fukushima - two plants, same tsunami, different outcomes" style="width: 100%; border-radius: var(--radius-lg); margin: var(--space-lg) 0;">
+                </div>
+                
                 <div class="highlight-box">
                     <p>In the 1960s, engineer Yanosuke Hirai insisted Onagawa's seawall be 14.8 metres high—nearly three times higher than calculations required. His colleagues thought he was being overly cautious. His decision saved the plant.</p>
                 </div>
@@ -2970,6 +3001,10 @@
                 </div>
                 <h2>The Evolution of Safety Culture</h2>
                 <p class="section-intro">Each accident fundamentally changed how the nuclear industry thinks about safety. The concept of "safety culture" didn't even exist before Chernobyl.</p>
+            </div>
+
+            <div class="section-image" style="margin-bottom: var(--space-xl);">
+                <img src="images/AI_02_safety_culture.png" alt="Evolution of nuclear safety culture - from lessons learned to global standards" style="width: 100%; border-radius: var(--radius-lg);">
             </div>
 
             <div class="culture-evolution">
@@ -3514,6 +3549,10 @@
                 <p class="section-intro">What you should remember from this module.</p>
             </div>
 
+            <div class="section-image" style="margin-bottom: var(--space-xl);">
+                <img src="images/AI_02_complete.png" alt="Module 2 Complete - History and Development of Nuclear Power" style="width: 100%; border-radius: var(--radius-lg);">
+            </div>
+
             <div class="takeaways-grid">
                 <div class="takeaway-card">
                     <div class="takeaway-number">01</div>
@@ -3566,7 +3605,7 @@
 
             <div class="footer">
                 <p>© 2024 The Nuclear House Academy. All rights reserved.</p>
-                <div class="version-number">v0.4</div>
+                <div class="version-number">v0.5</div>
             </div>
         </section>
     </main>
