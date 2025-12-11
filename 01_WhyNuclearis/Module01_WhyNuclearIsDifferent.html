@@ -257,7 +257,7 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.7rem;
             color: var(--text-muted);
-            min-width: 35px;
+            min-width: 70px;
         }
 
         .audio-mute-btn {
@@ -1779,10 +1779,10 @@
             <div class="audio-progress-container" onclick="seekAudio(event)">
                 <div class="audio-progress-bar" id="audioProgress"></div>
             </div>
-            <span class="audio-time" id="audioTime">0:00</span>
+            <span class="audio-time" id="audioTime">0:00 / 0:00</span>
             <button class="audio-mute-btn" id="audioMute" onclick="toggleMute()" title="Mute/Unmute">🔊</button>
         </div>
-        <audio id="narrationAudio" preload="metadata"></audio>
+        <audio id="narrationAudio" preload="auto"></audio>
         
         <div class="header-progress">
             <div class="progress-track">
@@ -1955,7 +1955,7 @@
                             <div class="slider-amount" id="uraniumAmount">1 kg</div>
                         </div>
                         <div class="slider-item active" id="sliderCoal">
-                            <div class="slider-icon">�ite</div>
+                            <div class="slider-icon"> ite</div>
                             <div class="slider-name">Coal</div>
                             <div class="slider-amount" id="coalAmount">2,000 tonnes</div>
                         </div>
@@ -2342,45 +2342,80 @@
                     <div class="comparison-visual">
                         <div class="comparison-item">
                             <div class="comparison-image">
-                                <!-- Uncontained SVG -->
+                                <!-- Uncontained SVG - particles escaping outward -->
                                 <svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg" style="max-height: 200px; width: auto;">
                                     <defs>
                                         <radialGradient id="dangerGlow" cx="50%" cy="50%" r="50%">
                                             <stop offset="0%" stop-color="#e54545" stop-opacity="0.4"/>
                                             <stop offset="100%" stop-color="#e54545" stop-opacity="0"/>
                                         </radialGradient>
-                                        <filter id="particleGlow">
-                                            <feGaussianBlur stdDeviation="2" result="blur"/>
-                                            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                                        </filter>
                                     </defs>
                                     
                                     <!-- Danger glow background -->
                                     <circle cx="120" cy="100" r="95" fill="url(#dangerGlow)"/>
                                     
                                     <!-- Damaged container -->
-                                    <rect x="85" y="65" width="70" height="70" fill="#4a5d6b" stroke="#6b7d8f" stroke-width="2" rx="4"/>
-                                    <path d="M140 80 L155 65 L155 75 L145 85 Z" fill="#2d3a47" stroke="#e54545" stroke-width="1"/>
-                                    <line x1="140" y1="80" x2="150" y2="70" stroke="#e54545" stroke-width="2"/>
+                                    <rect x="95" y="75" width="50" height="50" fill="#4a5d6b" stroke="#6b7d8f" stroke-width="2" rx="4"/>
+                                    <path d="M135 85 L150 70" stroke="#e54545" stroke-width="2"/>
+                                    <path d="M138 92 L152 82" stroke="#e54545" stroke-width="1.5"/>
                                     
                                     <!-- Radiation symbol in container -->
                                     <circle cx="120" cy="100" r="8" fill="none" stroke="#f4c255" stroke-width="2"/>
-                                    <path d="M120 92 L120 85 M126 96 L132 92 M126 104 L132 108 M120 108 L120 115 M114 104 L108 108 M114 96 L108 92" stroke="#f4c255" stroke-width="2"/>
+                                    <circle cx="120" cy="100" r="3" fill="#f4c255"/>
                                     
-                                    <!-- Escaping particles -->
-                                    <g filter="url(#particleGlow)">
-                                        <circle cx="165" cy="55" r="4" fill="#e54545"><animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/></circle>
-                                        <circle cx="180" cy="75" r="3" fill="#cc5500"><animate attributeName="opacity" values="0.5;1;0.5" dur="1.2s" repeatCount="indefinite"/></circle>
-                                        <circle cx="190" cy="95" r="3.5" fill="#e54545"><animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.8s" repeatCount="indefinite"/></circle>
-                                        <circle cx="175" cy="115" r="3" fill="#f4c255"><animate attributeName="opacity" values="1;0.4;1" dur="1.3s" repeatCount="indefinite"/></circle>
-                                        <circle cx="185" cy="60" r="2.5" fill="#cc5500"><animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/></circle>
-                                        <circle cx="200" cy="85" r="2" fill="#e54545"><animate attributeName="opacity" values="0.4;0.9;0.4" dur="1.6s" repeatCount="indefinite"/></circle>
-                                        <circle cx="55" cy="60" r="3" fill="#e54545"><animate attributeName="opacity" values="0.7;0.2;0.7" dur="1.4s" repeatCount="indefinite"/></circle>
-                                        <circle cx="45" cy="90" r="2.5" fill="#cc5500"><animate attributeName="opacity" values="1;0.5;1" dur="1.7s" repeatCount="indefinite"/></circle>
-                                        <circle cx="50" cy="120" r="3" fill="#f4c255"><animate attributeName="opacity" values="0.5;1;0.5" dur="1.9s" repeatCount="indefinite"/></circle>
-                                        <circle cx="170" cy="145" r="2.5" fill="#e54545"><animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.5s" repeatCount="indefinite"/></circle>
-                                        <circle cx="65" cy="145" r="3" fill="#cc5500"><animate attributeName="opacity" values="0.6;1;0.6" dur="1.4s" repeatCount="indefinite"/></circle>
-                                    </g>
+                                    <!-- Escaping particles - animated outward movement -->
+                                    <!-- Top-right particles -->
+                                    <circle r="4" fill="#e54545">
+                                        <animate attributeName="cx" values="140;180;220" dur="2s" repeatCount="indefinite"/>
+                                        <animate attributeName="cy" values="80;50;20" dur="2s" repeatCount="indefinite"/>
+                                        <animate attributeName="opacity" values="1;0.6;0" dur="2s" repeatCount="indefinite"/>
+                                    </circle>
+                                    <circle r="3" fill="#cc5500">
+                                        <animate attributeName="cx" values="145;175;205" dur="2.3s" repeatCount="indefinite"/>
+                                        <animate attributeName="cy" values="90;65;40" dur="2.3s" repeatCount="indefinite"/>
+                                        <animate attributeName="opacity" values="1;0.5;0" dur="2.3s" repeatCount="indefinite"/>
+                                    </circle>
+                                    <circle r="3.5" fill="#e54545">
+                                        <animate attributeName="cx" values="142;185;228" dur="1.8s" repeatCount="indefinite"/>
+                                        <animate attributeName="cy" values="95;85;75" dur="1.8s" repeatCount="indefinite"/>
+                                        <animate attributeName="opacity" values="1;0.7;0" dur="1.8s" repeatCount="indefinite"/>
+                                    </circle>
+                                    
+                                    <!-- Right particles -->
+                                    <circle r="3" fill="#f4c255">
+                                        <animate attributeName="cx" values="145;190;235" dur="2.1s" repeatCount="indefinite"/>
+                                        <animate attributeName="cy" values="100;100;100" dur="2.1s" repeatCount="indefinite"/>
+                                        <animate attributeName="opacity" values="1;0.6;0" dur="2.1s" repeatCount="indefinite"/>
+                                    </circle>
+                                    <circle r="2.5" fill="#e54545">
+                                        <animate attributeName="cx" values="145;180;215" dur="1.9s" repeatCount="indefinite"/>
+                                        <animate attributeName="cy" values="110;120;130" dur="1.9s" repeatCount="indefinite"/>
+                                        <animate attributeName="opacity" values="1;0.5;0" dur="1.9s" repeatCount="indefinite"/>
+                                    </circle>
+                                    
+                                    <!-- Top-left particles -->
+                                    <circle r="3" fill="#cc5500">
+                                        <animate attributeName="cx" values="100;60;20" dur="2.2s" repeatCount="indefinite"/>
+                                        <animate attributeName="cy" values="75;45;15" dur="2.2s" repeatCount="indefinite"/>
+                                        <animate attributeName="opacity" values="1;0.6;0" dur="2.2s" repeatCount="indefinite"/>
+                                    </circle>
+                                    <circle r="2.5" fill="#e54545">
+                                        <animate attributeName="cx" values="95;55;15" dur="2.4s" repeatCount="indefinite"/>
+                                        <animate attributeName="cy" values="85;65;45" dur="2.4s" repeatCount="indefinite"/>
+                                        <animate attributeName="opacity" values="1;0.5;0" dur="2.4s" repeatCount="indefinite"/>
+                                    </circle>
+                                    
+                                    <!-- Bottom particles -->
+                                    <circle r="3" fill="#f4c255">
+                                        <animate attributeName="cx" values="110;90;70" dur="2s" repeatCount="indefinite"/>
+                                        <animate attributeName="cy" values="125;155;185" dur="2s" repeatCount="indefinite"/>
+                                        <animate attributeName="opacity" values="1;0.6;0" dur="2s" repeatCount="indefinite"/>
+                                    </circle>
+                                    <circle r="3.5" fill="#e54545">
+                                        <animate attributeName="cx" values="130;150;170" dur="2.1s" repeatCount="indefinite"/>
+                                        <animate attributeName="cy" values="125;160;195" dur="2.1s" repeatCount="indefinite"/>
+                                        <animate attributeName="opacity" values="1;0.5;0" dur="2.1s" repeatCount="indefinite"/>
+                                    </circle>
                                     
                                     <!-- Warning indicator -->
                                     <circle cx="120" cy="175" r="12" fill="#e54545" opacity="0.2"/>
@@ -2395,55 +2430,73 @@
                         
                         <div class="comparison-item">
                             <div class="comparison-image">
-                                <!-- Contained SVG -->
+                                <!-- Contained SVG - particles bouncing inside -->
                                 <svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg" style="max-height: 200px; width: auto;">
                                     <defs>
                                         <radialGradient id="safeGlow" cx="50%" cy="50%" r="50%">
                                             <stop offset="0%" stop-color="#92d050" stop-opacity="0.15"/>
                                             <stop offset="100%" stop-color="#92d050" stop-opacity="0"/>
                                         </radialGradient>
+                                        <clipPath id="containmentClip">
+                                            <rect x="50" y="40" width="140" height="120" rx="6"/>
+                                        </clipPath>
                                     </defs>
                                     
                                     <!-- Safe glow background -->
                                     <circle cx="120" cy="100" r="95" fill="url(#safeGlow)"/>
                                     
                                     <!-- Outer containment building -->
-                                    <rect x="45" y="35" width="150" height="130" fill="none" stroke="#92d050" stroke-width="3" rx="8" stroke-dasharray="none"/>
-                                    <text x="120" y="28" text-anchor="middle" fill="#6b7d8f" font-family="Rajdhani, sans-serif" font-size="9">CONTAINMENT BUILDING</text>
+                                    <rect x="50" y="40" width="140" height="120" fill="none" stroke="#92d050" stroke-width="3" rx="6"/>
+                                    <text x="120" y="32" text-anchor="middle" fill="#6b7d8f" font-family="Rajdhani, sans-serif" font-size="8">CONTAINMENT</text>
                                     
                                     <!-- Reactor vessel -->
-                                    <rect x="65" y="55" width="110" height="90" fill="none" stroke="#00b0f0" stroke-width="2" rx="4"/>
-                                    <text x="120" y="52" text-anchor="middle" fill="#6b7d8f" font-family="Rajdhani, sans-serif" font-size="8">REACTOR VESSEL</text>
+                                    <rect x="70" y="55" width="100" height="90" fill="none" stroke="#00b0f0" stroke-width="2" rx="4"/>
                                     
                                     <!-- Fuel cladding -->
-                                    <rect x="85" y="75" width="70" height="50" fill="#4a5d6b" stroke="#f4c255" stroke-width="2" rx="2"/>
-                                    <text x="120" y="72" text-anchor="middle" fill="#6b7d8f" font-family="Rajdhani, sans-serif" font-size="8">CLADDING</text>
+                                    <rect x="90" y="70" width="60" height="60" fill="#4a5d6b" stroke="#f4c255" stroke-width="2" rx="2"/>
                                     
                                     <!-- Fuel pellet core -->
-                                    <rect x="100" y="88" width="40" height="24" fill="#364451" stroke="#cc5500" stroke-width="2" rx="2"/>
+                                    <rect x="105" y="85" width="30" height="30" fill="#364451" stroke="#cc5500" stroke-width="2" rx="2"/>
                                     
                                     <!-- Radiation symbol (contained) -->
                                     <circle cx="120" cy="100" r="6" fill="none" stroke="#f4c255" stroke-width="1.5"/>
                                     <circle cx="120" cy="100" r="2" fill="#f4c255"/>
                                     
-                                    <!-- Contained particles (not escaping) -->
-                                    <g opacity="0.6">
-                                        <circle cx="108" cy="95" r="2" fill="#cc5500"/>
-                                        <circle cx="132" cy="102" r="2" fill="#cc5500"/>
-                                        <circle cx="115" cy="108" r="1.5" fill="#f4c255"/>
-                                        <circle cx="125" cy="92" r="1.5" fill="#f4c255"/>
+                                    <!-- Contained particles - bouncing inside the barriers -->
+                                    <g clip-path="url(#containmentClip)">
+                                        <!-- Particle 1 - bounces in cladding area -->
+                                        <circle r="3" fill="#cc5500">
+                                            <animate attributeName="cx" values="100;130;145;130;100" dur="3s" repeatCount="indefinite"/>
+                                            <animate attributeName="cy" values="80;75;95;120;80" dur="3s" repeatCount="indefinite"/>
+                                        </circle>
+                                        <!-- Particle 2 -->
+                                        <circle r="2.5" fill="#f4c255">
+                                            <animate attributeName="cx" values="135;110;95;110;135" dur="2.8s" repeatCount="indefinite"/>
+                                            <animate attributeName="cy" values="90;115;100;80;90" dur="2.8s" repeatCount="indefinite"/>
+                                        </circle>
+                                        <!-- Particle 3 -->
+                                        <circle r="3" fill="#cc5500">
+                                            <animate attributeName="cx" values="115;140;125;100;115" dur="3.2s" repeatCount="indefinite"/>
+                                            <animate attributeName="cy" values="110;95;75;90;110" dur="3.2s" repeatCount="indefinite"/>
+                                        </circle>
+                                        <!-- Particle 4 -->
+                                        <circle r="2" fill="#f4c255">
+                                            <animate attributeName="cx" values="125;105;120;140;125" dur="2.5s" repeatCount="indefinite"/>
+                                            <animate attributeName="cy" values="85;100;120;105;85" dur="2.5s" repeatCount="indefinite"/>
+                                        </circle>
+                                        <!-- Particle 5 -->
+                                        <circle r="2.5" fill="#cc5500">
+                                            <animate attributeName="cx" values="110;130;115;95;110" dur="2.9s" repeatCount="indefinite"/>
+                                            <animate attributeName="cy" values="100;85;75;95;100" dur="2.9s" repeatCount="indefinite"/>
+                                        </circle>
                                     </g>
                                     
-                                    <!-- Barrier labels on right -->
-                                    <g font-family="JetBrains Mono, sans-serif" font-size="8" fill="#9babc2">
-                                        <line x1="200" y1="100" x2="215" y2="100" stroke="#92d050" stroke-width="1"/>
-                                        <text x="218" y="103">1</text>
-                                        <line x1="200" y1="85" x2="215" y2="70" stroke="#00b0f0" stroke-width="1"/>
-                                        <text x="218" y="73">2</text>
-                                        <line x1="200" y1="70" x2="215" y2="50" stroke="#f4c255" stroke-width="1"/>
-                                        <text x="218" y="53">3</text>
-                                        <line x1="200" y1="55" x2="215" y2="35" stroke="#cc5500" stroke-width="1"/>
-                                        <text x="218" y="38">4</text>
+                                    <!-- Barrier labels -->
+                                    <g font-family="JetBrains Mono, monospace" font-size="7" fill="#6b7d8f">
+                                        <text x="195" y="50">1</text>
+                                        <text x="175" y="60">2</text>
+                                        <text x="155" y="73">3</text>
+                                        <text x="138" y="88">4</text>
                                     </g>
                                     
                                     <!-- Checkmark indicator -->
@@ -2483,7 +2536,7 @@
                             <p style="color: var(--text-secondary); font-size: 0.9rem;">Click each step to see the process</p>
                         </div>
 
-                        <svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto;" id="dnaSvg">
+                        <svg viewBox="0 0 760 400" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto;" id="dnaSvg">
                             <defs>
                                 <linearGradient id="dnaGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                                     <stop offset="0%" stop-color="#00b0f0"/>
@@ -2500,32 +2553,32 @@
                             </defs>
 
                             <!-- Background -->
-                            <rect width="800" height="420" fill="#1f2937" rx="8"/>
+                            <rect width="760" height="400" fill="#1f2937" rx="8"/>
 
                             <!-- Step indicators at top -->
                             <g id="stepIndicators" font-family="Rajdhani, sans-serif">
                                 <g id="step1Indicator" style="cursor: pointer;" onclick="showDnaStep(1)">
-                                    <circle cx="160" cy="30" r="18" fill="#cc5500" stroke="#cc5500" stroke-width="2"/>
-                                    <text x="160" y="36" text-anchor="middle" fill="white" font-size="14" font-weight="600">1</text>
-                                    <text x="160" y="58" text-anchor="middle" fill="#f7f8fa" font-size="11">Healthy DNA</text>
+                                    <circle cx="140" cy="30" r="18" fill="#cc5500" stroke="#cc5500" stroke-width="2"/>
+                                    <text x="140" y="36" text-anchor="middle" fill="white" font-size="14" font-weight="600">1</text>
+                                    <text x="140" y="58" text-anchor="middle" fill="#f7f8fa" font-size="11">Healthy DNA</text>
                                 </g>
-                                <line x1="180" y1="30" x2="290" y2="30" stroke="#4a5d6b" stroke-width="2" stroke-dasharray="4,4"/>
+                                <line x1="160" y1="30" x2="260" y2="30" stroke="#4a5d6b" stroke-width="2" stroke-dasharray="4,4"/>
                                 <g id="step2Indicator" style="cursor: pointer;" onclick="showDnaStep(2)">
-                                    <circle cx="310" cy="30" r="18" fill="#2d3a47" stroke="#4a5d6b" stroke-width="2"/>
-                                    <text x="310" y="36" text-anchor="middle" fill="#9babc2" font-size="14" font-weight="600">2</text>
-                                    <text x="310" y="58" text-anchor="middle" fill="#9babc2" font-size="11">Radiation Strike</text>
+                                    <circle cx="280" cy="30" r="18" fill="#2d3a47" stroke="#4a5d6b" stroke-width="2"/>
+                                    <text x="280" y="36" text-anchor="middle" fill="#9babc2" font-size="14" font-weight="600">2</text>
+                                    <text x="280" y="58" text-anchor="middle" fill="#9babc2" font-size="11">Radiation Strike</text>
                                 </g>
-                                <line x1="330" y1="30" x2="440" y2="30" stroke="#4a5d6b" stroke-width="2" stroke-dasharray="4,4"/>
+                                <line x1="300" y1="30" x2="400" y2="30" stroke="#4a5d6b" stroke-width="2" stroke-dasharray="4,4"/>
                                 <g id="step3Indicator" style="cursor: pointer;" onclick="showDnaStep(3)">
-                                    <circle cx="460" cy="30" r="18" fill="#2d3a47" stroke="#4a5d6b" stroke-width="2"/>
-                                    <text x="460" y="36" text-anchor="middle" fill="#9babc2" font-size="14" font-weight="600">3</text>
-                                    <text x="460" y="58" text-anchor="middle" fill="#9babc2" font-size="11">DNA Damage</text>
+                                    <circle cx="420" cy="30" r="18" fill="#2d3a47" stroke="#4a5d6b" stroke-width="2"/>
+                                    <text x="420" y="36" text-anchor="middle" fill="#9babc2" font-size="14" font-weight="600">3</text>
+                                    <text x="420" y="58" text-anchor="middle" fill="#9babc2" font-size="11">DNA Damage</text>
                                 </g>
-                                <line x1="480" y1="30" x2="590" y2="30" stroke="#4a5d6b" stroke-width="2" stroke-dasharray="4,4"/>
+                                <line x1="440" y1="30" x2="540" y2="30" stroke="#4a5d6b" stroke-width="2" stroke-dasharray="4,4"/>
                                 <g id="step4Indicator" style="cursor: pointer;" onclick="showDnaStep(4)">
-                                    <circle cx="610" cy="30" r="18" fill="#2d3a47" stroke="#4a5d6b" stroke-width="2"/>
-                                    <text x="610" y="36" text-anchor="middle" fill="#9babc2" font-size="14" font-weight="600">4</text>
-                                    <text x="610" y="58" text-anchor="middle" fill="#9babc2" font-size="11">Cell Response</text>
+                                    <circle cx="560" cy="30" r="18" fill="#2d3a47" stroke="#4a5d6b" stroke-width="2"/>
+                                    <text x="560" y="36" text-anchor="middle" fill="#9babc2" font-size="14" font-weight="600">4</text>
+                                    <text x="560" y="58" text-anchor="middle" fill="#9babc2" font-size="11">Cell Response</text>
                                 </g>
                             </g>
 
@@ -2675,62 +2728,57 @@
                                 <g transform="translate(50, 85)">
                                     <!-- Outcome 1: Repair -->
                                     <g transform="translate(0, 0)">
-                                        <rect x="0" y="0" width="200" height="110" fill="#2d3a47" stroke="#92d050" stroke-width="2" rx="6"/>
+                                        <rect x="0" y="0" width="200" height="130" fill="#2d3a47" stroke="#92d050" stroke-width="2" rx="6"/>
                                         <text x="100" y="25" text-anchor="middle" fill="#92d050" font-family="Rajdhani, sans-serif" font-size="14" font-weight="600">REPAIR</text>
                                         <text x="100" y="45" text-anchor="middle" fill="#9babc2" font-family="Inter, sans-serif" font-size="10">Cell fixes the damage</text>
-                                        <text x="100" y="65" text-anchor="middle" fill="#6b7d8f" font-family="Inter, sans-serif" font-size="9">(Most common outcome)</text>
                                         <!-- Mini helix repaired -->
-                                        <path d="M80 80 Q90 90 80 100" stroke="#00b0f0" stroke-width="2" fill="none"/>
-                                        <path d="M120 80 Q110 90 120 100" stroke="#92d050" stroke-width="2" fill="none"/>
-                                        <line x1="84" y1="85" x2="116" y2="85" stroke="#f4c255" stroke-width="1.5"/>
-                                        <line x1="84" y1="95" x2="116" y2="95" stroke="#f4c255" stroke-width="1.5"/>
+                                        <path d="M80 65 Q90 75 80 85" stroke="#00b0f0" stroke-width="2" fill="none"/>
+                                        <path d="M120 65 Q110 75 120 85" stroke="#92d050" stroke-width="2" fill="none"/>
+                                        <line x1="84" y1="70" x2="116" y2="70" stroke="#f4c255" stroke-width="1.5"/>
+                                        <line x1="84" y1="80" x2="116" y2="80" stroke="#f4c255" stroke-width="1.5"/>
+                                        <!-- Probability -->
+                                        <text x="100" y="115" text-anchor="middle" fill="#92d050" font-family="JetBrains Mono, monospace" font-size="18" font-weight="700">~99%</text>
                                     </g>
                                     
                                     <!-- Outcome 2: Cell Death (Apoptosis) -->
                                     <g transform="translate(230, 0)">
-                                        <rect x="0" y="0" width="200" height="110" fill="#2d3a47" stroke="#00b0f0" stroke-width="2" rx="6"/>
+                                        <rect x="0" y="0" width="200" height="130" fill="#2d3a47" stroke="#00b0f0" stroke-width="2" rx="6"/>
                                         <text x="100" y="25" text-anchor="middle" fill="#00b0f0" font-family="Rajdhani, sans-serif" font-size="14" font-weight="600">CELL DEATH</text>
-                                        <text x="100" y="45" text-anchor="middle" fill="#9babc2" font-family="Inter, sans-serif" font-size="10">Apoptosis (programmed death)</text>
-                                        <text x="100" y="65" text-anchor="middle" fill="#6b7d8f" font-family="Inter, sans-serif" font-size="9">(Safety mechanism)</text>
+                                        <text x="100" y="45" text-anchor="middle" fill="#9babc2" font-family="Inter, sans-serif" font-size="10">Apoptosis (safety mechanism)</text>
                                         <!-- Cell breaking apart icon -->
-                                        <circle cx="100" cy="88" r="12" fill="none" stroke="#00b0f0" stroke-width="1.5" stroke-dasharray="3,3"/>
-                                        <line x1="92" y1="80" x2="85" y2="73" stroke="#00b0f0" stroke-width="1.5"/>
-                                        <line x1="108" y1="80" x2="115" y2="73" stroke="#00b0f0" stroke-width="1.5"/>
-                                        <line x1="100" y1="100" x2="100" y2="108" stroke="#00b0f0" stroke-width="1.5"/>
+                                        <circle cx="100" cy="72" r="12" fill="none" stroke="#00b0f0" stroke-width="1.5" stroke-dasharray="3,3"/>
+                                        <line x1="92" y1="64" x2="85" y2="57" stroke="#00b0f0" stroke-width="1.5"/>
+                                        <line x1="108" y1="64" x2="115" y2="57" stroke="#00b0f0" stroke-width="1.5"/>
+                                        <line x1="100" y1="84" x2="100" y2="92" stroke="#00b0f0" stroke-width="1.5"/>
+                                        <!-- Probability -->
+                                        <text x="100" y="115" text-anchor="middle" fill="#00b0f0" font-family="JetBrains Mono, monospace" font-size="18" font-weight="700">~0.9%</text>
                                     </g>
                                     
                                     <!-- Outcome 3: Mutation/Cancer -->
                                     <g transform="translate(460, 0)">
-                                        <rect x="0" y="0" width="200" height="110" fill="#2d3a47" stroke="#e54545" stroke-width="2" rx="6"/>
+                                        <rect x="0" y="0" width="200" height="130" fill="#2d3a47" stroke="#e54545" stroke-width="2" rx="6"/>
                                         <text x="100" y="25" text-anchor="middle" fill="#e54545" font-family="Rajdhani, sans-serif" font-size="14" font-weight="600">MUTATION</text>
                                         <text x="100" y="45" text-anchor="middle" fill="#9babc2" font-family="Inter, sans-serif" font-size="10">Incorrect repair - cancer risk</text>
-                                        <text x="100" y="65" text-anchor="middle" fill="#6b7d8f" font-family="Inter, sans-serif" font-size="9">(Rare but serious)</text>
                                         <!-- Mutated cells dividing -->
-                                        <circle cx="85" cy="88" r="10" fill="#e54545" opacity="0.3" stroke="#e54545" stroke-width="1"/>
-                                        <circle cx="100" cy="88" r="10" fill="#e54545" opacity="0.4" stroke="#e54545" stroke-width="1"/>
-                                        <circle cx="115" cy="88" r="10" fill="#e54545" opacity="0.5" stroke="#e54545" stroke-width="1"/>
+                                        <circle cx="85" cy="72" r="10" fill="#e54545" opacity="0.3" stroke="#e54545" stroke-width="1"/>
+                                        <circle cx="100" cy="72" r="10" fill="#e54545" opacity="0.4" stroke="#e54545" stroke-width="1"/>
+                                        <circle cx="115" cy="72" r="10" fill="#e54545" opacity="0.5" stroke="#e54545" stroke-width="1"/>
+                                        <!-- Probability -->
+                                        <text x="100" y="115" text-anchor="middle" fill="#e54545" font-family="JetBrains Mono, monospace" font-size="18" font-weight="700">~0.1%</text>
                                     </g>
                                 </g>
                                 
                                 <!-- Summary box -->
-                                <g transform="translate(50, 220)">
-                                    <rect x="0" y="0" width="610" height="90" fill="#1f2937" stroke="#cc5500" stroke-width="2" rx="6"/>
-                                    <text x="20" y="28" fill="#cc5500" font-family="Rajdhani, sans-serif" font-size="16" font-weight="600">Key Insight</text>
-                                    <text x="20" y="52" fill="#f7f8fa" font-family="Inter, sans-serif" font-size="12">Our bodies have evolved excellent DNA repair mechanisms. Low doses of radiation are usually</text>
-                                    <text x="20" y="70" fill="#f7f8fa" font-family="Inter, sans-serif" font-size="12">repaired successfully. The danger comes from high doses or prolonged exposure that overwhelm</text>
-                                    <text x="20" y="88" fill="#f7f8fa" font-family="Inter, sans-serif" font-size="12">repair mechanisms - which is why containment is so important.</text>
-                                </g>
-
-                                <!-- Probability indicators -->
-                                <g transform="translate(700, 100)" font-family="JetBrains Mono, monospace" font-size="10">
-                                    <text x="0" y="15" fill="#92d050">~99%</text>
-                                    <text x="0" y="125" fill="#00b0f0">~0.9%</text>
-                                    <text x="0" y="235" fill="#e54545">~0.1%</text>
+                                <g transform="translate(50, 235)">
+                                    <rect x="0" y="0" width="660" height="75" fill="#1f2937" stroke="#cc5500" stroke-width="2" rx="6"/>
+                                    <text x="20" y="25" fill="#cc5500" font-family="Rajdhani, sans-serif" font-size="14" font-weight="600">Key Insight</text>
+                                    <text x="20" y="47" fill="#f7f8fa" font-family="Inter, sans-serif" font-size="11">Our bodies have excellent DNA repair. Low doses are usually fixed. The danger is high doses or prolonged</text>
+                                    <text x="20" y="65" fill="#f7f8fa" font-family="Inter, sans-serif" font-size="11">exposure that overwhelm repair - which is why containment is so important.</text>
                                 </g>
                             </g>
 
                             <!-- Navigation hint -->
-                            <text x="400" y="400" text-anchor="middle" fill="#6b7d8f" font-family="Inter, sans-serif" font-size="11">Click the numbered steps above to explore each stage</text>
+                            <text x="380" y="385" text-anchor="middle" fill="#6b7d8f" font-family="Inter, sans-serif" font-size="11">Click the numbered steps above to explore each stage</text>
                         </svg>
                     </div>
 
@@ -3268,10 +3316,11 @@
                 </div>
 
                 <!-- Footer -->
-                <div style="text-align: center; padding-top: var(--space-2xl); border-top: 1px solid var(--border-subtle); margin-top: var(--space-2xl);">
+                <div style="text-align: center; padding-top: var(--space-2xl); border-top: 1px solid var(--border-subtle); margin-top: var(--space-2xl); position: relative;">
                     <img src="https://raw.githubusercontent.com/megtomazela-create/DfMDfADfO-Training/main/00_images/Logo_white.png" alt="The Nuclear House" style="height: 40px; opacity: 0.7; margin-bottom: var(--space-md);">
                     <p style="font-size: 0.85rem; color: var(--text-muted);">Module 1 • TNH Intro to Nuclear</p>
                     <p style="font-size: 0.75rem; color: var(--text-muted); opacity: 0.7;">© The Nuclear House Academy</p>
+                    <div style="position: absolute; bottom: 10px; right: 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--text-muted); opacity: 0.5;">v0.1</div>
                 </div>
             </div>
         </section>
@@ -3359,7 +3408,7 @@
             audio.currentTime = 0;
             playBtn.classList.remove('playing');
             document.getElementById('audioProgress').style.width = '0%';
-            document.getElementById('audioTime').textContent = '0:00';
+            document.getElementById('audioTime').textContent = '0:00 / 0:00';
 
             if (audioFiles[pageNum]) {
                 audio.src = audioFiles[pageNum];
@@ -3398,7 +3447,7 @@
         }
 
         function formatTime(seconds) {
-            if (isNaN(seconds)) return '0:00';
+            if (!seconds || isNaN(seconds) || !isFinite(seconds)) return '0:00';
             const mins = Math.floor(seconds / 60);
             const secs = Math.floor(seconds % 60);
             return `${mins}:${secs.toString().padStart(2, '0')}`;
@@ -3757,16 +3806,49 @@
             
             const audio = document.getElementById('narrationAudio');
             audio.addEventListener('timeupdate', function() {
-                if (audio.duration) {
-                    const percent = (audio.currentTime / audio.duration) * 100;
+                const duration = audio.duration || 0;
+                const currentTime = audio.currentTime || 0;
+                if (duration > 0 && isFinite(duration)) {
+                    const percent = (currentTime / duration) * 100;
                     document.getElementById('audioProgress').style.width = percent + '%';
-                    document.getElementById('audioTime').textContent = formatTime(audio.currentTime);
+                    document.getElementById('audioTime').textContent = formatTime(currentTime) + ' / ' + formatTime(duration);
+                }
+            });
+            
+            audio.addEventListener('loadedmetadata', function() {
+                if (audio.duration && isFinite(audio.duration)) {
+                    document.getElementById('audioTime').textContent = '0:00 / ' + formatTime(audio.duration);
+                }
+            });
+            
+            audio.addEventListener('durationchange', function() {
+                if (audio.duration && isFinite(audio.duration)) {
+                    document.getElementById('audioTime').textContent = '0:00 / ' + formatTime(audio.duration);
+                }
+            });
+            
+            audio.addEventListener('canplaythrough', function() {
+                if (audio.duration && isFinite(audio.duration)) {
+                    document.getElementById('audioTime').textContent = '0:00 / ' + formatTime(audio.duration);
+                }
+            });
+            
+            audio.addEventListener('loadeddata', function() {
+                if (audio.duration && isFinite(audio.duration)) {
+                    document.getElementById('audioTime').textContent = '0:00 / ' + formatTime(audio.duration);
+                }
+            });
+            
+            audio.addEventListener('playing', function() {
+                if (audio.duration && isFinite(audio.duration)) {
+                    document.getElementById('audioTime').textContent = formatTime(audio.currentTime) + ' / ' + formatTime(audio.duration);
                 }
             });
             
             audio.addEventListener('ended', function() {
                 document.getElementById('audioPlayPause').classList.remove('playing');
                 document.getElementById('audioProgress').style.width = '0%';
+                document.getElementById('audioTime').textContent = '0:00 / ' + formatTime(audio.duration);
             });
             
             // Keyboard navigation
