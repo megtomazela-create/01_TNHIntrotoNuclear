@@ -1,0 +1,3196 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 2: History & Development | TNH Academy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           CSS VARIABLES - TNH Brand Colours
+           ======================================== */
+        :root {
+            /* Primary Backgrounds - Dark Theme */
+            --bg-primary: #1f2937;
+            --bg-secondary: #364451;
+            --bg-card: #4a5d6b;
+            --bg-elevated: #2d3a47;
+            --bg-darker: #171f28;
+            
+            /* Text Colours */
+            --text-primary: #f7f8fa;
+            --text-secondary: #9babc2;
+            --text-muted: #6b7d8f;
+            --text-heading: #ffffff;
+            
+            /* Brand Accents */
+            --accent-green: #92d050;
+            --accent-blue: #00b0f0;
+            --accent-orange: #cc5500;
+            --accent-orange-light: #e86a10;
+            --accent-gold: #f4c255;
+            
+            /* Semantic Colours */
+            --color-success: #92d050;
+            --color-warning: #f4c255;
+            --color-danger: #e54545;
+            --color-info: #00b0f0;
+            
+            /* Era-specific colours */
+            --era-manhattan: #8b4513;
+            --era-atoms: #4a90d9;
+            --era-genI: #6b7280;
+            --era-genII: #059669;
+            --era-genIII: #3b82f6;
+            --era-genIIIplus: #8b5cf6;
+            
+            /* Accident colours */
+            --tmi-yellow: #f59e0b;
+            --chernobyl-red: #dc2626;
+            --fukushima-blue: #0284c7;
+            
+            /* Glows & Effects */
+            --glow-green: rgba(146, 208, 80, 0.3);
+            --glow-blue: rgba(0, 176, 240, 0.3);
+            --glow-orange: rgba(204, 85, 0, 0.4);
+            
+            /* UI Elements */
+            --border-subtle: rgba(155, 171, 194, 0.15);
+            --border-medium: rgba(155, 171, 194, 0.25);
+            
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            
+            /* Border Radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            
+            /* Transitions */
+            --transition-fast: 0.15s ease;
+            --transition-base: 0.3s ease;
+            --transition-slow: 0.5s ease;
+        }
+
+        /* ========================================
+           RESET & BASE STYLES
+           ======================================== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-weight: 400;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--text-heading);
+            letter-spacing: 0.01em;
+        }
+
+        h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+        h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+        h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
+        h4 { font-size: clamp(1.1rem, 2vw, 1.25rem); }
+
+        p { margin-bottom: 1rem; }
+
+        a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        a:hover { color: var(--accent-green); }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* ========================================
+           FIXED HEADER
+           ======================================== */
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: rgba(31, 41, 55, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-lg);
+            z-index: 1000;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .header-logo {
+            height: 36px;
+            opacity: 0.95;
+            transition: opacity var(--transition-fast);
+        }
+
+        .header-logo:hover { opacity: 1; }
+
+        .header-divider {
+            width: 1px;
+            height: 28px;
+            background: var(--border-medium);
+        }
+
+        .header-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .header-title span { color: var(--accent-orange); }
+
+        .header-progress {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .progress-track {
+            width: 140px;
+            height: 4px;
+            background: var(--bg-card);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-orange), var(--accent-green));
+            width: 0%;
+            transition: width var(--transition-slow);
+            border-radius: 2px;
+        }
+
+        .progress-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            min-width: 36px;
+        }
+
+        /* ========================================
+           MAIN LAYOUT
+           ======================================== */
+        main {
+            margin-top: 64px;
+            min-height: calc(100vh - 64px);
+        }
+
+        .page {
+            display: none;
+            min-height: calc(100vh - 64px);
+            padding: var(--space-3xl) var(--space-xl);
+            max-width: 1200px;
+            margin: 0 auto;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ========================================
+           HERO PAGE
+           ======================================== */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: calc(100vh - 64px);
+            padding: var(--space-2xl);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-lg);
+            background: rgba(204, 85, 0, 0.15);
+            border: 1px solid var(--accent-orange);
+            border-radius: 50px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-orange);
+            margin-bottom: var(--space-xl);
+        }
+
+        .hero h1 {
+            margin-bottom: var(--space-lg);
+            max-width: 800px;
+        }
+
+        .hero h1 span { color: var(--accent-orange); }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .hero-image-container {
+            width: 100%;
+            max-width: 900px;
+            aspect-ratio: 16/9;
+            background: var(--bg-elevated);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border-subtle);
+            overflow: hidden;
+            margin-bottom: var(--space-2xl);
+            position: relative;
+        }
+
+        .hero-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--bg-darker), var(--bg-secondary));
+        }
+
+        .hero-image-placeholder svg {
+            width: 120px;
+            height: 120px;
+            opacity: 0.5;
+            margin-bottom: var(--space-md);
+        }
+
+        .hero-image-placeholder span {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: var(--space-2xl);
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-value {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            line-height: 1;
+        }
+
+        .hero-stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ========================================
+           AUDIO PLAYER
+           ======================================== */
+        .audio-player {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md) var(--space-lg);
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-2xl);
+            max-width: 400px;
+        }
+
+        .audio-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--accent-orange);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-fast);
+            flex-shrink: 0;
+        }
+
+        .audio-btn:hover {
+            background: var(--accent-orange-light);
+            transform: scale(1.05);
+        }
+
+        .audio-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        .audio-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .audio-title {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .audio-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            min-width: 70px;
+        }
+
+        .audio-progress {
+            flex: 1;
+            height: 4px;
+            background: var(--bg-card);
+            border-radius: 2px;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .audio-progress-fill {
+            height: 100%;
+            background: var(--accent-orange);
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        /* ========================================
+           SECTION STYLING
+           ======================================== */
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-xs) var(--space-md);
+            background: rgba(0, 176, 240, 0.15);
+            border-radius: 50px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent-blue);
+            margin-bottom: var(--space-md);
+        }
+
+        .section-intro {
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .content-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            margin-bottom: var(--space-xl);
+        }
+
+        .highlight-box {
+            padding: var(--space-lg);
+            background: rgba(204, 85, 0, 0.1);
+            border-left: 4px solid var(--accent-orange);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            margin: var(--space-lg) 0;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+
+        .highlight-box strong {
+            color: var(--accent-orange);
+        }
+
+        /* ========================================
+           INTERACTIVE TIMELINE
+           ======================================== */
+        .timeline-container {
+            position: relative;
+            padding: var(--space-2xl) 0;
+        }
+
+        .timeline-track {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--bg-card);
+            border-radius: 3px;
+            transform: translateY(-50%);
+        }
+
+        .timeline-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--era-manhattan), var(--era-atoms), var(--era-genI), var(--era-genII), var(--era-genIII), var(--era-genIIIplus));
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .timeline-eras {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+        }
+
+        .timeline-era {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .timeline-era:hover .era-dot {
+            transform: scale(1.2);
+        }
+
+        .era-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 3px solid var(--bg-primary);
+            transition: all var(--transition-fast);
+            margin-bottom: var(--space-sm);
+        }
+
+        .timeline-era.active .era-dot {
+            background: var(--accent-orange);
+            box-shadow: 0 0 20px var(--glow-orange);
+        }
+
+        .era-year {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: var(--space-xs);
+        }
+
+        .era-label {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-align: center;
+            max-width: 80px;
+        }
+
+        .timeline-era.active .era-label {
+            color: var(--accent-orange);
+        }
+
+        .timeline-content {
+            margin-top: var(--space-2xl);
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            min-height: 300px;
+        }
+
+        .era-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .era-content.active {
+            display: block;
+        }
+
+        .era-content h3 {
+            margin-bottom: var(--space-md);
+        }
+
+        .era-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+
+        .era-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-sm);
+            padding: var(--space-md);
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+        }
+
+        .era-feature-icon {
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .era-feature-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* ========================================
+           REACTOR GENERATIONS VISUAL
+           ======================================== */
+        .generations-visual {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            gap: var(--space-lg);
+            padding: var(--space-2xl) 0;
+            min-height: 350px;
+        }
+
+        .gen-tower {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .gen-tower:hover {
+            transform: translateY(-10px);
+        }
+
+        .gen-tower.active .tower-body {
+            box-shadow: 0 0 30px var(--glow-orange);
+        }
+
+        .tower-body {
+            width: 80px;
+            background: linear-gradient(180deg, var(--bg-card), var(--bg-secondary));
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
+            position: relative;
+            transition: all var(--transition-base);
+            border: 2px solid var(--border-subtle);
+            border-bottom: none;
+        }
+
+        .tower-dome {
+            width: 60px;
+            height: 30px;
+            background: var(--bg-card);
+            border-radius: 50% 50% 0 0;
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 2px solid var(--border-subtle);
+            border-bottom: none;
+        }
+
+        .tower-base {
+            width: 100px;
+            height: 20px;
+            background: var(--bg-darker);
+            border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+        }
+
+        .tower-label {
+            margin-top: var(--space-md);
+            text-align: center;
+        }
+
+        .tower-gen {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        .tower-era {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* ========================================
+           ACCIDENT PAGES
+           ======================================== */
+        .accident-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .accident-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .accident-icon.tmi {
+            background: rgba(245, 158, 11, 0.2);
+            border: 3px solid var(--tmi-yellow);
+        }
+
+        .accident-icon.chernobyl {
+            background: rgba(220, 38, 38, 0.2);
+            border: 3px solid var(--chernobyl-red);
+        }
+
+        .accident-icon.fukushima {
+            background: rgba(2, 132, 199, 0.2);
+            border: 3px solid var(--fukushima-blue);
+        }
+
+        .accident-meta {
+            flex: 1;
+        }
+
+        .accident-meta h2 {
+            margin-bottom: var(--space-xs);
+        }
+
+        .accident-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .accident-ines {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-xs) var(--space-md);
+            background: rgba(229, 69, 69, 0.2);
+            border-radius: var(--radius-sm);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            margin-top: var(--space-sm);
+        }
+
+        .ines-level {
+            font-weight: 700;
+            color: var(--color-danger);
+        }
+
+        /* Sequence timeline */
+        .sequence-timeline {
+            position: relative;
+            padding-left: var(--space-2xl);
+            margin: var(--space-xl) 0;
+        }
+
+        .sequence-line {
+            position: absolute;
+            left: 12px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--bg-card);
+            border-radius: 2px;
+        }
+
+        .sequence-item {
+            position: relative;
+            margin-bottom: var(--space-lg);
+            padding: var(--space-md) var(--space-lg);
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .sequence-item:hover {
+            background: var(--bg-secondary);
+            transform: translateX(5px);
+        }
+
+        .sequence-item.active {
+            border-left: 3px solid var(--accent-orange);
+        }
+
+        .sequence-dot {
+            position: absolute;
+            left: calc(-1 * var(--space-2xl) + 6px);
+            top: 50%;
+            transform: translateY(-50%);
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 3px solid var(--bg-primary);
+            transition: all var(--transition-fast);
+        }
+
+        .sequence-item.active .sequence-dot {
+            background: var(--accent-orange);
+        }
+
+        .sequence-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent-blue);
+            margin-bottom: var(--space-xs);
+        }
+
+        .sequence-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .sequence-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: 0;
+            display: none;
+        }
+
+        .sequence-item.active .sequence-desc {
+            display: block;
+        }
+
+        /* Lessons cards */
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-xl);
+        }
+
+        .lesson-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            transition: all var(--transition-fast);
+        }
+
+        .lesson-card:hover {
+            border-color: var(--accent-green);
+            transform: translateY(-3px);
+        }
+
+        .lesson-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: var(--space-md);
+            background: rgba(146, 208, 80, 0.15);
+        }
+
+        .lesson-card h4 {
+            margin-bottom: var(--space-sm);
+            font-size: 1.1rem;
+        }
+
+        .lesson-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* ========================================
+           COMPARISON TABLE
+           ======================================== */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--space-xl) 0;
+            background: var(--bg-elevated);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: var(--space-md) var(--space-lg);
+            text-align: left;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .comparison-table th {
+            background: var(--bg-darker);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            color: var(--text-heading);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .comparison-table td {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .comparison-table tr:hover td {
+            background: rgba(0, 176, 240, 0.05);
+        }
+
+        .comparison-table .highlight {
+            color: var(--accent-orange);
+            font-weight: 600;
+        }
+
+        /* ========================================
+           INTERACTIVE SVG DIAGRAMS
+           ======================================== */
+        .diagram-container {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin: var(--space-xl) 0;
+            text-align: center;
+        }
+
+        .diagram-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .diagram-controls {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+
+        .diagram-btn {
+            padding: var(--space-sm) var(--space-lg);
+            background: var(--bg-card);
+            border: 2px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .diagram-btn:hover {
+            border-color: var(--accent-blue);
+            background: rgba(0, 176, 240, 0.1);
+        }
+
+        .diagram-btn.active {
+            border-color: var(--accent-orange);
+            background: rgba(204, 85, 0, 0.2);
+        }
+
+        /* ========================================
+           SAFETY CULTURE EVOLUTION
+           ======================================== */
+        .culture-evolution {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .culture-era {
+            display: flex;
+            gap: var(--space-xl);
+            padding: var(--space-xl);
+            background: var(--bg-elevated);
+            border-radius: var(--radius-lg);
+            border-left: 4px solid var(--border-subtle);
+            transition: all var(--transition-fast);
+            cursor: pointer;
+        }
+
+        .culture-era:hover {
+            border-left-color: var(--accent-orange);
+            transform: translateX(5px);
+        }
+
+        .culture-era.tmi { border-left-color: var(--tmi-yellow); }
+        .culture-era.chernobyl { border-left-color: var(--chernobyl-red); }
+        .culture-era.fukushima { border-left-color: var(--fukushima-blue); }
+
+        .culture-date {
+            flex-shrink: 0;
+            width: 80px;
+            text-align: center;
+        }
+
+        .culture-year {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            line-height: 1;
+        }
+
+        .culture-event {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .culture-changes {
+            flex: 1;
+        }
+
+        .culture-changes h4 {
+            margin-bottom: var(--space-md);
+        }
+
+        .culture-list {
+            list-style: none;
+        }
+
+        .culture-list li {
+            position: relative;
+            padding-left: var(--space-lg);
+            margin-bottom: var(--space-sm);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .culture-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+        }
+
+        /* ========================================
+           QUIZ STYLES
+           ======================================== */
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quiz-progress {
+            display: flex;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-xl);
+        }
+
+        .quiz-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 2px solid var(--border-subtle);
+            transition: all var(--transition-fast);
+        }
+
+        .quiz-dot.active {
+            background: var(--accent-orange);
+            border-color: var(--accent-orange);
+        }
+
+        .quiz-dot.correct {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+        }
+
+        .quiz-dot.incorrect {
+            background: var(--color-danger);
+            border-color: var(--color-danger);
+        }
+
+        .quiz-question {
+            display: none;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+        }
+
+        .quiz-question.active { display: block; }
+
+        .quiz-question h3 {
+            margin-bottom: var(--space-xl);
+            line-height: 1.4;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .quiz-option {
+            padding: var(--space-lg);
+            background: var(--bg-card);
+            border: 2px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            text-align: left;
+        }
+
+        .quiz-option:hover:not(.disabled) {
+            border-color: var(--accent-blue);
+            background: rgba(0, 176, 240, 0.1);
+        }
+
+        .quiz-option.selected {
+            border-color: var(--accent-orange);
+            background: rgba(204, 85, 0, 0.15);
+        }
+
+        .quiz-option.correct {
+            border-color: var(--accent-green);
+            background: rgba(146, 208, 80, 0.15);
+        }
+
+        .quiz-option.incorrect {
+            border-color: var(--color-danger);
+            background: rgba(229, 69, 69, 0.15);
+        }
+
+        .quiz-option.disabled {
+            cursor: default;
+            opacity: 0.7;
+        }
+
+        .quiz-feedback {
+            display: none;
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            margin-top: var(--space-lg);
+        }
+
+        .quiz-feedback.show { display: block; }
+
+        .quiz-feedback.correct {
+            background: rgba(146, 208, 80, 0.15);
+            border: 1px solid var(--accent-green);
+        }
+
+        .quiz-feedback.incorrect {
+            background: rgba(229, 69, 69, 0.15);
+            border: 1px solid var(--color-danger);
+        }
+
+        .quiz-feedback p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+
+        .quiz-result {
+            display: none;
+            text-align: center;
+            padding: var(--space-2xl);
+        }
+
+        .quiz-result.show { display: block; }
+
+        .quiz-score {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            line-height: 1;
+            margin-bottom: var(--space-md);
+        }
+
+        .quiz-score-label {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-xl);
+        }
+
+        /* ========================================
+           MATCHING GAME
+           ======================================== */
+        .game-container {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .game-header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .game-instruction {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: var(--space-md);
+            background: rgba(0, 176, 240, 0.1);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-xl);
+            font-size: 0.9rem;
+            color: var(--accent-blue);
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: var(--space-xl);
+            align-items: start;
+        }
+
+        .game-column {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .game-column-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            margin-bottom: var(--space-sm);
+        }
+
+        .game-item {
+            padding: var(--space-md) var(--space-lg);
+            background: var(--bg-card);
+            border: 2px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            text-align: center;
+        }
+
+        .game-item:hover:not(.matched):not(.disabled) {
+            border-color: var(--accent-blue);
+            background: rgba(0, 176, 240, 0.1);
+        }
+
+        .game-item.selected {
+            border-color: var(--accent-orange);
+            background: rgba(204, 85, 0, 0.2);
+        }
+
+        .game-item.matched {
+            border-color: var(--accent-green);
+            background: rgba(146, 208, 80, 0.2);
+            cursor: default;
+        }
+
+        .game-item.wrong {
+            border-color: var(--color-danger);
+            background: rgba(229, 69, 69, 0.2);
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .game-arrows {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-md);
+            padding-top: var(--space-2xl);
+        }
+
+        .game-arrow {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .game-result {
+            display: none;
+            text-align: center;
+            padding: var(--space-xl);
+            background: rgba(146, 208, 80, 0.1);
+            border: 2px solid var(--accent-green);
+            border-radius: var(--radius-lg);
+            margin-top: var(--space-xl);
+        }
+
+        .game-result.show { display: block; }
+
+        .game-result h4 {
+            color: var(--accent-green);
+            margin-bottom: var(--space-md);
+        }
+
+        .game-score {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: var(--space-md);
+        }
+
+        /* ========================================
+           TAKEAWAYS PAGE
+           ======================================== */
+        .takeaways-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+            margin: var(--space-2xl) 0;
+        }
+
+        .takeaway-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .takeaway-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-orange), var(--accent-green));
+        }
+
+        .takeaway-number {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--bg-card);
+            position: absolute;
+            top: var(--space-md);
+            right: var(--space-lg);
+            line-height: 1;
+        }
+
+        .takeaway-card h4 {
+            margin-bottom: var(--space-md);
+            color: var(--accent-orange);
+        }
+
+        .takeaway-card p {
+            color: var(--text-secondary);
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* ========================================
+           NAVIGATION
+           ======================================== */
+        .page-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-xl) 0;
+            border-top: 1px solid var(--border-subtle);
+            margin-top: var(--space-2xl);
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-xl);
+            background: var(--bg-card);
+            border: 2px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .nav-btn:hover {
+            border-color: var(--accent-orange);
+            background: rgba(204, 85, 0, 0.1);
+        }
+
+        .nav-btn.primary {
+            background: var(--accent-orange);
+            border-color: var(--accent-orange);
+            color: white;
+        }
+
+        .nav-btn.primary:hover {
+            background: var(--accent-orange-light);
+            border-color: var(--accent-orange-light);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-btn:disabled:hover {
+            border-color: var(--border-subtle);
+            background: var(--bg-card);
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+        .footer {
+            text-align: center;
+            padding: var(--space-xl);
+            border-top: 1px solid var(--border-subtle);
+            margin-top: var(--space-2xl);
+            position: relative;
+        }
+
+        .footer p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        .version-number {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            opacity: 0.5;
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 768px) {
+            .fixed-header {
+                padding: 0 var(--space-md);
+            }
+
+            .header-title {
+                display: none;
+            }
+
+            .page {
+                padding: var(--space-xl) var(--space-md);
+            }
+
+            .hero-stats {
+                gap: var(--space-lg);
+            }
+
+            .timeline-eras {
+                flex-wrap: wrap;
+                gap: var(--space-md);
+            }
+
+            .generations-visual {
+                flex-wrap: wrap;
+            }
+
+            .game-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .game-arrows {
+                flex-direction: row;
+                padding: var(--space-md) 0;
+            }
+
+            .accident-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .culture-era {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+
+            .culture-date {
+                width: auto;
+            }
+
+            .comparison-table {
+                font-size: 0.8rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: var(--space-sm);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <header class="fixed-header">
+        <div class="header-left">
+            <img src="https://thenuclearhouse.com/wp-content/uploads/2024/08/TNH-Logo-A-White-Transparent-1.png" alt="TNH Academy" class="header-logo">
+            <div class="header-divider"></div>
+            <div class="header-title">Module <span>02</span> — History & Development</div>
+        </div>
+        <div class="header-progress">
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <span class="progress-text" id="progressText">0%</span>
+        </div>
+    </header>
+
+    <main>
+        <!-- PAGE 1: Hero -->
+        <section class="page active" id="page1">
+            <div class="hero">
+                <div class="hero-badge">
+                    <span>⚡</span>
+                    <span>MODULE 02</span>
+                </div>
+                <h1>History & <span>Development</span></h1>
+                <p class="hero-subtitle">From wartime origins to modern safety culture: how eight decades of nuclear power shaped the industry we know today—and the lessons written in accident reports.</p>
+                
+                <div class="hero-image-container">
+                    <div class="hero-image-placeholder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                        <span>AI_02_hero_history_timeline.png</span>
+                    </div>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">80+</div>
+                        <div class="hero-stat-label">Years of Development</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">4</div>
+                        <div class="hero-stat-label">Reactor Generations</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">3</div>
+                        <div class="hero-stat-label">Major Accidents</div>
+                    </div>
+                </div>
+
+                <div class="page-nav" style="border-top: none; margin-top: 0;">
+                    <div></div>
+                    <button class="nav-btn primary" onclick="goToPage(2)">
+                        Begin Journey
+                        <span>→</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 2: Birth of Nuclear -->
+        <section class="page" id="page2">
+            <div class="section-header">
+                <div class="section-badge">
+                    <span>📜</span>
+                    <span>ORIGINS</span>
+                </div>
+                <h2>The Birth of Nuclear Power</h2>
+                <p class="section-intro">The same physics that ended World War II would soon promise to power the world.</p>
+            </div>
+
+            <div class="audio-player">
+                <button class="audio-btn" onclick="toggleAudio('audio2')" id="audioBtn2">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+                <div class="audio-info">
+                    <div class="audio-title">Listen to this section</div>
+                    <div class="audio-time" id="audioTime2">0:00 / 0:00</div>
+                </div>
+                <div class="audio-progress" onclick="seekAudio(event, 'audio2')">
+                    <div class="audio-progress-fill" id="audioProgress2"></div>
+                </div>
+                <audio id="audio2" preload="auto">
+                    <source src="audio/AUDIO_02_birth_of_nuclear.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="content-card">
+                <h3>The Manhattan Project (1942-1945)</h3>
+                <p>In 1939, Albert Einstein signed a letter to President Roosevelt warning that Nazi Germany might be developing an atomic bomb. This sparked what would become the largest scientific project in history—the Manhattan Project.</p>
+                
+                <div class="highlight-box">
+                    <p><strong>130,000 people</strong> worked on the project across multiple sites. The cost: <strong>$2 billion</strong> (approximately £28 billion in today's money). Most workers had no idea what they were building.</p>
+                </div>
+
+                <p>On 2nd December 1942, beneath the stands of a Chicago stadium, Enrico Fermi achieved the first controlled nuclear chain reaction. The reactor ran for just 28 minutes—but those minutes changed everything.</p>
+                
+                <p>Three years later, the Trinity test proved the weapon worked. Within weeks, atomic bombs destroyed Hiroshima and Nagasaki, ending World War II and beginning the atomic age.</p>
+            </div>
+
+            <!-- Manhattan Project Timeline SVG -->
+            <div class="diagram-container">
+                <svg viewBox="0 0 900 250" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Timeline track -->
+                    <line x1="50" y1="125" x2="850" y2="125" stroke="#4a5d6b" stroke-width="4" stroke-linecap="round"/>
+                    
+                    <!-- 1939 - Einstein Letter -->
+                    <g class="timeline-node" style="cursor: pointer;">
+                        <circle cx="100" cy="125" r="12" fill="#8b4513" stroke="#1f2937" stroke-width="3"/>
+                        <text x="100" y="165" fill="#9babc2" font-family="JetBrains Mono" font-size="12" text-anchor="middle">1939</text>
+                        <text x="100" y="100" fill="#f7f8fa" font-family="Rajdhani" font-size="13" font-weight="600" text-anchor="middle">Einstein</text>
+                        <text x="100" y="85" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">Letter</text>
+                    </g>
+                    
+                    <!-- 1942 - Manhattan Project -->
+                    <g class="timeline-node" style="cursor: pointer;">
+                        <circle cx="270" cy="125" r="12" fill="#8b4513" stroke="#1f2937" stroke-width="3"/>
+                        <text x="270" y="165" fill="#9babc2" font-family="JetBrains Mono" font-size="12" text-anchor="middle">1942</text>
+                        <text x="270" y="100" fill="#f7f8fa" font-family="Rajdhani" font-size="13" font-weight="600" text-anchor="middle">Manhattan</text>
+                        <text x="270" y="85" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">Project Begins</text>
+                    </g>
+                    
+                    <!-- 1942 - Chicago Pile -->
+                    <g class="timeline-node" style="cursor: pointer;">
+                        <circle cx="340" cy="125" r="15" fill="#cc5500" stroke="#1f2937" stroke-width="3">
+                            <animate attributeName="r" values="15;18;15" dur="2s" repeatCount="indefinite"/>
+                        </circle>
+                        <text x="340" y="165" fill="#9babc2" font-family="JetBrains Mono" font-size="12" text-anchor="middle">Dec 1942</text>
+                        <text x="340" y="100" fill="#cc5500" font-family="Rajdhani" font-size="13" font-weight="600" text-anchor="middle">Chicago Pile-1</text>
+                        <text x="340" y="85" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">First Chain Reaction</text>
+                    </g>
+                    
+                    <!-- 1945 - Trinity -->
+                    <g class="timeline-node" style="cursor: pointer;">
+                        <circle cx="550" cy="125" r="12" fill="#dc2626" stroke="#1f2937" stroke-width="3"/>
+                        <text x="550" y="165" fill="#9babc2" font-family="JetBrains Mono" font-size="12" text-anchor="middle">Jul 1945</text>
+                        <text x="550" y="100" fill="#f7f8fa" font-family="Rajdhani" font-size="13" font-weight="600" text-anchor="middle">Trinity Test</text>
+                        <text x="550" y="85" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">First Nuclear Explosion</text>
+                    </g>
+                    
+                    <!-- 1945 - Hiroshima/Nagasaki -->
+                    <g class="timeline-node" style="cursor: pointer;">
+                        <circle cx="650" cy="125" r="12" fill="#dc2626" stroke="#1f2937" stroke-width="3"/>
+                        <text x="650" y="165" fill="#9babc2" font-family="JetBrains Mono" font-size="12" text-anchor="middle">Aug 1945</text>
+                        <text x="650" y="100" fill="#f7f8fa" font-family="Rajdhani" font-size="13" font-weight="600" text-anchor="middle">Hiroshima &</text>
+                        <text x="650" y="85" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">Nagasaki</text>
+                    </g>
+                    
+                    <!-- 1953 - Atoms for Peace -->
+                    <g class="timeline-node" style="cursor: pointer;">
+                        <circle cx="800" cy="125" r="15" fill="#4a90d9" stroke="#1f2937" stroke-width="3">
+                            <animate attributeName="r" values="15;18;15" dur="2s" repeatCount="indefinite"/>
+                        </circle>
+                        <text x="800" y="165" fill="#9babc2" font-family="JetBrains Mono" font-size="12" text-anchor="middle">1953</text>
+                        <text x="800" y="100" fill="#4a90d9" font-family="Rajdhani" font-size="13" font-weight="600" text-anchor="middle">Atoms for Peace</text>
+                        <text x="800" y="85" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">Eisenhower Speech</text>
+                    </g>
+                    
+                    <!-- Era labels -->
+                    <text x="375" y="210" fill="#8b4513" font-family="Rajdhani" font-size="14" font-weight="600" text-anchor="middle">WEAPONS ERA</text>
+                    <text x="800" y="210" fill="#4a90d9" font-family="Rajdhani" font-size="14" font-weight="600" text-anchor="middle">CIVILIAN ERA</text>
+                    
+                    <!-- Dividing line -->
+                    <line x1="720" y1="50" x2="720" y2="200" stroke="#4a5d6b" stroke-width="1" stroke-dasharray="5,5" opacity="0.5"/>
+                </svg>
+            </div>
+
+            <div class="content-card">
+                <h3>Atoms for Peace (1953)</h3>
+                <p>On 8th December 1953, President Eisenhower addressed the United Nations with a revolutionary proposal: share nuclear technology with the world for peaceful purposes, in exchange for commitments not to develop weapons.</p>
+                
+                <div class="highlight-box">
+                    <p>"<strong>The United States pledges</strong> before you—and therefore before the world—its determination to help solve the fearful atomic dilemma—to devote its entire heart and mind to find the way by which the miraculous inventiveness of man shall not be dedicated to his death, but consecrated to his life."</p>
+                </div>
+
+                <p>This speech launched the civilian nuclear power industry. The International Atomic Energy Agency (IAEA) was established in 1957. The first commercial nuclear power plant—Calder Hall in the UK—had already begun operating in 1956.</p>
+                
+                <p>The same physics that had destroyed two cities would now be harnessed to power millions of homes. But the transition from weapons to power generation brought new challenges—and new risks.</p>
+            </div>
+
+            <div class="page-nav">
+                <button class="nav-btn" onclick="goToPage(1)">
+                    <span>←</span>
+                    Previous
+                </button>
+                <button class="nav-btn primary" onclick="goToPage(3)">
+                    Reactor Generations
+                    <span>→</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- PAGE 3: Reactor Generations -->
+        <section class="page" id="page3">
+            <div class="section-header">
+                <div class="section-badge">
+                    <span>🔬</span>
+                    <span>EVOLUTION</span>
+                </div>
+                <h2>Reactor Generations</h2>
+                <p class="section-intro">Click on each generation to explore how reactor technology evolved over seven decades.</p>
+            </div>
+
+            <div class="audio-player">
+                <button class="audio-btn" onclick="toggleAudio('audio3')" id="audioBtn3">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+                <div class="audio-info">
+                    <div class="audio-title">Listen to this section</div>
+                    <div class="audio-time" id="audioTime3">0:00 / 0:00</div>
+                </div>
+                <div class="audio-progress" onclick="seekAudio(event, 'audio3')">
+                    <div class="audio-progress-fill" id="audioProgress3"></div>
+                </div>
+                <audio id="audio3" preload="auto">
+                    <source src="audio/AUDIO_03_reactor_generations.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <!-- Interactive Generation Timeline -->
+            <div class="timeline-container">
+                <div class="timeline-track">
+                    <div class="timeline-progress" id="genTimelineProgress"></div>
+                </div>
+                <div class="timeline-eras">
+                    <div class="timeline-era active" onclick="showGeneration(1)" data-gen="1">
+                        <div class="era-dot" style="background: var(--era-genI);"></div>
+                        <div class="era-year">1950s-60s</div>
+                        <div class="era-label">Gen I</div>
+                    </div>
+                    <div class="timeline-era" onclick="showGeneration(2)" data-gen="2">
+                        <div class="era-dot"></div>
+                        <div class="era-year">1970s-90s</div>
+                        <div class="era-label">Gen II</div>
+                    </div>
+                    <div class="timeline-era" onclick="showGeneration(3)" data-gen="3">
+                        <div class="era-dot"></div>
+                        <div class="era-year">1990s-2010s</div>
+                        <div class="era-label">Gen III</div>
+                    </div>
+                    <div class="timeline-era" onclick="showGeneration(4)" data-gen="4">
+                        <div class="era-dot"></div>
+                        <div class="era-year">2010s+</div>
+                        <div class="era-label">Gen III+</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-content">
+                <!-- Gen I Content -->
+                <div class="era-content active" id="gen1Content">
+                    <h3>Generation I: The Pioneers</h3>
+                    <p>The first nuclear reactors were essentially scaled-up experiments. Built primarily in the 1950s and 1960s, these early prototypes proved that nuclear power was commercially viable—but they were expensive, inefficient, and designed with limited safety understanding.</p>
+                    
+                    <div class="era-features">
+                        <div class="era-feature">
+                            <span class="era-feature-icon">🏭</span>
+                            <span class="era-feature-text"><strong>Examples:</strong> Shippingport (USA), Calder Hall (UK), Obninsk (USSR)</span>
+                        </div>
+                        <div class="era-feature">
+                            <span class="era-feature-icon">⚡</span>
+                            <span class="era-feature-text"><strong>Typical output:</strong> 50-200 MWe (small by modern standards)</span>
+                        </div>
+                        <div class="era-feature">
+                            <span class="era-feature-icon">⏱️</span>
+                            <span class="era-feature-text"><strong>Design life:</strong> 20-30 years</span>
+                        </div>
+                        <div class="era-feature">
+                            <span class="era-feature-icon">⚠️</span>
+                            <span class="era-feature-text"><strong>Safety approach:</strong> Basic engineered systems, learning by experience</span>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <p>The last Gen I reactor (Wylfa in Wales) closed in 2015. These plants pioneered the technology but lacked the safety features we now consider essential.</p>
+                    </div>
+                </div>
+
+                <!-- Gen II Content -->
+                <div class="era-content" id="gen2Content">
+                    <h3>Generation II: The Workhorses</h3>
+                    <p>Generation II reactors make up the vast majority of today's operating fleet. Built from the late 1960s through the 1990s, these designs standardised commercial nuclear power and proved its reliability over decades of operation.</p>
+                    
+                    <div class="era-features">
+                        <div class="era-feature">
+                            <span class="era-feature-icon">🏭</span>
+                            <span class="era-feature-text"><strong>Types:</strong> PWR, BWR, CANDU, VVER, RBMK</span>
+                        </div>
+                        <div class="era-feature">
+                            <span class="era-feature-icon">⚡</span>
+                            <span class="era-feature-text"><strong>Typical output:</strong> 600-1400 MWe</span>
+                        </div>
+                        <div class="era-feature">
+                            <span class="era-feature-icon">⏱️</span>
+                            <span class="era-feature-text"><strong>Design life:</strong> 30-40 years (many extended to 60+)</span>
+                        </div>
+                        <div class="era-feature">
+                            <span class="era-feature-icon">⚠️</span>
+                            <span class="era-feature-text"><strong>Safety approach:</strong> Active systems requiring power and operator action</span>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <p><strong>Key limitation:</strong> Gen II safety systems are "active"—they need electrical power and often human intervention to work. This proved critical in all three major accidents.</p>
+                    </div>
+                </div>
+
+                <!-- Gen III Content -->
+                <div class="era-content" id="gen3Content">
+                    <h3>Generation III: Learning from Experience</h3>
+                    <p>Developed after Three Mile Island and Chernobyl, Gen III designs incorporated decades of operational experience. The focus shifted to standardisation, improved fuel efficiency, and enhanced safety—though still relying primarily on active systems.</p>
+                    
+                    <div class="era-features">
+                        <div class="era-feature">
+                            <span class="era-feature-icon">🏭</span>
+                            <span class="era-feature-text"><strong>Examples:</strong> ABWR, System 80+, AP600</span>
+                        </div>
+                        <div class="era-feature">
+                            <span class="era-feature-icon">⚡</span>
+                            <span class="era-feature-text"><strong>Efficiency:</strong> ~17% less uranium per unit of electricity</span>
+                        </div>
+                        <div class="era-feature">
+                            <span class="era-feature-icon">⏱️</span>
+                            <span class="era-feature-text"><strong>Design life:</strong> 60 years (designed from the start)</span>
+                        </div>
+                        <div class="era-feature">
+                            <span class="era-feature-icon">⚠️</span>
+                            <span class="era-feature-text"><strong>Safety approach:</strong> Improved active systems, better training</span>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <p>The first Gen III reactors (ABWRs at Kashiwazaki-Kariwa, Japan) began operation in 1996-1997. Both were shut down after Fukushima pending safety reviews.</p>
+                    </div>
+                </div>
+
+                <!-- Gen III+ Content -->
+                <div class="era-content" id="gen4Content">
+                    <h3>Generation III+: Passive Safety</h3>
+                    <p>The defining feature of Gen III+ designs is <strong>passive safety</strong>—systems that work using natural forces like gravity and convection, without needing electricity or human intervention. Even with a complete station blackout, these reactors can cool themselves for days.</p>
+                    
+                    <div class="era-features">
+                        <div class="era-feature">
+                            <span class="era-feature-icon">🏭</span>
+                            <span class="era-feature-text"><strong>Examples:</strong> AP1000, EPR, VVER-1200, APR1400</span>
+                        </div>
+                        <div class="era-feature">
+                            <span class="era-feature-icon">🛡️</span>
+                            <span class="era-feature-text"><strong>Core catchers:</strong> Designed to contain a full meltdown</span>
+                        </div>
+                        <div class="era-feature">
+                            <span class="era-feature-icon">💧</span>
+                            <span class="era-feature-text"><strong>Passive cooling:</strong> 72+ hours without power or operator action</span>
+                        </div>
+                        <div class="era-feature">
+                            <span class="era-feature-icon">📊</span>
+                            <span class="era-feature-text"><strong>Core damage frequency:</strong> ~1 in 2,000,000 reactor-years</span>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <p><strong>The Fukushima test:</strong> Had Fukushima Daiichi been a Gen III+ plant with passive cooling, the cores would have remained safely cooled even after the tsunami destroyed all electrical power.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generations Comparison Table -->
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Gen I</th>
+                        <th>Gen II</th>
+                        <th>Gen III/III+</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Design life</td>
+                        <td>20-30 years</td>
+                        <td>40 years</td>
+                        <td class="highlight">60+ years</td>
+                    </tr>
+                    <tr>
+                        <td>Safety systems</td>
+                        <td>Basic active</td>
+                        <td>Active (redundant)</td>
+                        <td class="highlight">Passive + Active</td>
+                    </tr>
+                    <tr>
+                        <td>Standardisation</td>
+                        <td>Each unique</td>
+                        <td>Some families</td>
+                        <td class="highlight">Highly standardised</td>
+                    </tr>
+                    <tr>
+                        <td>Core damage frequency</td>
+                        <td>~1 in 10,000</td>
+                        <td>~1 in 100,000</td>
+                        <td class="highlight">~1 in 2,000,000</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="page-nav">
+                <button class="nav-btn" onclick="goToPage(2)">
+                    <span>←</span>
+                    Previous
+                </button>
+                <button class="nav-btn primary" onclick="goToPage(4)">
+                    Three Mile Island
+                    <span>→</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- PAGE 4: Three Mile Island -->
+        <section class="page" id="page4">
+            <div class="accident-header">
+                <div class="accident-icon tmi">⚠️</div>
+                <div class="accident-meta">
+                    <h2>Three Mile Island</h2>
+                    <div class="accident-date">28 March 1979 • Pennsylvania, USA</div>
+                    <div class="accident-ines">
+                        INES Level: <span class="ines-level">5</span> (Accident with Wider Consequences)
+                    </div>
+                </div>
+            </div>
+
+            <div class="audio-player">
+                <button class="audio-btn" onclick="toggleAudio('audio4')" id="audioBtn4">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+                <div class="audio-info">
+                    <div class="audio-title">Listen to this section</div>
+                    <div class="audio-time" id="audioTime4">0:00 / 0:00</div>
+                </div>
+                <div class="audio-progress" onclick="seekAudio(event, 'audio4')">
+                    <div class="audio-progress-fill" id="audioProgress4"></div>
+                </div>
+                <audio id="audio4" preload="auto">
+                    <source src="audio/AUDIO_04_three_mile_island.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="content-card">
+                <h3>What Happened</h3>
+                <p>At 4:00 AM on 28th March 1979, a routine maintenance procedure at Unit 2 triggered a sequence of events that would change the nuclear industry forever. A stuck valve, confusing instruments, and undertrained operators combined to produce a partial core meltdown—the worst accident in US commercial nuclear history.</p>
+                
+                <div class="highlight-box">
+                    <p><strong>The fundamental problem:</strong> Operators couldn't tell what was actually happening inside the reactor. Instruments showed the relief valve was "closed"—but it was actually stuck open, draining coolant. They turned off emergency cooling, thinking the system was working fine.</p>
+                </div>
+            </div>
+
+            <h3 style="margin-bottom: var(--space-lg);">Sequence of Events</h3>
+            <p style="color: var(--text-secondary); margin-bottom: var(--space-lg);">Click each event to see details:</p>
+            
+            <div class="sequence-timeline">
+                <div class="sequence-line"></div>
+                
+                <div class="sequence-item active" onclick="toggleSequence(this)">
+                    <div class="sequence-dot"></div>
+                    <div class="sequence-time">04:00:36</div>
+                    <div class="sequence-title">Feedwater pumps trip</div>
+                    <p class="sequence-desc">A routine maintenance procedure accidentally stops the feedwater pumps. Without feedwater, steam generators can't remove heat from the primary coolant.</p>
+                </div>
+                
+                <div class="sequence-item" onclick="toggleSequence(this)">
+                    <div class="sequence-dot"></div>
+                    <div class="sequence-time">04:00:37</div>
+                    <div class="sequence-title">Pressure rises, PORV opens</div>
+                    <p class="sequence-desc">Primary system pressure increases rapidly. The pilot-operated relief valve (PORV) opens as designed to release pressure.</p>
+                </div>
+                
+                <div class="sequence-item" onclick="toggleSequence(this)">
+                    <div class="sequence-dot"></div>
+                    <div class="sequence-time">04:00:39</div>
+                    <div class="sequence-title">Reactor scrams automatically</div>
+                    <p class="sequence-desc">Control rods insert automatically, stopping the chain reaction. But decay heat continues—the reactor still needs cooling.</p>
+                </div>
+                
+                <div class="sequence-item" onclick="toggleSequence(this)">
+                    <div class="sequence-dot"></div>
+                    <div class="sequence-time">04:00:41</div>
+                    <div class="sequence-title">PORV should close—but doesn't</div>
+                    <p class="sequence-desc">The control room light shows "closed" because the signal was sent. But the valve is stuck open, draining coolant. Operators have no direct indication of actual valve position.</p>
+                </div>
+                
+                <div class="sequence-item" onclick="toggleSequence(this)">
+                    <div class="sequence-dot"></div>
+                    <div class="sequence-time">04:02:00</div>
+                    <div class="sequence-title">Emergency cooling activates</div>
+                    <p class="sequence-desc">High-pressure injection pumps start automatically, adding water to replace what's being lost through the stuck valve.</p>
+                </div>
+                
+                <div class="sequence-item" onclick="toggleSequence(this)">
+                    <div class="sequence-dot"></div>
+                    <div class="sequence-time">04:04:00</div>
+                    <div class="sequence-title">Operators throttle emergency cooling</div>
+                    <p class="sequence-desc">Believing the pressuriser is "going solid" (filling with water), operators reduce emergency injection. In reality, they're accelerating the loss of coolant.</p>
+                </div>
+                
+                <div class="sequence-item" onclick="toggleSequence(this)">
+                    <div class="sequence-dot"></div>
+                    <div class="sequence-time">06:22:00</div>
+                    <div class="sequence-title">PORV finally isolated</div>
+                    <p class="sequence-desc">After 2 hours 22 minutes, operators close a backup block valve, finally stopping the coolant loss. But by now, half the core has melted.</p>
+                </div>
+                
+                <div class="sequence-item" onclick="toggleSequence(this)">
+                    <div class="sequence-dot"></div>
+                    <div class="sequence-time">~20:00</div>
+                    <div class="sequence-title">Hydrogen bubble discovered</div>
+                    <p class="sequence-desc">Officials realise a hydrogen bubble has formed in the reactor vessel. For several days, there are fears it could explode—though this was physically impossible.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h3>The Outcome</h3>
+                <p><strong>52% of the core melted</strong>—but containment held. Despite the severity of the damage inside the reactor, radiation releases were minimal. The average dose to the 2 million people living nearby was about 1 millirem—equivalent to a few days of natural background radiation.</p>
+                
+                <div class="lessons-grid">
+                    <div class="lesson-card">
+                        <div class="lesson-icon">📊</div>
+                        <h4>Human Factors</h4>
+                        <p>Operators couldn't understand what was happening. Control rooms were redesigned industry-wide with clearer displays and better status indicators.</p>
+                    </div>
+                    <div class="lesson-card">
+                        <div class="lesson-icon">🎓</div>
+                        <h4>Training Revolution</h4>
+                        <p>INPO (Institute of Nuclear Power Operations) was created within weeks. Operator training became far more rigorous, including realistic simulators.</p>
+                    </div>
+                    <div class="lesson-card">
+                        <div class="lesson-icon">🛡️</div>
+                        <h4>Containment Works</h4>
+                        <p>Even with half the core melted, containment prevented significant public exposure—proving the value of defence in depth.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-nav">
+                <button class="nav-btn" onclick="goToPage(3)">
+                    <span>←</span>
+                    Previous
+                </button>
+                <button class="nav-btn primary" onclick="goToPage(5)">
+                    Chernobyl
+                    <span>→</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- PAGE 5: Chernobyl -->
+        <section class="page" id="page5">
+            <div class="accident-header">
+                <div class="accident-icon chernobyl">☢️</div>
+                <div class="accident-meta">
+                    <h2>Chernobyl</h2>
+                    <div class="accident-date">26 April 1986 • Pripyat, Ukrainian SSR (now Ukraine)</div>
+                    <div class="accident-ines">
+                        INES Level: <span class="ines-level">7</span> (Major Accident)
+                    </div>
+                </div>
+            </div>
+
+            <div class="audio-player">
+                <button class="audio-btn" onclick="toggleAudio('audio5')" id="audioBtn5">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+                <div class="audio-info">
+                    <div class="audio-title">Listen to this section</div>
+                    <div class="audio-time" id="audioTime5">0:00 / 0:00</div>
+                </div>
+                <div class="audio-progress" onclick="seekAudio(event, 'audio5')">
+                    <div class="audio-progress-fill" id="audioProgress5"></div>
+                </div>
+                <audio id="audio5" preload="auto">
+                    <source src="audio/AUDIO_05_chernobyl.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="content-card">
+                <h3>A Reactor Unlike Others</h3>
+                <p>The RBMK-1000 was a uniquely Soviet design, optimised for producing both electricity and weapons-grade plutonium. It had a fundamental flaw that made it unstable at low power: a <strong>positive void coefficient</strong>.</p>
+                
+                <div class="highlight-box">
+                    <p><strong>Positive void coefficient:</strong> In most reactors, if coolant boils away, the reaction slows down (a safety feature). In the RBMK, the opposite happened—steam bubbles made the reaction speed up. This created a dangerous feedback loop.</p>
+                </div>
+                
+                <p>The RBMK also lacked a proper containment building. The reactor hall was designed to keep the weather out, not radiation in. This would prove catastrophic.</p>
+            </div>
+
+            <!-- RBMK vs PWR Interactive Diagram -->
+            <div class="diagram-container">
+                <h4 style="margin-bottom: var(--space-lg);">Reactor Design Comparison</h4>
+                <svg viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg">
+                    <!-- PWR Side -->
+                    <g transform="translate(50, 20)">
+                        <text x="150" y="20" fill="#92d050" font-family="Rajdhani" font-size="18" font-weight="700" text-anchor="middle">PWR (Western Design)</text>
+                        
+                        <!-- Containment dome -->
+                        <path d="M50 300 L50 150 Q150 50 250 150 L250 300 Z" fill="rgba(146, 208, 80, 0.1)" stroke="#92d050" stroke-width="3"/>
+                        <text x="150" y="80" fill="#92d050" font-family="Inter" font-size="10" text-anchor="middle">CONTAINMENT DOME</text>
+                        
+                        <!-- Reactor vessel -->
+                        <rect x="100" y="140" width="100" height="130" rx="5" fill="#4a5d6b" stroke="#6b7d8f" stroke-width="2"/>
+                        <text x="150" y="200" fill="#f7f8fa" font-family="Inter" font-size="9" text-anchor="middle">Reactor</text>
+                        <text x="150" y="215" fill="#f7f8fa" font-family="Inter" font-size="9" text-anchor="middle">Vessel</text>
+                        
+                        <!-- Water moderator indication -->
+                        <rect x="110" y="155" width="80" height="100" fill="rgba(0, 176, 240, 0.3)" rx="3"/>
+                        <text x="150" y="245" fill="#00b0f0" font-family="Inter" font-size="8" text-anchor="middle">Water Moderator</text>
+                        
+                        <!-- Negative void label -->
+                        <rect x="60" y="285" width="180" height="35" rx="5" fill="rgba(146, 208, 80, 0.2)" stroke="#92d050"/>
+                        <text x="150" y="307" fill="#92d050" font-family="JetBrains Mono" font-size="11" text-anchor="middle">NEGATIVE VOID COEFFICIENT</text>
+                        
+                        <!-- Safety arrow -->
+                        <text x="150" y="335" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">Steam → Power ↓ (Self-limiting)</text>
+                    </g>
+                    
+                    <!-- VS Divider -->
+                    <line x1="400" y1="40" x2="400" y2="330" stroke="#4a5d6b" stroke-width="2" stroke-dasharray="10,5"/>
+                    <circle cx="400" cy="180" r="25" fill="#1f2937" stroke="#4a5d6b" stroke-width="2"/>
+                    <text x="400" y="185" fill="#9babc2" font-family="Rajdhani" font-size="14" font-weight="700" text-anchor="middle">VS</text>
+                    
+                    <!-- RBMK Side -->
+                    <g transform="translate(450, 20)">
+                        <text x="150" y="20" fill="#dc2626" font-family="Rajdhani" font-size="18" font-weight="700" text-anchor="middle">RBMK (Soviet Design)</text>
+                        
+                        <!-- Simple building (no dome) -->
+                        <rect x="50" y="100" width="200" height="200" fill="rgba(220, 38, 38, 0.05)" stroke="#dc2626" stroke-width="2" stroke-dasharray="5,3"/>
+                        <text x="150" y="120" fill="#dc2626" font-family="Inter" font-size="10" text-anchor="middle">NO CONTAINMENT</text>
+                        
+                        <!-- Graphite core -->
+                        <rect x="80" y="140" width="140" height="130" rx="5" fill="#6b7280" stroke="#9ca3af" stroke-width="2"/>
+                        <text x="150" y="200" fill="#f7f8fa" font-family="Inter" font-size="9" text-anchor="middle">Graphite</text>
+                        <text x="150" y="215" fill="#f7f8fa" font-family="Inter" font-size="9" text-anchor="middle">Core</text>
+                        
+                        <!-- Pressure tubes -->
+                        <line x1="100" y1="150" x2="100" y2="260" stroke="#00b0f0" stroke-width="4"/>
+                        <line x1="130" y1="150" x2="130" y2="260" stroke="#00b0f0" stroke-width="4"/>
+                        <line x1="160" y1="150" x2="160" y2="260" stroke="#00b0f0" stroke-width="4"/>
+                        <line x1="190" y1="150" x2="190" y2="260" stroke="#00b0f0" stroke-width="4"/>
+                        <text x="150" y="245" fill="#00b0f0" font-family="Inter" font-size="8" text-anchor="middle">Pressure Tubes</text>
+                        
+                        <!-- Positive void label -->
+                        <rect x="60" y="285" width="180" height="35" rx="5" fill="rgba(220, 38, 38, 0.2)" stroke="#dc2626"/>
+                        <text x="150" y="307" fill="#dc2626" font-family="JetBrains Mono" font-size="11" text-anchor="middle">POSITIVE VOID COEFFICIENT</text>
+                        
+                        <!-- Danger arrow -->
+                        <text x="150" y="335" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">Steam → Power ↑ (Runaway!)</text>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="content-card">
+                <h3>The Test That Went Wrong</h3>
+                <p>On the night of 25-26 April 1986, operators were conducting a safety test to see if the spinning turbines could provide emergency power during a blackout. The test required running the reactor at low power—precisely the conditions where the RBMK was most unstable.</p>
+            </div>
+
+            <h3 style="margin-bottom: var(--space-lg);">Sequence of Events</h3>
+            
+            <div class="sequence-timeline">
+                <div class="sequence-line"></div>
+                
+                <div class="sequence-item active" onclick="toggleSequence(this)">
+                    <div class="sequence-dot"></div>
+                    <div class="sequence-time">01:00:00</div>
+                    <div class="sequence-title">Power falls too low</div>
+                    <p class="sequence-desc">The reactor drops to just 30 MW thermal (should be 700-1000 MW for the test). Xenon poisoning makes it hard to raise power again.</p>
+                </div>
+                
+                <div class="sequence-item" onclick="toggleSequence(this)">
+                    <div class="sequence-dot"></div>
+                    <div class="sequence-time">01:03:00</div>
+                    <div class="sequence-title">Decision to continue anyway</div>
+                    <p class="sequence-desc">Deputy chief engineer Dyatlov orders the test to proceed at 200 MW—far below the safe minimum. Control rods are withdrawn to raise power.</p>
+                </div>
+                
+                <div class="sequence-item" onclick="toggleSequence(this)">
+                    <div class="sequence-dot"></div>
+                    <div class="sequence-time">01:22:30</div>
+                    <div class="sequence-title">Only 6-8 control rods remain</div>
+                    <p class="sequence-desc">Regulations required minimum 30 rods in the core. With most withdrawn, the reactor is dangerously unstable—but operators may not have known this.</p>
+                </div>
+                
+                <div class="sequence-item" onclick="toggleSequence(this)">
+                    <div class="sequence-dot"></div>
+                    <div class="sequence-time">01:23:04</div>
+                    <div class="sequence-title">Test begins</div>
+                    <p class="sequence-desc">Steam to the turbines is cut. Coolant flow drops. The positive void coefficient begins driving power upward.</p>
+                </div>
+                
+                <div class="sequence-item" onclick="toggleSequence(this)">
+                    <div class="sequence-dot"></div>
+                    <div class="sequence-time">01:23:40</div>
+                    <div class="sequence-title">Emergency shutdown (AZ-5) pressed</div>
+                    <p class="sequence-desc">Seeing rising power, an operator presses the emergency button. But the control rods have graphite tips—inserting them initially INCREASES reactivity.</p>
+                </div>
+                
+                <div class="sequence-item" onclick="toggleSequence(this)">
+                    <div class="sequence-dot"></div>
+                    <div class="sequence-time">01:23:44</div>
+                    <div class="sequence-title">Power spike and explosion</div>
+                    <p class="sequence-desc">Power surges to 100x normal in 4 seconds. Fuel fragments, steam explodes, and a second explosion (possibly hydrogen or steam) blows the 1,000-tonne reactor lid off.</p>
+                </div>
+                
+                <div class="sequence-item" onclick="toggleSequence(this)">
+                    <div class="sequence-dot"></div>
+                    <div class="sequence-time">01:24:00+</div>
+                    <div class="sequence-title">Graphite fire begins</div>
+                    <p class="sequence-desc">The exposed graphite moderator catches fire, burning for 10 days. With no containment, radioactive material is carried high into the atmosphere and spreads across Europe.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h3>The Human Cost</h3>
+                <p>Two workers died immediately from the explosion. In the following months, 28 firefighters and plant workers died from acute radiation syndrome. The UN estimates about 4,000 eventual cancer deaths may be attributable to the accident.</p>
+                
+                <p>Over 350,000 people were permanently evacuated from a 30km exclusion zone. The nearby city of Pripyat, population 49,000, was abandoned within 36 hours and remains a ghost town today.</p>
+                
+                <div class="lessons-grid">
+                    <div class="lesson-card">
+                        <div class="lesson-icon">⚛️</div>
+                        <h4>Design Matters</h4>
+                        <p>The RBMK's positive void coefficient made it inherently unstable. This design is now unique to Russia and heavily modified post-Chernobyl.</p>
+                    </div>
+                    <div class="lesson-card">
+                        <div class="lesson-icon">🛡️</div>
+                        <h4>Containment is Essential</h4>
+                        <p>Without containment, there was nothing to prevent massive releases. All Western designs include robust containment structures.</p>
+                    </div>
+                    <div class="lesson-card">
+                        <div class="lesson-icon">🌍</div>
+                        <h4>Safety Culture Born</h4>
+                        <p>The term "safety culture" was coined after Chernobyl. WANO (World Association of Nuclear Operators) was created to share lessons globally.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-nav">
+                <button class="nav-btn" onclick="goToPage(4)">
+                    <span>←</span>
+                    Previous
+                </button>
+                <button class="nav-btn primary" onclick="goToPage(6)">
+                    Fukushima
+                    <span>→</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- PAGE 6: Fukushima -->
+        <section class="page" id="page6">
+            <div class="accident-header">
+                <div class="accident-icon fukushima">🌊</div>
+                <div class="accident-meta">
+                    <h2>Fukushima Daiichi</h2>
+                    <div class="accident-date">11 March 2011 • Ōkuma, Fukushima Prefecture, Japan</div>
+                    <div class="accident-ines">
+                        INES Level: <span class="ines-level">7</span> (Major Accident)
+                    </div>
+                </div>
+            </div>
+
+            <div class="audio-player">
+                <button class="audio-btn" onclick="toggleAudio('audio6')" id="audioBtn6">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+                <div class="audio-info">
+                    <div class="audio-title">Listen to this section</div>
+                    <div class="audio-time" id="audioTime6">0:00 / 0:00</div>
+                </div>
+                <div class="audio-progress" onclick="seekAudio(event, 'audio6')">
+                    <div class="audio-progress-fill" id="audioProgress6"></div>
+                </div>
+                <audio id="audio6" preload="auto">
+                    <source src="audio/AUDIO_06_fukushima.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="content-card">
+                <h3>When Nature Overwhelms</h3>
+                <p>Unlike TMI and Chernobyl, Fukushima wasn't caused by operator error or design flaw. The reactors did exactly what they were supposed to do when the earthquake struck—they shut down safely. The disaster came from what happened next.</p>
+                
+                <div class="highlight-box">
+                    <p><strong>The sequence:</strong> Earthquake → Automatic shutdown → Tsunami → Total power loss → No cooling → Three core meltdowns</p>
+                </div>
+                
+                <p>The plant was designed to withstand a 5.7-metre tsunami. The wave that hit was <strong>14-15 metres</strong>. It flooded the basement-level emergency diesel generators that were the plant's last line of defence.</p>
+            </div>
+
+            <!-- Fukushima Timeline Visual -->
+            <div class="diagram-container">
+                <h4 style="margin-bottom: var(--space-lg);">Timeline: 11-15 March 2011</h4>
+                <svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Timeline base -->
+                    <line x1="50" y1="150" x2="850" y2="150" stroke="#4a5d6b" stroke-width="4"/>
+                    
+                    <!-- Day markers -->
+                    <g fill="#9babc2" font-family="JetBrains Mono" font-size="11">
+                        <text x="100" y="180">Mar 11</text>
+                        <text x="275" y="180">Mar 12</text>
+                        <text x="450" y="180">Mar 13</text>
+                        <text x="625" y="180">Mar 14</text>
+                        <text x="800" y="180">Mar 15</text>
+                    </g>
+                    
+                    <!-- Events -->
+                    <!-- Earthquake -->
+                    <g>
+                        <circle cx="100" cy="150" r="15" fill="#0284c7" stroke="#1f2937" stroke-width="3">
+                            <animate attributeName="r" values="15;18;15" dur="2s" repeatCount="indefinite"/>
+                        </circle>
+                        <text x="100" y="115" fill="#f7f8fa" font-family="Rajdhani" font-size="12" font-weight="600" text-anchor="middle">14:46</text>
+                        <text x="100" y="100" fill="#0284c7" font-family="Inter" font-size="11" text-anchor="middle">M9.0 Earthquake</text>
+                        <text x="100" y="210" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">Reactors</text>
+                        <text x="100" y="225" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">shut down ✓</text>
+                    </g>
+                    
+                    <!-- Tsunami -->
+                    <g>
+                        <circle cx="175" cy="150" r="15" fill="#dc2626" stroke="#1f2937" stroke-width="3">
+                            <animate attributeName="r" values="15;18;15" dur="2s" repeatCount="indefinite"/>
+                        </circle>
+                        <text x="175" y="115" fill="#f7f8fa" font-family="Rajdhani" font-size="12" font-weight="600" text-anchor="middle">15:35</text>
+                        <text x="175" y="100" fill="#dc2626" font-family="Inter" font-size="11" text-anchor="middle">14m Tsunami</text>
+                        <text x="175" y="210" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">All power</text>
+                        <text x="175" y="225" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">lost ✗</text>
+                    </g>
+                    
+                    <!-- Unit 1 explosion -->
+                    <g>
+                        <circle cx="350" cy="150" r="12" fill="#f59e0b" stroke="#1f2937" stroke-width="3"/>
+                        <text x="350" y="115" fill="#f7f8fa" font-family="Rajdhani" font-size="12" font-weight="600" text-anchor="middle">15:36</text>
+                        <text x="350" y="100" fill="#f59e0b" font-family="Inter" font-size="11" text-anchor="middle">Unit 1 H₂ Explosion</text>
+                    </g>
+                    
+                    <!-- Unit 3 explosion -->
+                    <g>
+                        <circle cx="650" cy="150" r="12" fill="#f59e0b" stroke="#1f2937" stroke-width="3"/>
+                        <text x="650" y="115" fill="#f7f8fa" font-family="Rajdhani" font-size="12" font-weight="600" text-anchor="middle">11:01</text>
+                        <text x="650" y="100" fill="#f59e0b" font-family="Inter" font-size="11" text-anchor="middle">Unit 3 H₂ Explosion</text>
+                    </g>
+                    
+                    <!-- Unit 2 & 4 -->
+                    <g>
+                        <circle cx="825" cy="150" r="12" fill="#f59e0b" stroke="#1f2937" stroke-width="3"/>
+                        <text x="825" y="115" fill="#f7f8fa" font-family="Rajdhani" font-size="12" font-weight="600" text-anchor="middle">06:00</text>
+                        <text x="825" y="100" fill="#f59e0b" font-family="Inter" font-size="11" text-anchor="middle">Unit 2 & 4 Damage</text>
+                    </g>
+                    
+                    <!-- Core melt indicators -->
+                    <g fill="none" stroke="#dc2626" stroke-width="2">
+                        <path d="M200 240 Q 275 280 350 240" stroke-dasharray="5,3"/>
+                        <text x="275" y="270" fill="#dc2626" font-family="Inter" font-size="10" text-anchor="middle">Unit 1 core melts</text>
+                    </g>
+                    <g fill="none" stroke="#dc2626" stroke-width="2">
+                        <path d="M200 255 Q 400 295 600 255" stroke-dasharray="5,3"/>
+                        <text x="400" y="290" fill="#dc2626" font-family="Inter" font-size="10" text-anchor="middle">Units 2 & 3 cores melt</text>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="content-card">
+                <h3>Station Blackout</h3>
+                <p>Nuclear plants need cooling even after shutdown—decay heat continues for days. Fukushima Daiichi had multiple backup systems, but they all failed for the same reason:</p>
+                
+                <ul style="color: var(--text-secondary); padding-left: var(--space-xl); margin-bottom: var(--space-lg);">
+                    <li style="margin-bottom: var(--space-sm);">External power grid damaged by earthquake</li>
+                    <li style="margin-bottom: var(--space-sm);">Diesel generators in basement flooded by tsunami</li>
+                    <li style="margin-bottom: var(--space-sm);">Seawater pumps for ultimate heat sink destroyed</li>
+                    <li style="margin-bottom: var(--space-sm);">Battery power exhausted after 8 hours</li>
+                </ul>
+                
+                <p>Without cooling, water boiled away, fuel rods overheated, and zirconium cladding reacted with steam to produce hydrogen. When this hydrogen accumulated and ignited, it blew the tops off three reactor buildings.</p>
+            </div>
+
+            <div class="content-card">
+                <h3>A Contrast: Onagawa</h3>
+                <p>Just 120 km north, the Onagawa Nuclear Power Plant experienced the same earthquake and a 13-metre tsunami—yet suffered no major damage. Why?</p>
+                
+                <div class="highlight-box">
+                    <p>In the 1960s, engineer Yanosuke Hirai insisted Onagawa's seawall be 14.8 metres high—nearly three times higher than calculations required. His colleagues thought he was being overly cautious. His decision saved the plant.</p>
+                </div>
+                
+                <p>Onagawa's town, devastated by the tsunami, used the nuclear plant as an evacuation shelter. This contrast between two plants facing the same disaster highlights how decisions made decades earlier—about siting, design margins, and safety culture—can determine outcomes.</p>
+            </div>
+
+            <div class="lessons-grid">
+                <div class="lesson-card">
+                    <div class="lesson-icon">🔌</div>
+                    <h4>Beyond Design Basis</h4>
+                    <p>Plants must prepare for events that exceed their design assumptions. "Never happen" isn't good enough when consequences are severe.</p>
+                </div>
+                <div class="lesson-card">
+                    <div class="lesson-icon">💧</div>
+                    <h4>Defence in Depth</h4>
+                    <p>All backup systems failed together because they shared a common vulnerability. True defence in depth means diverse, independent protection.</p>
+                </div>
+                <div class="lesson-card">
+                    <div class="lesson-icon">⏱️</div>
+                    <h4>Passive Systems</h4>
+                    <p>Active safety systems that need power can't help during a blackout. Gen III+ passive cooling systems were designed specifically for this scenario.</p>
+                </div>
+            </div>
+
+            <div class="page-nav">
+                <button class="nav-btn" onclick="goToPage(5)">
+                    <span>←</span>
+                    Previous
+                </button>
+                <button class="nav-btn primary" onclick="goToPage(7)">
+                    Safety Culture
+                    <span>→</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- PAGE 7: Safety Culture Evolution -->
+        <section class="page" id="page7">
+            <div class="section-header">
+                <div class="section-badge">
+                    <span>🛡️</span>
+                    <span>EVOLUTION</span>
+                </div>
+                <h2>The Evolution of Safety Culture</h2>
+                <p class="section-intro">Each accident fundamentally changed how the nuclear industry thinks about safety. The concept of "safety culture" didn't even exist before Chernobyl.</p>
+            </div>
+
+            <div class="audio-player">
+                <button class="audio-btn" onclick="toggleAudio('audio7')" id="audioBtn7">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+                <div class="audio-info">
+                    <div class="audio-title">Listen to this section</div>
+                    <div class="audio-time" id="audioTime7">0:00 / 0:00</div>
+                </div>
+                <div class="audio-progress" onclick="seekAudio(event, 'audio7')">
+                    <div class="audio-progress-fill" id="audioProgress7"></div>
+                </div>
+                <audio id="audio7" preload="auto">
+                    <source src="audio/AUDIO_07_safety_culture.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="culture-evolution">
+                <div class="culture-era tmi" onclick="expandCultureEra(this)">
+                    <div class="culture-date">
+                        <div class="culture-year">1979</div>
+                        <div class="culture-event">After TMI</div>
+                    </div>
+                    <div class="culture-changes">
+                        <h4>Human Factors Revolution</h4>
+                        <ul class="culture-list">
+                            <li><strong>INPO created</strong> — Industry self-regulation through peer review</li>
+                            <li><strong>Control room redesign</strong> — Clear status displays, alarm prioritisation</li>
+                            <li><strong>Simulator training</strong> — Operators must handle realistic accident scenarios</li>
+                            <li><strong>Symptom-based procedures</strong> — Respond to what you see, not what you think caused it</li>
+                            <li><strong>NRC strengthened</strong> — More inspectors, tougher oversight</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="culture-era chernobyl" onclick="expandCultureEra(this)">
+                    <div class="culture-date">
+                        <div class="culture-year">1986</div>
+                        <div class="culture-event">After Chernobyl</div>
+                    </div>
+                    <div class="culture-changes">
+                        <h4>"Safety Culture" Concept Born</h4>
+                        <ul class="culture-list">
+                            <li><strong>WANO established</strong> — Global sharing of operational experience</li>
+                            <li><strong>Safety culture defined</strong> — IAEA creates formal framework</li>
+                            <li><strong>RBMK modifications</strong> — Void coefficient reduced, faster shutdown</li>
+                            <li><strong>Containment standards</strong> — Reinforced for all new builds</li>
+                            <li><strong>International peer reviews</strong> — OSART missions begin</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="culture-era fukushima" onclick="expandCultureEra(this)">
+                    <div class="culture-date">
+                        <div class="culture-year">2011</div>
+                        <div class="culture-event">After Fukushima</div>
+                    </div>
+                    <div class="culture-changes">
+                        <h4>Beyond Design Basis</h4>
+                        <ul class="culture-list">
+                            <li><strong>Stress tests worldwide</strong> — Re-evaluate for extreme external events</li>
+                            <li><strong>FLEX equipment</strong> — Portable pumps and generators at every plant</li>
+                            <li><strong>Passive safety emphasis</strong> — Gen III+ designs accelerated</li>
+                            <li><strong>Severe accident management</strong> — Plans for core damage scenarios</li>
+                            <li><strong>Spent fuel pool protection</strong> — Enhanced cooling and monitoring</li>
+                            <li><strong>Filtered venting</strong> — Control hydrogen without uncontrolled release</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card" style="margin-top: var(--space-2xl);">
+                <h3>INPO's Eight Principles of Safety Culture</h3>
+                <p>The Institute of Nuclear Power Operations defines safety culture through eight principles that apply to every person in a nuclear organisation:</p>
+                
+                <div class="era-features" style="margin-top: var(--space-lg);">
+                    <div class="era-feature">
+                        <span class="era-feature-icon">1️⃣</span>
+                        <span class="era-feature-text"><strong>Everyone is personally responsible</strong> for nuclear safety</span>
+                    </div>
+                    <div class="era-feature">
+                        <span class="era-feature-icon">2️⃣</span>
+                        <span class="era-feature-text"><strong>Leaders demonstrate commitment</strong> to safety</span>
+                    </div>
+                    <div class="era-feature">
+                        <span class="era-feature-icon">3️⃣</span>
+                        <span class="era-feature-text"><strong>Trust permeates</strong> the organisation</span>
+                    </div>
+                    <div class="era-feature">
+                        <span class="era-feature-icon">4️⃣</span>
+                        <span class="era-feature-text"><strong>Decision-making reflects</strong> safety first</span>
+                    </div>
+                    <div class="era-feature">
+                        <span class="era-feature-icon">5️⃣</span>
+                        <span class="era-feature-text"><strong>Nuclear technology is special</strong> and unique</span>
+                    </div>
+                    <div class="era-feature">
+                        <span class="era-feature-icon">6️⃣</span>
+                        <span class="era-feature-text"><strong>Questioning attitude</strong> is cultivated</span>
+                    </div>
+                    <div class="era-feature">
+                        <span class="era-feature-icon">7️⃣</span>
+                        <span class="era-feature-text"><strong>Organisational learning</strong> is embraced</span>
+                    </div>
+                    <div class="era-feature">
+                        <span class="era-feature-icon">8️⃣</span>
+                        <span class="era-feature-text"><strong>Nuclear safety undergoes</strong> constant examination</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>The nuclear industry's paradox:</strong> It has one of the best safety records of any major industry, yet exists under constant scrutiny because of three accidents over 70 years. This scrutiny has made it better—but also means any failure is global news.</p>
+            </div>
+
+            <div class="page-nav">
+                <button class="nav-btn" onclick="goToPage(6)">
+                    <span>←</span>
+                    Previous
+                </button>
+                <button class="nav-btn primary" onclick="goToPage(8)">
+                    Knowledge Check
+                    <span>→</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- PAGE 8: Matching Game -->
+        <section class="page" id="page8">
+            <div class="section-header">
+                <div class="section-badge">
+                    <span>🎯</span>
+                    <span>ACTIVITY</span>
+                </div>
+                <h2>Match the Accident to the Lesson</h2>
+                <p class="section-intro">Each major accident taught the industry something different. Match the event to its primary lesson.</p>
+            </div>
+
+            <div class="game-container">
+                <div class="game-instruction">
+                    <span>💡</span>
+                    Click an accident, then click the matching lesson
+                </div>
+
+                <div class="game-grid">
+                    <div class="game-column">
+                        <div class="game-column-title">Accidents</div>
+                        <div class="game-item" data-match="tmi" onclick="selectGameItem(this, 'left')">
+                            Three Mile Island (1979)
+                        </div>
+                        <div class="game-item" data-match="chernobyl" onclick="selectGameItem(this, 'left')">
+                            Chernobyl (1986)
+                        </div>
+                        <div class="game-item" data-match="fukushima" onclick="selectGameItem(this, 'left')">
+                            Fukushima (2011)
+                        </div>
+                    </div>
+
+                    <div class="game-arrows">
+                        <span class="game-arrow">↔</span>
+                        <span class="game-arrow">↔</span>
+                        <span class="game-arrow">↔</span>
+                    </div>
+
+                    <div class="game-column">
+                        <div class="game-column-title">Key Lessons</div>
+                        <div class="game-item" data-match="fukushima" onclick="selectGameItem(this, 'right')">
+                            Prepare for beyond design basis events; passive safety systems
+                        </div>
+                        <div class="game-item" data-match="tmi" onclick="selectGameItem(this, 'right')">
+                            Human factors matter; operators need clear information and training
+                        </div>
+                        <div class="game-item" data-match="chernobyl" onclick="selectGameItem(this, 'right')">
+                            Design flaws can be fatal; containment is essential
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-result" id="gameResult">
+                    <h4>🎉 Excellent Work!</h4>
+                    <div class="game-score" id="gameScoreDisplay">3/3</div>
+                    <p>You've matched all the accidents to their key lessons correctly.</p>
+                </div>
+            </div>
+
+            <!-- Second Game: Timeline Order -->
+            <div class="content-card">
+                <h3>Quick Recall: Put These in Order</h3>
+                <p style="color: var(--text-secondary); margin-bottom: var(--space-lg);">Click the events in chronological order (earliest first):</p>
+                
+                <div id="orderGame" style="display: flex; flex-wrap: wrap; gap: var(--space-md);">
+                    <button class="diagram-btn" data-order="3" onclick="selectOrder(this)">Atoms for Peace Speech</button>
+                    <button class="diagram-btn" data-order="1" onclick="selectOrder(this)">Einstein-Szilárd Letter</button>
+                    <button class="diagram-btn" data-order="5" onclick="selectOrder(this)">INPO Created</button>
+                    <button class="diagram-btn" data-order="2" onclick="selectOrder(this)">Chicago Pile-1</button>
+                    <button class="diagram-btn" data-order="4" onclick="selectOrder(this)">First Commercial Nuclear Plant</button>
+                    <button class="diagram-btn" data-order="6" onclick="selectOrder(this)">WANO Created</button>
+                </div>
+                
+                <div id="orderResult" style="margin-top: var(--space-lg); display: none;">
+                    <p style="color: var(--accent-green);">✓ Correct order: Einstein Letter (1939) → Chicago Pile-1 (1942) → Atoms for Peace (1953) → Calder Hall (1956) → INPO (1979) → WANO (1989)</p>
+                </div>
+            </div>
+
+            <div class="page-nav">
+                <button class="nav-btn" onclick="goToPage(7)">
+                    <span>←</span>
+                    Previous
+                </button>
+                <button class="nav-btn primary" onclick="goToPage(9)">
+                    Quiz
+                    <span>→</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- PAGE 9: Quiz -->
+        <section class="page" id="page9">
+            <div class="section-header">
+                <div class="section-badge">
+                    <span>📝</span>
+                    <span>QUIZ</span>
+                </div>
+                <h2>Test Your Knowledge</h2>
+                <p class="section-intro">Five questions covering the history and development of nuclear power.</p>
+            </div>
+
+            <div class="quiz-container">
+                <div class="quiz-progress" id="quizProgress">
+                    <div class="quiz-dot active"></div>
+                    <div class="quiz-dot"></div>
+                    <div class="quiz-dot"></div>
+                    <div class="quiz-dot"></div>
+                    <div class="quiz-dot"></div>
+                </div>
+
+                <!-- Question 1 -->
+                <div class="quiz-question active" id="q1">
+                    <h3>1. What was the fundamental problem at Three Mile Island?</h3>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">
+                            The reactor had a positive void coefficient
+                        </div>
+                        <div class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">
+                            Operators couldn't tell what was happening inside the reactor
+                        </div>
+                        <div class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">
+                            A tsunami flooded the emergency generators
+                        </div>
+                        <div class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">
+                            The containment structure failed
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback1">
+                        <p><strong>Correct!</strong> Confusing instrumentation meant operators couldn't understand the plant's actual state. They turned off emergency cooling thinking the system was working fine, when a stuck valve was actually draining coolant.</p>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="quiz-question" id="q2">
+                    <h3>2. What made the RBMK reactor design uniquely dangerous?</h3>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">
+                            It used heavy water as a moderator
+                        </div>
+                        <div class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">
+                            It couldn't be shut down manually
+                        </div>
+                        <div class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">
+                            It had a positive void coefficient and no proper containment
+                        </div>
+                        <div class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">
+                            Its cooling systems were too small
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback2">
+                        <p><strong>Correct!</strong> The RBMK's positive void coefficient meant steam formation increased the reaction rate—the opposite of most designs. Combined with no containment building, this allowed a catastrophic release when the reactor exploded.</p>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="quiz-question" id="q3">
+                    <h3>3. At Fukushima, the reactors shut down correctly when the earthquake struck. What caused the disaster?</h3>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">
+                            The earthquake damaged the reactor cores directly
+                        </div>
+                        <div class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">
+                            The tsunami destroyed all backup power, making cooling impossible
+                        </div>
+                        <div class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">
+                            Operators made critical errors during the emergency
+                        </div>
+                        <div class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">
+                            The containment structures were breached by the earthquake
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback3">
+                        <p><strong>Correct!</strong> The reactors shut down as designed. But the 14-metre tsunami flooded the basement generators and destroyed seawater pumps, eliminating all cooling capability. Without cooling, decay heat melted the cores.</p>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="quiz-question" id="q4">
+                    <h3>4. What key organisation was created immediately after Three Mile Island?</h3>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">
+                            INPO (Institute of Nuclear Power Operations)
+                        </div>
+                        <div class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">
+                            WANO (World Association of Nuclear Operators)
+                        </div>
+                        <div class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">
+                            IAEA (International Atomic Energy Agency)
+                        </div>
+                        <div class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">
+                            NRC (Nuclear Regulatory Commission)
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback4">
+                        <p><strong>Correct!</strong> INPO was established within weeks of TMI. It's an industry self-regulation body that conducts peer reviews, shares operating experience, and promotes safety culture across all US nuclear plants.</p>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="quiz-question" id="q5">
+                    <h3>5. What is the defining safety feature of Generation III+ reactor designs?</h3>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">
+                            Larger containment buildings
+                        </div>
+                        <div class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">
+                            More powerful emergency generators
+                        </div>
+                        <div class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">
+                            Passive safety systems that work without power or operator action
+                        </div>
+                        <div class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">
+                            Smaller reactor cores that produce less heat
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback5">
+                        <p><strong>Correct!</strong> Gen III+ designs use gravity, convection, and compressed gases to cool the reactor—no electricity or human intervention needed. Had Fukushima been Gen III+, the cores could have cooled themselves for days during the blackout.</p>
+                    </div>
+                </div>
+
+                <!-- Quiz Result -->
+                <div class="quiz-result" id="quizResult">
+                    <div class="quiz-score" id="quizScore">0/5</div>
+                    <div class="quiz-score-label">Questions Correct</div>
+                    <p style="color: var(--text-secondary); margin-bottom: var(--space-xl);" id="quizMessage"></p>
+                    <button class="nav-btn primary" onclick="goToPage(10)">
+                        View Takeaways
+                        <span>→</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="page-nav">
+                <button class="nav-btn" onclick="goToPage(8)">
+                    <span>←</span>
+                    Previous
+                </button>
+                <button class="nav-btn primary" id="quizNextBtn" onclick="nextQuestion()" style="display: none;">
+                    Next Question
+                    <span>→</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- PAGE 10: Takeaways -->
+        <section class="page" id="page10">
+            <div class="section-header">
+                <div class="section-badge">
+                    <span>✓</span>
+                    <span>COMPLETE</span>
+                </div>
+                <h2>Key Takeaways</h2>
+                <p class="section-intro">What you should remember from this module.</p>
+            </div>
+
+            <div class="audio-player">
+                <button class="audio-btn" onclick="toggleAudio('audio10')" id="audioBtn10">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+                <div class="audio-info">
+                    <div class="audio-title">Listen to summary</div>
+                    <div class="audio-time" id="audioTime10">0:00 / 0:00</div>
+                </div>
+                <div class="audio-progress" onclick="seekAudio(event, 'audio10')">
+                    <div class="audio-progress-fill" id="audioProgress10"></div>
+                </div>
+                <audio id="audio10" preload="auto">
+                    <source src="audio/AUDIO_10_takeaways.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="takeaways-grid">
+                <div class="takeaway-card">
+                    <div class="takeaway-number">01</div>
+                    <h4>Nuclear power evolved from weapons</h4>
+                    <p>The Manhattan Project created the science; Atoms for Peace redirected it toward electricity. This dual-use origin shapes nuclear regulation and perception to this day.</p>
+                </div>
+
+                <div class="takeaway-card">
+                    <div class="takeaway-number">02</div>
+                    <h4>Four generations of improvement</h4>
+                    <p>From Gen I prototypes to Gen III+ passive safety, each generation incorporated lessons from operation and accidents. Modern designs can cool themselves for days without power.</p>
+                </div>
+
+                <div class="takeaway-card">
+                    <div class="takeaway-number">03</div>
+                    <h4>Three accidents shaped the industry</h4>
+                    <p>TMI (human factors), Chernobyl (design flaws), and Fukushima (external events) each revealed different vulnerabilities and prompted industry-wide improvements.</p>
+                </div>
+
+                <div class="takeaway-card">
+                    <div class="takeaway-number">04</div>
+                    <h4>Safety culture is paramount</h4>
+                    <p>The concept didn't exist before Chernobyl. Today it's central to nuclear operations—from INPO's peer reviews to WANO's global experience sharing.</p>
+                </div>
+
+                <div class="takeaway-card">
+                    <div class="takeaway-number">05</div>
+                    <h4>Defence in depth works</h4>
+                    <p>At TMI, containment held despite a 52% core melt. The industry's layered approach to safety has prevented radiation deaths in the West's entire commercial nuclear history.</p>
+                </div>
+
+                <div class="takeaway-card">
+                    <div class="takeaway-number">06</div>
+                    <h4>Learning never stops</h4>
+                    <p>Every incident, near-miss, and operational experience is shared globally. The nuclear industry's commitment to learning from mistakes makes it one of the safest industrial sectors.</p>
+                </div>
+            </div>
+
+            <div class="content-card" style="text-align: center;">
+                <h3>Module Complete! 🎉</h3>
+                <p style="color: var(--text-secondary);">You've completed Module 2: History & Development. In the next module, we'll explore how nuclear reactors actually work—the physics that makes it all possible.</p>
+                
+                <div style="display: flex; justify-content: center; gap: var(--space-lg); margin-top: var(--space-xl); flex-wrap: wrap;">
+                    <button class="nav-btn" onclick="goToPage(1)">
+                        <span>↺</span>
+                        Review Module
+                    </button>
+                    <button class="nav-btn primary">
+                        Next Module
+                        <span>→</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>© 2024 The Nuclear House Academy. All rights reserved.</p>
+                <div class="version-number">v0.1</div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // ========================================
+        // NAVIGATION & PROGRESS
+        // ========================================
+        const totalPages = 10;
+        let currentPage = 1;
+
+        function goToPage(pageNum) {
+            // Hide current page
+            document.getElementById(`page${currentPage}`).classList.remove('active');
+            
+            // Show new page
+            currentPage = pageNum;
+            document.getElementById(`page${currentPage}`).classList.add('active');
+            
+            // Update progress
+            updateProgress();
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function updateProgress() {
+            const progress = ((currentPage - 1) / (totalPages - 1)) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+            document.getElementById('progressText').textContent = `${Math.round(progress)}%`;
+        }
+
+        // ========================================
+        // AUDIO PLAYER
+        // ========================================
+        function toggleAudio(audioId) {
+            const audio = document.getElementById(audioId);
+            const btn = document.getElementById(`audioBtn${audioId.replace('audio', '')}`);
+            
+            if (audio.paused) {
+                // Pause all other audio first
+                document.querySelectorAll('audio').forEach(a => {
+                    if (a.id !== audioId) {
+                        a.pause();
+                        const otherBtn = document.getElementById(`audioBtn${a.id.replace('audio', '')}`);
+                        if (otherBtn) {
+                            otherBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+                        }
+                    }
+                });
+                
+                audio.play();
+                btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>';
+            } else {
+                audio.pause();
+                btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+            }
+        }
+
+        function formatTime(seconds) {
+            if (isNaN(seconds) || !isFinite(seconds)) return '0:00';
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function seekAudio(event, audioId) {
+            const audio = document.getElementById(audioId);
+            const progressBar = event.currentTarget;
+            const rect = progressBar.getBoundingClientRect();
+            const percent = (event.clientX - rect.left) / rect.width;
+            audio.currentTime = percent * audio.duration;
+        }
+
+        // Set up audio event listeners
+        document.querySelectorAll('audio').forEach(audio => {
+            const id = audio.id.replace('audio', '');
+            
+            audio.addEventListener('timeupdate', () => {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                document.getElementById(`audioProgress${id}`).style.width = `${progress}%`;
+                document.getElementById(`audioTime${id}`).textContent = 
+                    `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+            });
+            
+            audio.addEventListener('loadedmetadata', () => {
+                document.getElementById(`audioTime${id}`).textContent = 
+                    `0:00 / ${formatTime(audio.duration)}`;
+            });
+            
+            audio.addEventListener('ended', () => {
+                const btn = document.getElementById(`audioBtn${id}`);
+                btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+                document.getElementById(`audioProgress${id}`).style.width = '0%';
+            });
+        });
+
+        // ========================================
+        // REACTOR GENERATIONS TIMELINE
+        // ========================================
+        function showGeneration(genNum) {
+            // Update era dots
+            document.querySelectorAll('.timeline-era').forEach(era => {
+                era.classList.remove('active');
+            });
+            document.querySelector(`.timeline-era[data-gen="${genNum}"]`).classList.add('active');
+            
+            // Update progress bar
+            const progress = ((genNum - 1) / 3) * 100;
+            document.getElementById('genTimelineProgress').style.width = `${progress}%`;
+            
+            // Show content
+            document.querySelectorAll('.era-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(`gen${genNum}Content`).classList.add('active');
+        }
+
+        // ========================================
+        // ACCIDENT SEQUENCE TIMELINE
+        // ========================================
+        function toggleSequence(element) {
+            // Toggle active state
+            const wasActive = element.classList.contains('active');
+            
+            // Close all
+            element.parentElement.querySelectorAll('.sequence-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Open clicked if it wasn't already open
+            if (!wasActive) {
+                element.classList.add('active');
+            }
+        }
+
+        // ========================================
+        // CULTURE ERA EXPANSION
+        // ========================================
+        function expandCultureEra(element) {
+            element.style.transform = element.style.transform === 'translateX(10px)' ? 'translateX(5px)' : 'translateX(10px)';
+        }
+
+        // ========================================
+        // MATCHING GAME
+        // ========================================
+        let selectedLeft = null;
+        let selectedRight = null;
+        let matchedCount = 0;
+
+        function selectGameItem(element, side) {
+            if (element.classList.contains('matched')) return;
+            
+            if (side === 'left') {
+                if (selectedLeft) selectedLeft.classList.remove('selected');
+                selectedLeft = element;
+                element.classList.add('selected');
+            } else {
+                if (selectedRight) selectedRight.classList.remove('selected');
+                selectedRight = element;
+                element.classList.add('selected');
+            }
+            
+            // Check for match if both selected
+            if (selectedLeft && selectedRight) {
+                checkMatch();
+            }
+        }
+
+        function checkMatch() {
+            const leftMatch = selectedLeft.dataset.match;
+            const rightMatch = selectedRight.dataset.match;
+            
+            if (leftMatch === rightMatch) {
+                selectedLeft.classList.remove('selected');
+                selectedRight.classList.remove('selected');
+                selectedLeft.classList.add('matched');
+                selectedRight.classList.add('matched');
+                matchedCount++;
+                
+                if (matchedCount === 3) {
+                    document.getElementById('gameResult').classList.add('show');
+                }
+            } else {
+                selectedLeft.classList.add('wrong');
+                selectedRight.classList.add('wrong');
+                
+                setTimeout(() => {
+                    selectedLeft.classList.remove('wrong', 'selected');
+                    selectedRight.classList.remove('wrong', 'selected');
+                    selectedLeft = null;
+                    selectedRight = null;
+                }, 500);
+                return;
+            }
+            
+            selectedLeft = null;
+            selectedRight = null;
+        }
+
+        // ========================================
+        // ORDER GAME
+        // ========================================
+        let orderSelections = [];
+        const correctOrder = [1, 2, 3, 4, 5, 6];
+
+        function selectOrder(element) {
+            if (element.classList.contains('active')) return;
+            
+            const order = parseInt(element.dataset.order);
+            const expectedOrder = orderSelections.length + 1;
+            
+            if (order === expectedOrder) {
+                element.classList.add('active');
+                element.style.borderColor = 'var(--accent-green)';
+                element.style.background = 'rgba(146, 208, 80, 0.2)';
+                orderSelections.push(order);
+                
+                if (orderSelections.length === 6) {
+                    document.getElementById('orderResult').style.display = 'block';
+                }
+            } else {
+                element.style.borderColor = 'var(--color-danger)';
+                element.style.background = 'rgba(229, 69, 69, 0.2)';
+                
+                setTimeout(() => {
+                    element.style.borderColor = '';
+                    element.style.background = '';
+                }, 500);
+            }
+        }
+
+        // ========================================
+        // QUIZ
+        // ========================================
+        let currentQuestion = 1;
+        let quizScore = 0;
+        let answered = false;
+
+        function selectQuizOption(element) {
+            if (answered) return;
+            
+            answered = true;
+            const isCorrect = element.dataset.correct === 'true';
+            
+            // Mark selection
+            element.classList.add(isCorrect ? 'correct' : 'incorrect');
+            
+            // Show correct answer if wrong
+            if (!isCorrect) {
+                element.parentElement.querySelector('[data-correct="true"]').classList.add('correct');
+            } else {
+                quizScore++;
+            }
+            
+            // Disable all options
+            element.parentElement.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.add('disabled');
+            });
+            
+            // Show feedback
+            const feedback = document.getElementById(`feedback${currentQuestion}`);
+            feedback.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+            
+            // Update progress dots
+            const dots = document.querySelectorAll('.quiz-dot');
+            dots[currentQuestion - 1].classList.remove('active');
+            dots[currentQuestion - 1].classList.add(isCorrect ? 'correct' : 'incorrect');
+            
+            // Show next button or results
+            if (currentQuestion < 5) {
+                document.getElementById('quizNextBtn').style.display = 'flex';
+            } else {
+                setTimeout(showQuizResult, 1500);
+            }
+        }
+
+        function nextQuestion() {
+            // Hide current question
+            document.getElementById(`q${currentQuestion}`).classList.remove('active');
+            
+            // Move to next
+            currentQuestion++;
+            answered = false;
+            
+            // Show next question
+            document.getElementById(`q${currentQuestion}`).classList.add('active');
+            
+            // Update progress dot
+            document.querySelectorAll('.quiz-dot')[currentQuestion - 1].classList.add('active');
+            
+            // Hide next button
+            document.getElementById('quizNextBtn').style.display = 'none';
+        }
+
+        function showQuizResult() {
+            document.getElementById(`q${currentQuestion}`).classList.remove('active');
+            document.getElementById('quizResult').classList.add('show');
+            document.getElementById('quizScore').textContent = `${quizScore}/5`;
+            
+            let message = '';
+            if (quizScore === 5) {
+                message = 'Perfect score! You\'ve mastered the history of nuclear power development.';
+            } else if (quizScore >= 3) {
+                message = 'Good work! You have a solid understanding of nuclear history.';
+            } else {
+                message = 'Consider reviewing the material before moving on.';
+            }
+            document.getElementById('quizMessage').textContent = message;
+            
+            document.querySelector('#page9 .page-nav').style.display = 'none';
+        }
+
+        // Initialize
+        updateProgress();
+    </script>
+</body>
+</html>
