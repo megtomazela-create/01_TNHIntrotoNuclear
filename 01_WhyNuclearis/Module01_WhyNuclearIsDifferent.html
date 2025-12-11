@@ -1941,28 +1941,74 @@
                     </div>
                 </div>
 
-                <!-- Interactive Element -->
+                <!-- Interactive Element - Visual Scale Comparison -->
                 <div class="slider-container animate-on-scroll">
                     <div class="slider-header">
                         <h4>🔄 Energy Equivalents Explorer</h4>
-                        <p class="text-secondary">Drag the slider to see how nuclear compares to other fuels</p>
+                        <p style="color: var(--text-secondary);">Drag the slider to see the massive scale difference</p>
                     </div>
                     
-                    <div class="slider-visual">
-                        <div class="slider-item" id="sliderNuclear">
-                            <div class="slider-icon">⚛️</div>
-                            <div class="slider-name">Uranium</div>
-                            <div class="slider-amount" id="uraniumAmount">1 kg</div>
+                    <!-- Visual Comparison Area -->
+                    <div style="display: flex; align-items: flex-end; justify-content: center; gap: var(--space-3xl); padding: var(--space-xl) 0; min-height: 280px;">
+                        
+                        <!-- Uranium Visual -->
+                        <div style="text-align: center; width: 200px;">
+                            <div style="display: flex; align-items: flex-end; justify-content: center; height: 200px;">
+                                <div id="uraniumVisual" style="
+                                    width: 20px; 
+                                    height: 20px; 
+                                    background: linear-gradient(135deg, #cc5500, #f4c255); 
+                                    border-radius: 4px;
+                                    box-shadow: 0 0 20px rgba(204, 85, 0, 0.5);
+                                    transition: all 0.3s ease;
+                                "></div>
+                            </div>
+                            <div style="margin-top: var(--space-md);">
+                                <div style="font-family: 'Rajdhani', sans-serif; font-weight: 600; color: var(--text-heading);">Uranium</div>
+                                <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; color: var(--accent-orange);" id="uraniumAmount">1 kg</div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;" id="uraniumContext">Size of a golf ball</div>
+                            </div>
                         </div>
-                        <div class="slider-item active" id="sliderCoal">
-                            <div class="slider-icon"> ite</div>
-                            <div class="slider-name">Coal</div>
-                            <div class="slider-amount" id="coalAmount">2,000 tonnes</div>
+
+                        <!-- Equals Sign -->
+                        <div style="font-family: 'Rajdhani', sans-serif; font-size: 2.5rem; color: var(--text-muted); padding-bottom: 80px;">=</div>
+
+                        <!-- Coal Visual -->
+                        <div style="text-align: center; width: 200px;">
+                            <div style="display: flex; align-items: flex-end; justify-content: center; height: 200px;">
+                                <svg id="coalVisual" viewBox="0 0 200 200" style="width: 200px; height: 200px;">
+                                    <!-- Coal pile that grows -->
+                                    <defs>
+                                        <linearGradient id="coalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" stop-color="#4a4a4a"/>
+                                            <stop offset="100%" stop-color="#2a2a2a"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <!-- Base reference line -->
+                                    <line x1="0" y1="199" x2="200" y2="199" stroke="#4a5d6b" stroke-width="1" stroke-dasharray="4,4"/>
+                                    <!-- Coal pile - starts small, grows huge -->
+                                    <ellipse id="coalPile" cx="100" cy="195" rx="15" ry="8" fill="url(#coalGrad)" stroke="#3a3a3a" stroke-width="1"/>
+                                    <!-- Coal chunks on top -->
+                                    <g id="coalChunks">
+                                        <rect x="92" y="185" width="6" height="5" fill="#3a3a3a" rx="1" transform="rotate(-10, 95, 187)"/>
+                                        <rect x="100" y="183" width="5" height="4" fill="#4a4a4a" rx="1" transform="rotate(15, 102, 185)"/>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div style="margin-top: var(--space-md);">
+                                <div style="font-family: 'Rajdhani', sans-serif; font-weight: 600; color: var(--text-heading);">Coal</div>
+                                <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; color: var(--accent-orange);" id="coalAmount">2,000 tonnes</div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;" id="coalContext">80 lorry loads</div>
+                            </div>
                         </div>
-                        <div class="slider-item" id="sliderGas">
-                            <div class="slider-icon">🔥</div>
-                            <div class="slider-name">Natural Gas</div>
-                            <div class="slider-amount" id="gasAmount">960,000 m³</div>
+                    </div>
+
+                    <!-- Scale indicator -->
+                    <div style="text-align: center; margin-bottom: var(--space-lg);">
+                        <div style="display: inline-block; padding: var(--space-sm) var(--space-lg); background: rgba(204, 85, 0, 0.15); border-radius: var(--radius-md); border: 1px solid rgba(204, 85, 0, 0.3);">
+                            <span style="color: var(--text-muted); font-size: 0.85rem;">Coal pile is </span>
+                            <span style="color: var(--accent-orange); font-family: 'JetBrains Mono', monospace; font-weight: 600;" id="scaleRatio">2,000×</span>
+                            <span style="color: var(--text-muted); font-size: 0.85rem;"> heavier</span>
                         </div>
                     </div>
 
@@ -1970,6 +2016,13 @@
                         <span class="slider-label">Uranium:</span>
                         <input type="range" id="energySlider" min="1" max="100" value="1" oninput="updateEnergyComparison(this.value)">
                         <span class="slider-label" id="sliderValue">1 kg</span>
+                    </div>
+
+                    <!-- Real-world context -->
+                    <div style="margin-top: var(--space-lg); padding: var(--space-md); background: var(--bg-card); border-radius: var(--radius-md); text-align: center;">
+                        <p style="margin: 0; color: var(--text-secondary); font-size: 0.9rem;" id="realWorldContext">
+                            💡 <strong>1 kg of uranium</strong> could power a UK home for <strong>~45 years</strong>
+                        </p>
                     </div>
                 </div>
 
@@ -2911,10 +2964,10 @@
                         <text x="350" y="195" text-anchor="middle" fill="#f7f8fa" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">NUCLEAR</text>
                         <text x="350" y="210" text-anchor="middle" fill="#9babc2" font-family="Rajdhani, sans-serif" font-size="11">SAFETY</text>
                         
-                        <!-- Connecting lines -->
+                        <!-- Connecting lines - from centre outward -->
                         <line x1="305" y1="200" x2="230" y2="200" stroke="#cc5500" stroke-width="2" stroke-dasharray="4,4"/>
                         <line x1="395" y1="200" x2="470" y2="200" stroke="#92d050" stroke-width="2" stroke-dasharray="4,4"/>
-                        <line x1="350" y1="155" x2="350" y2="90" stroke="#00b0f0" stroke-width="2" stroke-dasharray="4,4"/>
+                        <line x1="350" y1="155" x2="350" y2="148" stroke="#00b0f0" stroke-width="2" stroke-dasharray="4,4"/>
                         
                         <!-- CONTROL Card (Left) -->
                         <g filter="url(#cardShadow)">
@@ -3320,7 +3373,7 @@
                     <img src="https://raw.githubusercontent.com/megtomazela-create/DfMDfADfO-Training/main/00_images/Logo_white.png" alt="The Nuclear House" style="height: 40px; opacity: 0.7; margin-bottom: var(--space-md);">
                     <p style="font-size: 0.85rem; color: var(--text-muted);">Module 1 • TNH Intro to Nuclear</p>
                     <p style="font-size: 0.75rem; color: var(--text-muted); opacity: 0.7;">© The Nuclear House Academy</p>
-                    <div style="position: absolute; bottom: 10px; right: 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--text-muted); opacity: 0.5;">v0.1</div>
+                    <div style="position: absolute; bottom: 10px; right: 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--text-muted); opacity: 0.5;">v0.2</div>
                 </div>
             </div>
         </section>
@@ -3457,12 +3510,68 @@
         function updateEnergyComparison(value) {
             const uranium = parseInt(value);
             const coal = uranium * 2000;
-            const gas = uranium * 960000;
             
+            // Update numbers
             document.getElementById('uraniumAmount').textContent = `${uranium} kg`;
             document.getElementById('coalAmount').textContent = `${coal.toLocaleString()} tonnes`;
-            document.getElementById('gasAmount').textContent = `${gas.toLocaleString()} m³`;
             document.getElementById('sliderValue').textContent = `${uranium} kg`;
+            document.getElementById('scaleRatio').textContent = `2,000×`;
+            
+            // Update uranium visual (grows slightly)
+            const uraniumSize = 20 + (uranium * 0.8); // 20px to 100px
+            const uraniumVisual = document.getElementById('uraniumVisual');
+            uraniumVisual.style.width = `${uraniumSize}px`;
+            uraniumVisual.style.height = `${uraniumSize}px`;
+            
+            // Update coal pile (grows dramatically)
+            const coalPile = document.getElementById('coalPile');
+            const coalChunks = document.getElementById('coalChunks');
+            
+            // Coal pile scales much more dramatically
+            const coalRx = 15 + (uranium * 1.8); // radius x: 15 to 195
+            const coalRy = 8 + (uranium * 1.5); // radius y: 8 to 158
+            const coalCy = 195 - (uranium * 1.4); // moves up as pile grows
+            
+            coalPile.setAttribute('rx', coalRx);
+            coalPile.setAttribute('ry', coalRy);
+            coalPile.setAttribute('cy', coalCy);
+            
+            // Add more coal chunks as pile grows
+            let chunksHtml = '';
+            const numChunks = Math.min(Math.floor(uranium / 5) + 2, 25);
+            for (let i = 0; i < numChunks; i++) {
+                const chunkX = 85 + Math.random() * 30;
+                const chunkY = coalCy - coalRy + Math.random() * (coalRy * 0.8);
+                const chunkW = 4 + Math.random() * 6;
+                const chunkH = 3 + Math.random() * 5;
+                const rotation = -20 + Math.random() * 40;
+                const shade = Math.random() > 0.5 ? '#3a3a3a' : '#4a4a4a';
+                chunksHtml += `<rect x="${chunkX}" y="${chunkY}" width="${chunkW}" height="${chunkH}" fill="${shade}" rx="1" transform="rotate(${rotation}, ${chunkX + chunkW/2}, ${chunkY + chunkH/2})"/>`;
+            }
+            coalChunks.innerHTML = chunksHtml;
+            
+            // Update context text based on amount
+            const uraniumContext = document.getElementById('uraniumContext');
+            const coalContext = document.getElementById('coalContext');
+            const realWorldContext = document.getElementById('realWorldContext');
+            
+            if (uranium <= 1) {
+                uraniumContext.textContent = 'Size of a golf ball';
+                coalContext.textContent = '80 lorry loads';
+                realWorldContext.innerHTML = '💡 <strong>1 kg of uranium</strong> could power a UK home for <strong>~45 years</strong>';
+            } else if (uranium <= 10) {
+                uraniumContext.textContent = 'Fits in your hand';
+                coalContext.textContent = `${(coal / 25).toLocaleString()} lorry loads`;
+                realWorldContext.innerHTML = `💡 <strong>${uranium} kg of uranium</strong> could power <strong>${uranium * 45} homes</strong> for a year`;
+            } else if (uranium <= 50) {
+                uraniumContext.textContent = 'Size of a shoebox';
+                coalContext.textContent = `${(coal / 25).toLocaleString()} lorry loads`;
+                realWorldContext.innerHTML = `💡 <strong>${uranium} kg of uranium</strong> = fuel for a small reactor for <strong>weeks</strong>`;
+            } else {
+                uraniumContext.textContent = 'Size of a suitcase';
+                coalContext.textContent = `Would fill ${Math.floor(coal / 50000)} football pitches`;
+                realWorldContext.innerHTML = `💡 <strong>${uranium} kg</strong> is roughly the annual fuel load for a <strong>nuclear power station</strong>`;
+            }
         }
 
         // ==================== DECAY HEAT SIMULATION ====================
