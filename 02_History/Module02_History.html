@@ -665,95 +665,35 @@
         }
 
         /* ========================================
-           KEY TERMS / GLOSSARY
+           INLINE TERM DEFINITIONS
            ======================================== */
-        .key-terms-card {
-            background: linear-gradient(135deg, rgba(0, 176, 240, 0.05) 0%, rgba(146, 208, 80, 0.05) 100%);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            padding: var(--space-xl);
-            margin-bottom: var(--space-xl);
-        }
-
-        .key-terms-header {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-            margin-bottom: var(--space-lg);
-            cursor: pointer;
-        }
-
-        .key-terms-header h3 {
-            margin: 0;
-            color: var(--accent-blue);
-            flex: 1;
-        }
-
-        .key-terms-toggle {
-            background: var(--bg-card);
-            border: none;
-            color: var(--text-secondary);
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all var(--transition-fast);
-        }
-
-        .key-terms-toggle:hover {
-            background: var(--accent-blue);
-            color: white;
-        }
-
-        .key-terms-subtitle {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: var(--space-lg);
-        }
-
-        .terms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-lg);
-        }
-
-        .term-item {
-            background: var(--bg-elevated);
-            border-radius: var(--radius-md);
-            padding: var(--space-md);
+        .term-note {
+            background: linear-gradient(135deg, rgba(0, 176, 240, 0.08) 0%, rgba(146, 208, 80, 0.05) 100%);
             border-left: 3px solid var(--accent-blue);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: var(--space-md) var(--space-lg);
+            margin: var(--space-md) 0;
+            font-size: 0.9rem;
         }
 
-        .term-name {
+        .term-note-label {
             font-family: 'Rajdhani', sans-serif;
             font-weight: 600;
-            color: var(--accent-green);
-            font-size: 1rem;
+            color: var(--accent-blue);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             margin-bottom: var(--space-xs);
         }
 
-        .term-definition {
+        .term-note p {
+            margin: 0;
             color: var(--text-secondary);
-            font-size: 0.9rem;
             line-height: 1.5;
         }
 
-        .term-analogy {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            font-style: italic;
-            margin-top: var(--space-xs);
-        }
-
-        .key-terms-collapsed .terms-grid {
-            display: none;
-        }
-
-        .key-terms-collapsed .key-terms-toggle {
-            transform: rotate(180deg);
+        .term-note strong {
+            color: var(--accent-green);
         }
 
         /* ========================================
@@ -2620,66 +2560,6 @@
                 <p class="section-intro">The same physics that ended World War II would soon promise to power the world.</p>
             </div>
 
-            <!-- Key Terms Glossary -->
-            <div class="key-terms-card" id="keyTermsCard">
-                <div class="key-terms-header" onclick="toggleKeyTerms()">
-                    <span style="font-size: 1.5rem;">📚</span>
-                    <h3>Key Terms You'll Meet in This Module</h3>
-                    <button class="key-terms-toggle" aria-label="Toggle terms">▲</button>
-                </div>
-                <p class="key-terms-subtitle">New to nuclear? Here's plain-English explanations of the technical terms we'll use. Click the header to collapse this section once you're ready.</p>
-                
-                <div class="terms-grid">
-                    <div class="term-item">
-                        <div class="term-name">Fission</div>
-                        <div class="term-definition">Splitting heavy atoms (usually uranium) to release enormous energy. One kilogram of uranium contains as much energy as 3,000 tonnes of coal.</div>
-                        <div class="term-analogy">💡 Think of it as: Snapping a tightly wound spring that releases all its stored energy at once.</div>
-                    </div>
-                    
-                    <div class="term-item">
-                        <div class="term-name">Reactor Core</div>
-                        <div class="term-definition">The heart of the power plant where fission happens. Contains uranium fuel arranged in bundles, surrounded by systems to control and cool it.</div>
-                        <div class="term-analogy">💡 Think of it as: The engine of the power plant.</div>
-                    </div>
-                    
-                    <div class="term-item">
-                        <div class="term-name">Coolant</div>
-                        <div class="term-definition">Liquid (usually water) that carries heat away from the reactor core to make steam for electricity. If coolant is lost, the core can overheat.</div>
-                        <div class="term-analogy">💡 Think of it as: Like the water in your car's radiator—essential to prevent overheating.</div>
-                    </div>
-                    
-                    <div class="term-item">
-                        <div class="term-name">Moderator</div>
-                        <div class="term-definition">Material that slows down neutrons so they can split more atoms. Most reactors use water; the Soviet RBMK used graphite (carbon).</div>
-                        <div class="term-analogy">💡 Think of it as: Speed bumps that slow particles to the right speed for fission.</div>
-                    </div>
-                    
-                    <div class="term-item">
-                        <div class="term-name">Control Rods</div>
-                        <div class="term-definition">Rods that absorb neutrons to slow or stop the reaction. Push them in = less power. Pull them out = more power. Drop them all in = emergency shutdown.</div>
-                        <div class="term-analogy">💡 Think of it as: The accelerator and brake pedals for the reactor.</div>
-                    </div>
-                    
-                    <div class="term-item">
-                        <div class="term-name">Containment</div>
-                        <div class="term-definition">A massive reinforced structure (often concrete and steel, over 1 metre thick) designed to keep radioactive material inside even if something goes wrong.</div>
-                        <div class="term-analogy">💡 Think of it as: A very strong safety box around the reactor—the last line of defence.</div>
-                    </div>
-                    
-                    <div class="term-item">
-                        <div class="term-name">Void Coefficient</div>
-                        <div class="term-definition">What happens to reactor power when coolant starts boiling (forming steam "voids"). <strong>Negative</strong> = reaction slows down (safe, self-limiting). <strong>Positive</strong> = reaction speeds up (dangerous, can run away).</div>
-                        <div class="term-analogy">💡 Think of it as: Negative = car slows when engine overheats. Positive = car accelerates when engine overheats (bad!).</div>
-                    </div>
-                    
-                    <div class="term-item">
-                        <div class="term-name">INES Scale</div>
-                        <div class="term-definition">International Nuclear Event Scale (1-7). Level 1-3: incidents. Level 4-7: accidents. Only Chernobyl and Fukushima reached Level 7 (Major Accident). TMI was Level 5.</div>
-                        <div class="term-analogy">💡 Think of it as: The Richter scale but for nuclear events—each level is significantly worse than the one below.</div>
-                    </div>
-                </div>
-            </div>
-
             <div class="content-card">
                 <h3>The Manhattan Project (1942-1945)</h3>
                 <p>In 1939, Albert Einstein signed a letter to President Roosevelt warning that Nazi Germany might be developing an atomic bomb. This sparked what would become the largest scientific project in history—the Manhattan Project.</p>
@@ -2689,10 +2569,15 @@
                 </div>
                 
                 <div class="highlight-box">
-                    <p><strong>130,000 people</strong> worked on the project across multiple sites. The cost: <strong>$2 billion</strong> (approximately £28 billion in today's money). Most workers had no idea what they were building.</p>
+                    <p><strong>130,000 people</strong> worked on the project across multiple sites. The cost: <strong>$2.2 billion</strong> (approximately £22 billion in today's money). Most workers had no idea what they were building.</p>
                 </div>
 
                 <p>On 2nd December 1942, beneath the stands of a Chicago stadium, Enrico Fermi achieved the first controlled nuclear chain reaction. The reactor ran for just 28 minutes—but those minutes changed everything.</p>
+                
+                <div class="term-note">
+                    <div class="term-note-label">📘 Key Term</div>
+                    <p><strong>Nuclear fission</strong> is splitting heavy atoms (like uranium) to release energy. When one atom splits, it releases particles that split more atoms—a <strong>chain reaction</strong>. A single uranium fuel pellet (the size of your fingertip) contains as much energy as one tonne of coal.</p>
+                </div>
                 
                 <p>Three years later, the Trinity test proved the weapon worked. Within weeks, atomic bombs destroyed Hiroshima and Nagasaki, ending World War II and beginning the atomic age.</p>
             </div>
@@ -2777,6 +2662,11 @@
                 </div>
 
                 <p>This speech launched the civilian nuclear power industry. The International Atomic Energy Agency (IAEA) was established in 1957. The first commercial nuclear power plant—Calder Hall in the UK—had already begun operating in 1956.</p>
+                
+                <div class="term-note">
+                    <div class="term-note-label">📘 Key Term</div>
+                    <p><strong>IAEA</strong> (International Atomic Energy Agency) is the UN's nuclear watchdog. It promotes safe, secure, and peaceful uses of nuclear technology worldwide, and conducts inspections to verify countries aren't diverting nuclear materials to weapons.</p>
+                </div>
                 
                 <p>The same physics that had destroyed two cities would now be harnessed to power millions of homes. But the transition from weapons to power generation brought new challenges—and new risks.</p>
             </div>
@@ -3017,6 +2907,11 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="term-note">
+                <div class="term-note-label">📘 Key Term</div>
+                <p><strong>INES</strong> (International Nuclear Event Scale) rates nuclear incidents from 1-7. Levels 1-3 are "incidents" with limited impact. Levels 4-7 are "accidents" with increasing severity. Only Chernobyl and Fukushima have reached Level 7 (Major Accident).</p>
+            </div>
 
             <div class="content-card">
                 <h3>What Happened</h3>
@@ -3110,6 +3005,11 @@
                 <h3>The Outcome</h3>
                 <p><strong>52% of the core melted</strong>—but containment held. Despite the severity of the damage inside the reactor, radiation releases were minimal. The average dose to the 2 million people living nearby was about 1 millirem—equivalent to a few days of natural background radiation.</p>
                 
+                <div class="term-note">
+                    <div class="term-note-label">📘 Key Term</div>
+                    <p><strong>Containment</strong> is a massive reinforced structure (concrete and steel, typically over 1 metre thick) that surrounds the reactor. It's designed to keep radioactive material inside even if the worst happens. At TMI, despite a 52% core melt, containment prevented any significant release.</p>
+                </div>
+                
                 <div class="lessons-grid">
                     <div class="lesson-card">
                         <div class="lesson-icon">📊</div>
@@ -3164,6 +3064,11 @@
                 
                 <div class="highlight-box">
                     <p><strong>Positive void coefficient:</strong> In most reactors, if coolant boils away, the reaction slows down (a safety feature). In the RBMK, the opposite happened—steam bubbles made the reaction speed up. This created a dangerous feedback loop.</p>
+                </div>
+                
+                <div class="term-note">
+                    <div class="term-note-label">📘 Key Terms</div>
+                    <p><strong>Moderator</strong>: Material that slows neutrons to the right speed for fission. Most reactors use water; the RBMK used graphite (carbon). <strong>Control rods</strong>: Rods that absorb neutrons—push them in to reduce power, pull them out to increase it. In an emergency, all rods drop in at once ("scram").</p>
                 </div>
                 
                 <p>The RBMK also lacked a proper containment building. The reactor hall was designed to keep the weather out, not radiation in. This would prove catastrophic.</p>
@@ -3373,6 +3278,11 @@
                 
                 <div class="highlight-box">
                     <p><strong>The sequence:</strong> Earthquake → Automatic shutdown → Tsunami → Total power loss → No cooling → Three core meltdowns</p>
+                </div>
+                
+                <div class="term-note">
+                    <div class="term-note-label">📘 Key Term</div>
+                    <p><strong>Decay heat</strong>: Even after a reactor shuts down, the fuel stays hot for days or weeks. This residual heat comes from radioactive decay of fission products, not from the chain reaction itself. Without continuous cooling, decay heat alone can melt the fuel—which is exactly what happened at Fukushima.</p>
                 </div>
                 
                 <p>The plant was designed to withstand a 5.7-metre tsunami. The wave that hit was <strong>14-15 metres</strong>. It flooded the basement-level emergency diesel generators that were the plant's last line of defence.</p>
@@ -4126,7 +4036,7 @@
 
             <div class="footer">
                 <p>© 2024 The Nuclear House Academy. All rights reserved.</p>
-                <div class="version-number">v0.7</div>
+                <div class="version-number">v0.8</div>
             </div>
         </section>
     </main>
@@ -4297,14 +4207,6 @@
                     `0:00 / ${formatTime(this.duration)}`;
             });
         });
-
-        // ========================================
-        // KEY TERMS GLOSSARY TOGGLE
-        // ========================================
-        function toggleKeyTerms() {
-            const card = document.getElementById('keyTermsCard');
-            card.classList.toggle('key-terms-collapsed');
-        }
 
         // ========================================
         // REACTOR GENERATIONS TIMELINE
