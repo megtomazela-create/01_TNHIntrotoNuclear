@@ -219,6 +219,13 @@
             background: rgba(0, 0, 0, 0.3);
             border-radius: var(--radius-xl);
             border: 1px solid var(--border-subtle);
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .header-audio.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
         }
 
         .header-audio .audio-btn {
@@ -2067,6 +2074,324 @@
                 max-width: 100%;
             }
         }
+
+        /* ========================================
+           COMPREHENSIVE RESPONSIVE DESIGN
+           ======================================== */
+        
+        /* Tablet Portrait (768px - 1024px) */
+        @media (max-width: 1024px) {
+            .content-card {
+                padding: var(--space-lg);
+            }
+            
+            .hero-image-container {
+                max-height: 300px;
+            }
+            
+            .diagram-container svg {
+                max-width: 100%;
+                height: auto;
+            }
+            
+            .lessons-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .takeaways-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* Tablet/Mobile (max 768px) - Enhanced */
+        @media (max-width: 768px) {
+            :root {
+                --space-2xl: 2rem;
+                --space-xl: 1.5rem;
+            }
+            
+            .section-header h2 {
+                font-size: 1.75rem;
+            }
+            
+            .section-intro {
+                font-size: 1rem;
+            }
+            
+            .hero-title h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+            
+            .hero-stat {
+                flex-direction: row;
+                gap: var(--space-md);
+                text-align: left;
+            }
+            
+            .hero-stat-value {
+                font-size: 2rem;
+            }
+            
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .takeaways-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .diagram-container {
+                overflow-x: auto;
+                padding: var(--space-md);
+            }
+            
+            .diagram-container svg {
+                min-width: 600px;
+            }
+            
+            .sequence-timeline {
+                padding-left: var(--space-lg);
+            }
+            
+            .sequence-item {
+                padding-left: var(--space-lg);
+            }
+            
+            .quiz-options {
+                gap: var(--space-sm);
+            }
+            
+            .quiz-option {
+                padding: var(--space-md);
+                font-size: 0.9rem;
+            }
+            
+            .nav-btn {
+                padding: var(--space-sm) var(--space-md);
+                font-size: 0.9rem;
+            }
+            
+            .section-image img {
+                border-radius: var(--radius-md);
+            }
+            
+            /* Era features stack on mobile */
+            .era-features {
+                gap: var(--space-sm);
+            }
+            
+            .era-feature {
+                flex-direction: column;
+                text-align: center;
+                padding: var(--space-md);
+            }
+            
+            /* Hide audio player label on mobile */
+            .header-audio.hidden {
+                display: none;
+            }
+        }
+        
+        /* Mobile (max 480px) */
+        @media (max-width: 480px) {
+            :root {
+                --space-2xl: 1.5rem;
+                --space-xl: 1rem;
+                --space-lg: 0.75rem;
+            }
+            
+            body {
+                font-size: 0.95rem;
+            }
+            
+            .fixed-header {
+                height: 56px;
+            }
+            
+            .header-logo {
+                height: 28px;
+            }
+            
+            main {
+                padding-top: 56px;
+            }
+            
+            .page {
+                padding: var(--space-lg) var(--space-md);
+                padding-bottom: 100px; /* Space for bottom audio player */
+            }
+            
+            .section-header {
+                margin-bottom: var(--space-lg);
+            }
+            
+            .section-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .section-badge {
+                font-size: 0.7rem;
+                padding: var(--space-xs) var(--space-sm);
+            }
+            
+            .content-card {
+                padding: var(--space-md);
+                border-radius: var(--radius-md);
+            }
+            
+            .highlight-box {
+                padding: var(--space-md);
+            }
+            
+            .hero-title h1 {
+                font-size: 1.75rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 0.95rem;
+            }
+            
+            .hero-image-container {
+                max-height: 200px;
+                margin: var(--space-md) 0;
+            }
+            
+            .accident-header {
+                gap: var(--space-md);
+            }
+            
+            .accident-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+            
+            .accident-meta h2 {
+                font-size: 1.5rem;
+            }
+            
+            .ines-level {
+                font-size: 1rem;
+                padding: var(--space-xs) var(--space-sm);
+            }
+            
+            /* Timeline scrollable on mobile */
+            .timeline-container {
+                overflow-x: auto;
+                padding-bottom: var(--space-md);
+            }
+            
+            .timeline-eras {
+                min-width: 400px;
+                justify-content: space-around;
+            }
+            
+            /* Challenge games mobile adjustments */
+            .evidence-panel {
+                padding: var(--space-md);
+            }
+            
+            .evidence-item {
+                padding: var(--space-sm);
+                font-size: 0.85rem;
+            }
+            
+            .answer-btn {
+                padding: var(--space-md);
+            }
+            
+            .answer-icon {
+                font-size: 1.5rem;
+            }
+            
+            .chain-slot {
+                min-width: 100%;
+                min-height: 60px;
+            }
+            
+            .chain-event {
+                font-size: 0.85rem;
+                padding: var(--space-sm) var(--space-md);
+            }
+            
+            /* Page navigation mobile */
+            .page-nav {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+            
+            .page-nav .nav-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            /* Quiz mobile */
+            .quiz-progress {
+                gap: var(--space-xs);
+            }
+            
+            .quiz-dot {
+                width: 10px;
+                height: 10px;
+            }
+            
+            /* Footer mobile */
+            .footer {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--space-sm);
+            }
+        }
+        
+        /* Extra small devices (max 360px) */
+        @media (max-width: 360px) {
+            .hero-title h1 {
+                font-size: 1.5rem;
+            }
+            
+            .section-header h2 {
+                font-size: 1.25rem;
+            }
+            
+            .header-audio {
+                padding: var(--space-xs);
+                gap: 4px;
+            }
+            
+            .header-audio .audio-btn {
+                width: 28px;
+                height: 28px;
+            }
+            
+            .audio-progress-container {
+                width: 60px;
+            }
+            
+            .header-audio .audio-time {
+                font-size: 0.6rem;
+                min-width: 50px;
+            }
+        }
+        
+        /* Landscape mobile orientation */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .page {
+                padding-bottom: 80px;
+            }
+            
+            .header-audio {
+                bottom: 10px;
+            }
+            
+            .hero-image-container {
+                max-height: 150px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -2683,62 +3008,64 @@
             <!-- RBMK vs PWR Interactive Diagram -->
             <div class="diagram-container">
                 <h4 style="margin-bottom: var(--space-lg);">Reactor Design Comparison</h4>
-                <svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 900 450" xmlns="http://www.w3.org/2000/svg">
                     <!-- PWR Side -->
-                    <g transform="translate(50, 40)">
-                        <text x="170" y="20" fill="#92d050" font-family="Rajdhani" font-size="20" font-weight="700" text-anchor="middle">PWR (Western Design)</text>
+                    <g transform="translate(50, 50)">
+                        <text x="170" y="10" fill="#92d050" font-family="Rajdhani" font-size="20" font-weight="700" text-anchor="middle">PWR (Western Design)</text>
                         
                         <!-- Containment dome -->
-                        <path d="M50 310 L50 140 Q170 40 290 140 L290 310 Z" fill="rgba(146, 208, 80, 0.1)" stroke="#92d050" stroke-width="3"/>
-                        <text x="170" y="75" fill="#92d050" font-family="Inter" font-size="11" font-weight="600" text-anchor="middle">CONTAINMENT DOME</text>
+                        <path d="M50 300 L50 130 Q170 30 290 130 L290 300 Z" fill="rgba(146, 208, 80, 0.1)" stroke="#92d050" stroke-width="3"/>
+                        <text x="170" y="65" fill="#92d050" font-family="Inter" font-size="11" font-weight="600" text-anchor="middle">CONTAINMENT DOME</text>
                         
                         <!-- Reactor vessel -->
-                        <rect x="110" y="130" width="120" height="150" rx="8" fill="#4a5d6b" stroke="#6b7d8f" stroke-width="2"/>
-                        <text x="170" y="195" fill="#f7f8fa" font-family="Inter" font-size="13" font-weight="600" text-anchor="middle">Reactor</text>
-                        <text x="170" y="215" fill="#f7f8fa" font-family="Inter" font-size="13" font-weight="600" text-anchor="middle">Vessel</text>
+                        <rect x="110" y="120" width="120" height="150" rx="8" fill="#4a5d6b" stroke="#6b7d8f" stroke-width="2"/>
+                        <text x="170" y="185" fill="#f7f8fa" font-family="Inter" font-size="13" font-weight="600" text-anchor="middle">Reactor</text>
+                        <text x="170" y="205" fill="#f7f8fa" font-family="Inter" font-size="13" font-weight="600" text-anchor="middle">Vessel</text>
                         
                         <!-- Water moderator indication -->
-                        <rect x="125" y="150" width="90" height="100" fill="rgba(0, 176, 240, 0.35)" rx="4"/>
-                        <text x="170" y="235" fill="#00b0f0" font-family="Inter" font-size="10" font-weight="500" text-anchor="middle">Water Moderator</text>
+                        <rect x="125" y="140" width="90" height="100" fill="rgba(0, 176, 240, 0.35)" rx="4"/>
+                        <text x="170" y="225" fill="#00b0f0" font-family="Inter" font-size="10" font-weight="500" text-anchor="middle">Water Moderator</text>
                         
                         <!-- Negative void label -->
-                        <rect x="55" y="320" width="230" height="40" rx="6" fill="rgba(146, 208, 80, 0.2)" stroke="#92d050" stroke-width="2"/>
-                        <text x="170" y="345" fill="#92d050" font-family="JetBrains Mono" font-size="12" font-weight="600" text-anchor="middle">NEGATIVE VOID COEFFICIENT</text>
+                        <rect x="55" y="315" width="230" height="40" rx="6" fill="rgba(146, 208, 80, 0.2)" stroke="#92d050" stroke-width="2"/>
+                        <text x="170" y="340" fill="#92d050" font-family="JetBrains Mono" font-size="12" font-weight="600" text-anchor="middle">NEGATIVE VOID COEFFICIENT</text>
                         
                         <!-- Safety arrow -->
-                        <text x="170" y="385" fill="#9babc2" font-family="Inter" font-size="11" text-anchor="middle">Steam → Power ↓ (Self-limiting)</text>
+                        <text x="170" y="380" fill="#9babc2" font-family="Inter" font-size="11" text-anchor="middle">Steam → Power ↓ (Self-limiting)</text>
                     </g>
                     
                     <!-- VS Divider -->
-                    <line x1="450" y1="60" x2="450" y2="380" stroke="#4a5d6b" stroke-width="2" stroke-dasharray="10,5"/>
-                    <circle cx="450" cy="220" r="28" fill="#1f2937" stroke="#4a5d6b" stroke-width="2"/>
-                    <text x="450" y="226" fill="#9babc2" font-family="Rajdhani" font-size="16" font-weight="700" text-anchor="middle">VS</text>
+                    <line x1="450" y1="60" x2="450" y2="400" stroke="#4a5d6b" stroke-width="2" stroke-dasharray="10,5"/>
+                    <circle cx="450" cy="230" r="28" fill="#1f2937" stroke="#4a5d6b" stroke-width="2"/>
+                    <text x="450" y="236" fill="#9babc2" font-family="Rajdhani" font-size="16" font-weight="700" text-anchor="middle">VS</text>
                     
                     <!-- RBMK Side -->
-                    <g transform="translate(510, 40)">
-                        <text x="170" y="20" fill="#dc2626" font-family="Rajdhani" font-size="20" font-weight="700" text-anchor="middle">RBMK (Soviet Design)</text>
+                    <g transform="translate(510, 50)">
+                        <text x="170" y="10" fill="#dc2626" font-family="Rajdhani" font-size="20" font-weight="700" text-anchor="middle">RBMK (Soviet Design)</text>
                         
                         <!-- Simple building (no dome) -->
-                        <rect x="50" y="90" width="240" height="220" fill="rgba(220, 38, 38, 0.05)" stroke="#dc2626" stroke-width="2" stroke-dasharray="6,4"/>
-                        <text x="170" y="115" fill="#dc2626" font-family="Inter" font-size="11" font-weight="600" text-anchor="middle">NO CONTAINMENT</text>
+                        <rect x="50" y="80" width="240" height="220" fill="rgba(220, 38, 38, 0.05)" stroke="#dc2626" stroke-width="2" stroke-dasharray="6,4"/>
+                        <text x="170" y="105" fill="#dc2626" font-family="Inter" font-size="11" font-weight="600" text-anchor="middle">NO CONTAINMENT</text>
                         
-                        <!-- Graphite core -->
-                        <rect x="85" y="135" width="170" height="140" rx="8" fill="#6b7280" stroke="#9ca3af" stroke-width="2"/>
-                        <text x="170" y="205" fill="#f7f8fa" font-family="Inter" font-size="13" font-weight="600" text-anchor="middle">Graphite Core</text>
+                        <!-- Graphite core - solid block, no internal elements -->
+                        <rect x="85" y="125" width="170" height="140" rx="8" fill="#6b7280" stroke="#9ca3af" stroke-width="2"/>
                         
-                        <!-- Pressure tubes -->
-                        <line x1="115" y1="145" x2="115" y2="265" stroke="#00b0f0" stroke-width="6"/>
-                        <line x1="150" y1="145" x2="150" y2="265" stroke="#00b0f0" stroke-width="6"/>
-                        <line x1="185" y1="145" x2="185" y2="265" stroke="#00b0f0" stroke-width="6"/>
-                        <line x1="220" y1="145" x2="220" y2="265" stroke="#00b0f0" stroke-width="6"/>
-                        <text x="170" y="295" fill="#00b0f0" font-family="Inter" font-size="10" font-weight="500" text-anchor="middle">Pressure Tubes</text>
+                        <!-- Pressure tubes drawn ON TOP of graphite -->
+                        <line x1="115" y1="135" x2="115" y2="255" stroke="#00b0f0" stroke-width="8"/>
+                        <line x1="150" y1="135" x2="150" y2="255" stroke="#00b0f0" stroke-width="8"/>
+                        <line x1="185" y1="135" x2="185" y2="255" stroke="#00b0f0" stroke-width="8"/>
+                        <line x1="220" y1="135" x2="220" y2="255" stroke="#00b0f0" stroke-width="8"/>
+                        
+                        <!-- Labels OUTSIDE the graphite block -->
+                        <text x="170" y="195" fill="#f7f8fa" font-family="Inter" font-size="12" font-weight="600" text-anchor="middle">Graphite Core</text>
+                        <text x="170" y="285" fill="#00b0f0" font-family="Inter" font-size="10" font-weight="500" text-anchor="middle">Pressure Tubes</text>
                         
                         <!-- Positive void label -->
-                        <rect x="55" y="320" width="230" height="40" rx="6" fill="rgba(220, 38, 38, 0.2)" stroke="#dc2626" stroke-width="2"/>
-                        <text x="170" y="345" fill="#dc2626" font-family="JetBrains Mono" font-size="12" font-weight="600" text-anchor="middle">POSITIVE VOID COEFFICIENT</text>
+                        <rect x="55" y="315" width="230" height="40" rx="6" fill="rgba(220, 38, 38, 0.2)" stroke="#dc2626" stroke-width="2"/>
+                        <text x="170" y="340" fill="#dc2626" font-family="JetBrains Mono" font-size="12" font-weight="600" text-anchor="middle">POSITIVE VOID COEFFICIENT</text>
                         
                         <!-- Danger arrow -->
-                        <text x="170" y="385" fill="#9babc2" font-family="Inter" font-size="11" text-anchor="middle">Steam → Power ↑ (Runaway!)</text>
+                        <text x="170" y="380" fill="#9babc2" font-family="Inter" font-size="11" text-anchor="middle">Steam → Power ↑ (Runaway!)</text>
                     </g>
                 </svg>
             </div>
@@ -3605,7 +3932,7 @@
 
             <div class="footer">
                 <p>© 2024 The Nuclear House Academy. All rights reserved.</p>
-                <div class="version-number">v0.5</div>
+                <div class="version-number">v0.6</div>
             </div>
         </section>
     </main>
@@ -3694,19 +4021,26 @@
         function loadAudioForPage(pageNum) {
             const audio = document.getElementById('narrationAudio');
             const playBtn = document.getElementById('audioPlayPause');
+            const audioPlayer = document.getElementById('audioPlayer');
             
             if (currentAudioPage === pageNum) return;
             currentAudioPage = pageNum;
 
+            // Always stop and reset current audio
             audio.pause();
             audio.currentTime = 0;
             playBtn.classList.remove('playing');
             document.getElementById('audioProgress').style.width = '0%';
             document.getElementById('audioTime').textContent = '0:00 / 0:00';
 
+            // Show/hide audio player based on whether page has audio
             if (audioFiles[pageNum]) {
                 audio.src = audioFiles[pageNum];
                 audio.load();
+                audioPlayer.classList.remove('hidden');
+            } else {
+                audio.src = '';
+                audioPlayer.classList.add('hidden');
             }
         }
 
