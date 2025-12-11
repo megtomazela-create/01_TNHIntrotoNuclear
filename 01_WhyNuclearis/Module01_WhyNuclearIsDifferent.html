@@ -1,0 +1,3792 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 1: Why Nuclear is Different | TNH Academy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           CSS VARIABLES - TNH Brand Colours
+           ======================================== */
+        :root {
+            /* Primary Backgrounds - Dark Theme */
+            --bg-primary: #1f2937;
+            --bg-secondary: #364451;
+            --bg-card: #4a5d6b;
+            --bg-elevated: #2d3a47;
+            --bg-darker: #171f28;
+            
+            /* Text Colours */
+            --text-primary: #f7f8fa;
+            --text-secondary: #9babc2;
+            --text-muted: #6b7d8f;
+            --text-heading: #ffffff;
+            
+            /* Brand Accents */
+            --accent-green: #92d050;
+            --accent-blue: #00b0f0;
+            --accent-orange: #cc5500;
+            --accent-orange-light: #e86a10;
+            --accent-gold: #f4c255;
+            
+            /* Semantic Colours */
+            --color-success: #92d050;
+            --color-warning: #f4c255;
+            --color-danger: #e54545;
+            --color-info: #00b0f0;
+            
+            /* Glows & Effects */
+            --glow-green: rgba(146, 208, 80, 0.3);
+            --glow-blue: rgba(0, 176, 240, 0.3);
+            --glow-orange: rgba(204, 85, 0, 0.4);
+            
+            /* UI Elements */
+            --border-subtle: rgba(155, 171, 194, 0.15);
+            --border-medium: rgba(155, 171, 194, 0.25);
+            
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            
+            /* Border Radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            
+            /* Transitions */
+            --transition-fast: 0.15s ease;
+            --transition-base: 0.3s ease;
+            --transition-slow: 0.5s ease;
+        }
+
+        /* ========================================
+           RESET & BASE STYLES
+           ======================================== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-weight: 400;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--text-heading);
+            letter-spacing: 0.01em;
+        }
+
+        h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+        h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+        h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
+        h4 { font-size: clamp(1.1rem, 2vw, 1.25rem); }
+
+        p { margin-bottom: 1rem; }
+
+        a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        a:hover { color: var(--accent-green); }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* ========================================
+           FIXED HEADER
+           ======================================== */
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: rgba(31, 41, 55, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-lg);
+            z-index: 1000;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .header-logo {
+            height: 36px;
+            opacity: 0.95;
+            transition: opacity var(--transition-fast);
+        }
+
+        .header-logo:hover { opacity: 1; }
+
+        .header-divider {
+            width: 1px;
+            height: 28px;
+            background: var(--border-medium);
+        }
+
+        .header-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .header-title span { color: var(--accent-orange); }
+
+        /* Progress Indicator */
+        .header-progress {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .progress-track {
+            width: 140px;
+            height: 4px;
+            background: var(--bg-card);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-orange), var(--accent-green));
+            width: 0%;
+            transition: width var(--transition-slow);
+            border-radius: 2px;
+        }
+
+        .progress-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            min-width: 36px;
+        }
+
+        /* Audio Player */
+        .header-audio {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-xs) var(--space-md);
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .audio-btn {
+            background: var(--accent-orange);
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: white;
+            font-size: 0.85rem;
+            transition: all var(--transition-fast);
+            flex-shrink: 0;
+        }
+
+        .audio-btn:hover {
+            background: var(--accent-orange-light);
+            transform: scale(1.05);
+        }
+
+        .audio-btn.playing { background: var(--accent-green); }
+
+        .audio-btn .pause-icon { display: none; }
+        .audio-btn.playing .play-icon { display: none; }
+        .audio-btn.playing .pause-icon { display: block; }
+
+        .audio-progress-container {
+            width: 100px;
+            height: 6px;
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .audio-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-orange), var(--accent-green));
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        .audio-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            min-width: 35px;
+        }
+
+        .audio-mute-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 4px;
+            transition: color var(--transition-fast);
+        }
+
+        .audio-mute-btn:hover { color: var(--text-primary); }
+        .audio-mute-btn.muted { color: var(--color-danger); }
+
+        /* Menu Toggle */
+        .menu-toggle {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: var(--space-sm);
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            transition: transform var(--transition-fast);
+        }
+
+        .menu-toggle:hover { transform: scale(1.05); }
+
+        .menu-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            border-radius: 1px;
+            transition: all var(--transition-base);
+            transform-origin: center;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ========================================
+           NAVIGATION MENU
+           ======================================== */
+        .nav-menu {
+            position: fixed;
+            top: 64px;
+            right: 0;
+            bottom: 0;
+            width: 320px;
+            max-width: 85vw;
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border-subtle);
+            transform: translateX(100%);
+            transition: transform var(--transition-base);
+            z-index: 999;
+            overflow-y: auto;
+            padding: var(--space-lg);
+        }
+
+        .nav-menu.open { transform: translateX(0); }
+
+        .nav-menu-header {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: var(--space-md);
+            padding: 0 var(--space-sm);
+        }
+
+        .nav-menu a {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            color: var(--text-secondary);
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            transition: all var(--transition-fast);
+            margin-bottom: var(--space-xs);
+            border: 1px solid transparent;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(0, 176, 240, 0.1);
+            color: var(--accent-blue);
+            border-color: rgba(0, 176, 240, 0.2);
+        }
+
+        .nav-menu a.active {
+            background: var(--accent-orange);
+            color: var(--bg-primary);
+            font-weight: 500;
+        }
+
+        .nav-menu a.completed { color: var(--accent-green); }
+
+        .nav-menu a.completed::after {
+            content: '✓';
+            margin-left: auto;
+            font-size: 0.8rem;
+        }
+
+        .nav-icon {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .nav-menu a.active .nav-icon { background: rgba(0, 0, 0, 0.2); }
+
+        /* ========================================
+           PAGE CONTAINER
+           ======================================== */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding-top: 64px;
+        }
+
+        .page.active { display: block; }
+
+        /* ========================================
+           SECTION STYLES
+           ======================================== */
+        .section {
+            padding: var(--space-3xl) var(--space-xl);
+            position: relative;
+        }
+
+        .section-container {
+            max-width: 1140px;
+            margin: 0 auto;
+        }
+
+        .section-narrow {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-md);
+            background: rgba(204, 85, 0, 0.15);
+            border-left: 3px solid var(--accent-orange);
+            color: var(--accent-orange);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: var(--space-md);
+        }
+
+        .section-title { margin-bottom: var(--space-md); }
+
+        .section-intro {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-xl);
+            max-width: 700px;
+            line-height: 1.8;
+        }
+
+        /* ========================================
+           BUTTONS
+           ======================================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-xl);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--accent-orange);
+            color: var(--text-heading);
+            box-shadow: 0 4px 15px var(--glow-orange);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-orange-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--glow-orange);
+            color: var(--text-heading);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-blue);
+            border: 2px solid var(--accent-blue);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-blue);
+            color: var(--bg-primary);
+        }
+
+        .btn-ghost {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            border-color: var(--border-medium);
+        }
+
+        .btn-lg {
+            padding: var(--space-lg) var(--space-2xl);
+            font-size: 1.1rem;
+        }
+
+        .btn-icon { font-size: 1.2rem; }
+
+        /* ========================================
+           CARDS
+           ======================================== */
+        .card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            transition: all var(--transition-base);
+        }
+
+        .card:hover {
+            border-color: var(--border-medium);
+            transform: translateY(-2px);
+        }
+
+        .card-accent-orange { border-left: 4px solid var(--accent-orange); }
+        .card-accent-blue { border-left: 4px solid var(--accent-blue); }
+        .card-accent-green { border-left: 4px solid var(--accent-green); }
+
+        /* ========================================
+           HERO SCREEN (Page 1)
+           ======================================== */
+        .hero-screen {
+            min-height: calc(100vh - 64px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-primary) 50%, var(--bg-secondary) 100%);
+            z-index: 0;
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(155, 171, 194, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(155, 171, 194, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+        }
+
+        .hero-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+        }
+
+        .hero-glow-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-orange);
+            top: 10%;
+            left: 10%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero-glow-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent-blue);
+            bottom: 20%;
+            right: 15%;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -30px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-lg);
+            background: rgba(204, 85, 0, 0.15);
+            border: 1px solid rgba(204, 85, 0, 0.3);
+            border-radius: var(--radius-xl);
+            color: var(--accent-orange);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-headline {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-highlight {
+            color: var(--accent-orange);
+            position: relative;
+        }
+
+        .hero-image-container {
+            width: 100%;
+            max-width: 700px;
+            margin: var(--space-xl) auto;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .hero-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto var(--space-xl);
+            line-height: 1.7;
+        }
+
+        .hero-question {
+            display: inline-block;
+            padding: var(--space-lg) var(--space-2xl);
+            background: var(--bg-elevated);
+            border: 2px solid var(--accent-blue);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .hero-question p {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin: 0;
+        }
+
+        /* ========================================
+           CONTENT SECTIONS
+           ======================================== */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2xl);
+            align-items: center;
+            margin-bottom: var(--space-3xl);
+        }
+
+        .content-grid.reverse { direction: rtl; }
+        .content-grid.reverse > * { direction: ltr; }
+
+        .content-text h3 {
+            margin-bottom: var(--space-md);
+            color: var(--accent-orange);
+        }
+
+        .content-text p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .content-image {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .content-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Stat Cards */
+        .stat-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-orange);
+            line-height: 1;
+            margin-bottom: var(--space-sm);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-comparison {
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--border-subtle);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* ========================================
+           COMPARISON VISUAL
+           ======================================== */
+        .comparison-container {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .comparison-title {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .comparison-visual {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: var(--space-3xl);
+            margin-bottom: var(--space-xl);
+        }
+
+        .comparison-item {
+            text-align: center;
+        }
+
+        .comparison-image {
+            margin-bottom: var(--space-md);
+        }
+
+        .comparison-image img {
+            max-height: 200px;
+            width: auto;
+            border-radius: var(--radius-md);
+        }
+
+        .comparison-label {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-heading);
+            margin-bottom: var(--space-xs);
+        }
+
+        .comparison-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--accent-blue);
+        }
+
+        .comparison-vs {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            padding-bottom: 40px;
+        }
+
+        .comparison-takeaway {
+            text-align: center;
+            padding: var(--space-lg);
+            background: rgba(204, 85, 0, 0.1);
+            border-left: 4px solid var(--accent-orange);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+
+        .comparison-takeaway p {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        .comparison-takeaway strong {
+            color: var(--accent-orange);
+        }
+
+        /* ========================================
+           INTERACTIVE SLIDER
+           ======================================== */
+        .slider-container {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .slider-header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .slider-visual {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+
+        .slider-item {
+            flex: 1;
+            text-align: center;
+            padding: var(--space-lg);
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-base);
+        }
+
+        .slider-item.active {
+            background: rgba(204, 85, 0, 0.2);
+            border: 2px solid var(--accent-orange);
+        }
+
+        .slider-icon {
+            font-size: 3rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .slider-name {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-heading);
+            margin-bottom: var(--space-xs);
+        }
+
+        .slider-amount {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-orange);
+        }
+
+        .slider-control {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+        }
+
+        .slider-control input[type="range"] {
+            flex: 1;
+            height: 8px;
+            -webkit-appearance: none;
+            background: var(--bg-darker);
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .slider-control input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            background: var(--accent-orange);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 10px var(--glow-orange);
+        }
+
+        .slider-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            min-width: 100px;
+        }
+
+        /* ========================================
+           DECAY HEAT SIMULATION
+           ======================================== */
+        .simulation-container {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .simulation-header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .reactor-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .reactor-icon {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin-bottom: var(--space-lg);
+            transition: all var(--transition-slow);
+            position: relative;
+        }
+
+        .reactor-icon.running {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            box-shadow: 0 0 60px rgba(255, 107, 53, 0.6);
+            animation: pulse-hot 1s ease-in-out infinite;
+        }
+
+        .reactor-icon.shutdown {
+            background: linear-gradient(135deg, #f7931e, #ffc107);
+            box-shadow: 0 0 40px rgba(255, 193, 7, 0.4);
+        }
+
+        .reactor-icon.cooled {
+            background: linear-gradient(135deg, #4a5d6b, #364451);
+            box-shadow: 0 0 20px rgba(74, 93, 107, 0.3);
+        }
+
+        @keyframes pulse-hot {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .heat-indicator {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md) var(--space-xl);
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .heat-bar {
+            flex: 1;
+            height: 20px;
+            background: var(--bg-darker);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .heat-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ffc107, #ff6b35, #e54545);
+            transition: width var(--transition-slow);
+            border-radius: 10px;
+        }
+
+        .heat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-orange);
+            min-width: 60px;
+        }
+
+        .simulation-controls {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .sim-btn {
+            padding: var(--space-md) var(--space-xl);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .sim-btn-run {
+            background: var(--accent-green);
+            color: var(--bg-primary);
+        }
+
+        .sim-btn-run:hover { background: #7bc043; }
+
+        .sim-btn-stop {
+            background: var(--color-danger);
+            color: white;
+        }
+
+        .sim-btn-stop:hover { background: #d43d3d; }
+
+        .sim-btn-reset {
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .sim-btn-reset:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .simulation-message {
+            text-align: center;
+            padding: var(--space-lg);
+            background: rgba(0, 176, 240, 0.1);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(0, 176, 240, 0.2);
+        }
+
+        .simulation-message p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+
+        .simulation-message strong {
+            color: var(--accent-blue);
+        }
+
+        .timeline-container {
+            margin-top: var(--space-xl);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-md);
+        }
+
+        .timeline-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .timeline-elapsed {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-blue);
+        }
+
+        .timeline-bar {
+            height: 8px;
+            background: var(--bg-darker);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: var(--space-md);
+        }
+
+        .timeline-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-orange), var(--accent-green));
+            transition: width 0.5s linear;
+        }
+
+        .timeline-markers {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* ========================================
+           3 C'S FRAMEWORK
+           ======================================== */
+        .framework-container {
+            margin-bottom: var(--space-3xl);
+        }
+
+        .framework-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto var(--space-2xl);
+        }
+
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .framework-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            text-align: center;
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .framework-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+
+        .framework-card.control::before { background: var(--accent-orange); }
+        .framework-card.cooling::before { background: var(--accent-blue); }
+        .framework-card.containment::before { background: var(--accent-green); }
+
+        .framework-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .framework-icon {
+            font-size: 3rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .framework-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+
+        .framework-card.control .framework-title { color: var(--accent-orange); }
+        .framework-card.cooling .framework-title { color: var(--accent-blue); }
+        .framework-card.containment .framework-title { color: var(--accent-green); }
+
+        .framework-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: var(--space-md);
+            font-style: italic;
+        }
+
+        .framework-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--space-md);
+        }
+
+        .framework-risk {
+            padding: var(--space-md);
+            background: rgba(229, 69, 69, 0.1);
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+        }
+
+        .framework-risk-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--color-danger);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--space-xs);
+        }
+
+        .framework-risk p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+
+        .framework-summary {
+            text-align: center;
+            padding: var(--space-xl);
+            background: linear-gradient(135deg, rgba(204, 85, 0, 0.1), rgba(0, 176, 240, 0.1));
+            border-radius: var(--radius-lg);
+            border: 2px solid var(--accent-orange);
+        }
+
+        .framework-summary h4 {
+            font-size: 1.25rem;
+            margin-bottom: var(--space-md);
+            color: var(--text-heading);
+        }
+
+        .framework-summary p {
+            color: var(--text-secondary);
+            margin: 0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ========================================
+           MATCHING GAME
+           ======================================== */
+        .game-container {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .game-header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .game-instruction {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: var(--space-md);
+            background: rgba(0, 176, 240, 0.1);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-xl);
+            font-size: 0.9rem;
+            color: var(--accent-blue);
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: var(--space-xl);
+            align-items: start;
+        }
+
+        .game-column {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .game-column-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            margin-bottom: var(--space-sm);
+        }
+
+        .game-item {
+            padding: var(--space-md) var(--space-lg);
+            background: var(--bg-card);
+            border: 2px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            text-align: center;
+        }
+
+        .game-item:hover {
+            border-color: var(--accent-blue);
+            background: rgba(0, 176, 240, 0.1);
+        }
+
+        .game-item.selected {
+            border-color: var(--accent-orange);
+            background: rgba(204, 85, 0, 0.2);
+        }
+
+        .game-item.matched {
+            border-color: var(--accent-green);
+            background: rgba(146, 208, 80, 0.2);
+            cursor: default;
+        }
+
+        .game-item.wrong {
+            border-color: var(--color-danger);
+            background: rgba(229, 69, 69, 0.2);
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .game-arrows {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-md);
+            padding-top: var(--space-2xl);
+        }
+
+        .game-arrow {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .game-result {
+            display: none;
+            text-align: center;
+            padding: var(--space-xl);
+            background: rgba(146, 208, 80, 0.1);
+            border: 2px solid var(--accent-green);
+            border-radius: var(--radius-lg);
+            margin-top: var(--space-xl);
+        }
+
+        .game-result.show { display: block; }
+
+        .game-result h4 {
+            color: var(--accent-green);
+            margin-bottom: var(--space-md);
+        }
+
+        .game-score {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: var(--space-md);
+        }
+
+        /* ========================================
+           QUIZ
+           ======================================== */
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quiz-progress {
+            display: flex;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-xl);
+        }
+
+        .quiz-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 2px solid var(--border-subtle);
+            transition: all var(--transition-fast);
+        }
+
+        .quiz-dot.active {
+            background: var(--accent-orange);
+            border-color: var(--accent-orange);
+        }
+
+        .quiz-dot.correct {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+        }
+
+        .quiz-dot.incorrect {
+            background: var(--color-danger);
+            border-color: var(--color-danger);
+        }
+
+        .quiz-question {
+            display: none;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+        }
+
+        .quiz-question.active { display: block; }
+
+        .quiz-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: var(--space-sm);
+        }
+
+        .quiz-text {
+            font-size: 1.25rem;
+            color: var(--text-heading);
+            margin-bottom: var(--space-xl);
+            line-height: 1.5;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .quiz-option {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md) var(--space-lg);
+            background: var(--bg-card);
+            border: 2px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .quiz-option:hover {
+            border-color: var(--accent-blue);
+            background: rgba(0, 176, 240, 0.1);
+        }
+
+        .quiz-option.selected {
+            border-color: var(--accent-orange);
+            background: rgba(204, 85, 0, 0.1);
+        }
+
+        .quiz-option.correct {
+            border-color: var(--accent-green);
+            background: rgba(146, 208, 80, 0.15);
+        }
+
+        .quiz-option.incorrect {
+            border-color: var(--color-danger);
+            background: rgba(229, 69, 69, 0.15);
+        }
+
+        .quiz-option.disabled {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .quiz-radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-medium);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .quiz-option.selected .quiz-radio {
+            border-color: var(--accent-orange);
+            background: var(--accent-orange);
+        }
+
+        .quiz-option.correct .quiz-radio {
+            border-color: var(--accent-green);
+            background: var(--accent-green);
+        }
+
+        .quiz-option.incorrect .quiz-radio {
+            border-color: var(--color-danger);
+            background: var(--color-danger);
+        }
+
+        .quiz-radio::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        .quiz-option.selected .quiz-radio::after,
+        .quiz-option.correct .quiz-radio::after,
+        .quiz-option.incorrect .quiz-radio::after {
+            opacity: 1;
+        }
+
+        .quiz-option-text {
+            flex: 1;
+            color: var(--text-secondary);
+        }
+
+        .quiz-feedback {
+            display: none;
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-md);
+            margin-top: var(--space-lg);
+        }
+
+        .quiz-feedback.show { display: block; }
+
+        .quiz-feedback.correct {
+            background: rgba(146, 208, 80, 0.1);
+            border-left: 4px solid var(--accent-green);
+        }
+
+        .quiz-feedback.incorrect {
+            background: rgba(229, 69, 69, 0.1);
+            border-left: 4px solid var(--color-danger);
+        }
+
+        .quiz-feedback p { margin: 0; }
+
+        .quiz-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: var(--space-xl);
+        }
+
+        .quiz-results {
+            display: none;
+            text-align: center;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+        }
+
+        .quiz-results.show { display: block; }
+
+        .results-icon {
+            font-size: 4rem;
+            margin-bottom: var(--space-lg);
+        }
+
+        .results-score {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: var(--space-md);
+        }
+
+        .results-message {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-xl);
+        }
+
+        /* ========================================
+           KEY TAKEAWAYS
+           ======================================== */
+        .takeaways-container {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .takeaway-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-lg);
+        }
+
+        .takeaway-card {
+            display: flex;
+            gap: var(--space-md);
+            padding: var(--space-lg);
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            border-left: 4px solid var(--accent-orange);
+        }
+
+        .takeaway-number {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-orange);
+            color: white;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .takeaway-content h4 {
+            font-size: 1rem;
+            margin-bottom: var(--space-xs);
+        }
+
+        .takeaway-content p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           SECTION NAVIGATION
+           ======================================== */
+        .section-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        /* ========================================
+           ANIMATIONS
+           ======================================== */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .animate-fade-in { animation: fadeIn 0.6s ease forwards; }
+        .animate-fade-in-up { animation: fadeInUp 0.6s ease forwards; }
+        .animate-scale-in { animation: scaleIn 0.5s ease forwards; }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger animations */
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-grid.reverse { direction: ltr; }
+
+            .framework-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .game-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .game-arrows {
+                flex-direction: row;
+                padding: var(--space-md) 0;
+            }
+
+            .takeaway-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .fixed-header {
+                padding: 0 var(--space-md);
+            }
+
+            .header-title,
+            .header-divider {
+                display: none;
+            }
+
+            .header-audio {
+                position: fixed;
+                bottom: 15px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: var(--bg-elevated);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+                z-index: 900;
+            }
+
+            .section {
+                padding: var(--space-xl) var(--space-md);
+            }
+
+            .comparison-visual {
+                flex-direction: column;
+                gap: var(--space-lg);
+            }
+
+            .comparison-vs {
+                padding: 0;
+            }
+
+            .slider-visual {
+                flex-direction: column;
+            }
+
+            .section-nav {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+
+            .section-nav .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .progress-track {
+                width: 80px;
+            }
+
+            .nav-menu {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========================================
+         FIXED HEADER
+         ======================================== -->
+    <header class="fixed-header">
+        <div class="header-left">
+            <img src="https://raw.githubusercontent.com/megtomazela-create/DfMDfADfO-Training/main/00_images/Logo_white.png" alt="The Nuclear House" class="header-logo">
+            <div class="header-divider"></div>
+            <div class="header-title">Module <span>01</span></div>
+        </div>
+        
+        <!-- Audio Player -->
+        <div class="header-audio" id="audioPlayer">
+            <button class="audio-btn" id="audioPlayPause" onclick="toggleAudio()" title="Play/Pause">
+                <span class="play-icon">▶</span>
+                <span class="pause-icon">⏸</span>
+            </button>
+            <div class="audio-progress-container" onclick="seekAudio(event)">
+                <div class="audio-progress-bar" id="audioProgress"></div>
+            </div>
+            <span class="audio-time" id="audioTime">0:00</span>
+            <button class="audio-mute-btn" id="audioMute" onclick="toggleMute()" title="Mute/Unmute">🔊</button>
+        </div>
+        <audio id="narrationAudio" preload="metadata"></audio>
+        
+        <div class="header-progress">
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <span class="progress-text" id="progressText">0%</span>
+        </div>
+
+        <button class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- ========================================
+         NAVIGATION MENU
+         ======================================== -->
+    <nav class="nav-menu" id="navMenu">
+        <div class="nav-menu-header">Module Contents</div>
+        
+        <a href="#" onclick="goToPage(1); return false;" data-page="1" class="active">
+            <span class="nav-icon">01</span>
+            <span>Introduction</span>
+        </a>
+        <a href="#" onclick="goToPage(2); return false;" data-page="2">
+            <span class="nav-icon">02</span>
+            <span>Stored Energy</span>
+        </a>
+        <a href="#" onclick="goToPage(3); return false;" data-page="3">
+            <span class="nav-icon">03</span>
+            <span>Decay Heat</span>
+        </a>
+        <a href="#" onclick="goToPage(4); return false;" data-page="4">
+            <span class="nav-icon">04</span>
+            <span>Radioactivity</span>
+        </a>
+        <a href="#" onclick="goToPage(5); return false;" data-page="5">
+            <span class="nav-icon">05</span>
+            <span>The 3 C's Framework</span>
+        </a>
+        <a href="#" onclick="goToPage(6); return false;" data-page="6">
+            <span class="nav-icon">🎮</span>
+            <span>Match the Risk</span>
+        </a>
+        <a href="#" onclick="goToPage(7); return false;" data-page="7">
+            <span class="nav-icon">📝</span>
+            <span>Knowledge Check</span>
+        </a>
+        <a href="#" onclick="goToPage(8); return false;" data-page="8">
+            <span class="nav-icon">🎯</span>
+            <span>Key Takeaways</span>
+        </a>
+    </nav>
+
+    <!-- ========================================
+         PAGE 1: Introduction / Hook
+         ======================================== -->
+    <div class="page active" id="page1" data-page="1">
+        <div class="hero-screen">
+            <div class="hero-bg">
+                <div class="hero-grid"></div>
+                <div class="hero-glow hero-glow-1"></div>
+                <div class="hero-glow hero-glow-2"></div>
+            </div>
+
+            <div class="hero-content">
+                <div class="hero-badge animate-fade-in-up">
+                    <span>⚛️</span>
+                    MODULE 01 • TNH ACADEMY
+                </div>
+                
+                <h1 class="hero-headline animate-fade-in-up stagger-1">
+                    Why Nuclear is <span class="hero-highlight">Different</span>
+                </h1>
+
+                <div class="hero-image-container animate-fade-in-up stagger-2">
+                    <img src="images/IMAGE_01_hero.png" alt="Nuclear power plant - what makes it unique" class="hero-image">
+                </div>
+
+                <p class="hero-subtitle animate-fade-in-up stagger-3">
+                    Nuclear power isn't just another way to boil water. Understanding <strong>why</strong> it's fundamentally different is the foundation of nuclear safety.
+                </p>
+
+                <div class="hero-question animate-fade-in-up stagger-4">
+                    <p>🤔 What makes nuclear power unique?</p>
+                </div>
+
+                <button class="btn btn-primary btn-lg animate-fade-in-up stagger-4" onclick="goToPage(2)">
+                    Let's Find Out <span class="btn-icon">→</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================
+         PAGE 2: Stored Energy
+         ======================================== -->
+    <div class="page" id="page2" data-page="2">
+        <section class="section">
+            <div class="section-container">
+                <div class="section-tag animate-on-scroll">
+                    <span>01</span> Stored Energy
+                </div>
+                <h2 class="section-title animate-on-scroll">Incredible Energy Density</h2>
+                <p class="section-intro animate-on-scroll">
+                    The first thing that makes nuclear different: the sheer amount of energy packed into nuclear fuel. It's not just a bit more than coal or gas — it's millions of times more.
+                </p>
+
+                <!-- Visual Comparison -->
+                <div class="comparison-container animate-on-scroll">
+                    <div class="comparison-title">
+                        <h3>The Energy Comparison</h3>
+                    </div>
+                    
+                    <div class="comparison-visual">
+                        <div class="comparison-item">
+                            <div class="comparison-image">
+                                <img src="images/IMAGE_02_fuel_pellet.png" alt="Uranium fuel pellet">
+                            </div>
+                            <div class="comparison-label">Uranium Fuel Pellet</div>
+                            <div class="comparison-value">~7 grams</div>
+                        </div>
+                        
+                        <div class="comparison-vs">=</div>
+                        
+                        <div class="comparison-item">
+                            <div class="comparison-image">
+                                <img src="images/IMAGE_02_coal_pile.png" alt="One tonne of coal">
+                            </div>
+                            <div class="comparison-label">Coal</div>
+                            <div class="comparison-value">~1 tonne</div>
+                        </div>
+                    </div>
+
+                    <div class="comparison-takeaway">
+                        <p>A single fuel pellet the size of your fingertip contains the same energy as <strong>1 tonne of coal</strong> or <strong>480 cubic metres of natural gas</strong>.</p>
+                    </div>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="content-grid animate-on-scroll">
+                    <div class="stat-card">
+                        <div class="stat-value">2,000,000×</div>
+                        <div class="stat-label">More Energy Dense Than Coal</div>
+                        <div class="stat-comparison">
+                            One kilogram of uranium contains as much energy as 2,000 tonnes of coal
+                        </div>
+                    </div>
+                    
+                    <div class="content-text">
+                        <h3>Why Does This Matter?</h3>
+                        <p>This extreme energy density is both nuclear power's greatest advantage and its greatest responsibility.</p>
+                        <p><strong>The advantage:</strong> Massive amounts of clean electricity from tiny amounts of fuel. No carbon emissions during operation.</p>
+                        <p><strong>The responsibility:</strong> All that energy must be managed carefully. If something goes wrong, the consequences scale with the energy involved.</p>
+                    </div>
+                </div>
+
+                <!-- Interactive Element -->
+                <div class="slider-container animate-on-scroll">
+                    <div class="slider-header">
+                        <h4>🔄 Energy Equivalents Explorer</h4>
+                        <p class="text-secondary">Drag the slider to see how nuclear compares to other fuels</p>
+                    </div>
+                    
+                    <div class="slider-visual">
+                        <div class="slider-item" id="sliderNuclear">
+                            <div class="slider-icon">⚛️</div>
+                            <div class="slider-name">Uranium</div>
+                            <div class="slider-amount" id="uraniumAmount">1 kg</div>
+                        </div>
+                        <div class="slider-item active" id="sliderCoal">
+                            <div class="slider-icon">�ite</div>
+                            <div class="slider-name">Coal</div>
+                            <div class="slider-amount" id="coalAmount">2,000 tonnes</div>
+                        </div>
+                        <div class="slider-item" id="sliderGas">
+                            <div class="slider-icon">🔥</div>
+                            <div class="slider-name">Natural Gas</div>
+                            <div class="slider-amount" id="gasAmount">960,000 m³</div>
+                        </div>
+                    </div>
+
+                    <div class="slider-control">
+                        <span class="slider-label">Uranium:</span>
+                        <input type="range" id="energySlider" min="1" max="100" value="1" oninput="updateEnergyComparison(this.value)">
+                        <span class="slider-label" id="sliderValue">1 kg</span>
+                    </div>
+                </div>
+
+                <div class="section-nav">
+                    <button class="btn btn-ghost" onclick="goToPage(1)">
+                        <span class="btn-icon">←</span> Previous
+                    </button>
+                    <button class="btn btn-primary" onclick="goToPage(3)">
+                        Continue: Decay Heat <span class="btn-icon">→</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ========================================
+         PAGE 3: Decay Heat
+         ======================================== -->
+    <div class="page" id="page3" data-page="3">
+        <section class="section">
+            <div class="section-container">
+                <div class="section-tag animate-on-scroll">
+                    <span>02</span> Decay Heat
+                </div>
+                <h2 class="section-title animate-on-scroll">The Heat That Won't Stop</h2>
+                <p class="section-intro animate-on-scroll">
+                    Here's something that surprises many people: even after you "turn off" a nuclear reactor, it keeps producing heat. This is called <strong>decay heat</strong>, and it's one of the most important concepts in nuclear safety.
+                </p>
+
+                <!-- Simulation -->
+                <div class="simulation-container animate-on-scroll">
+                    <div class="simulation-header">
+                        <h4>⚡ Reactor Shutdown Simulation</h4>
+                        <p class="text-secondary">Watch what happens when we shut down the reactor</p>
+                    </div>
+
+                    <div class="reactor-visual">
+                        <div class="reactor-icon running" id="reactorIcon">⚛️</div>
+                        
+                        <div class="heat-indicator">
+                            <span>Heat Output:</span>
+                            <div class="heat-bar">
+                                <div class="heat-fill" id="heatFill" style="width: 100%"></div>
+                            </div>
+                            <span class="heat-value" id="heatValue">100%</span>
+                        </div>
+                    </div>
+
+                    <div class="simulation-controls">
+                        <button class="sim-btn sim-btn-run" id="btnRun" onclick="runReactor()">▶ Run Reactor</button>
+                        <button class="sim-btn sim-btn-stop" id="btnStop" onclick="shutdownReactor()">⏹ Emergency Shutdown</button>
+                        <button class="sim-btn sim-btn-reset" onclick="resetSimulation()">↺ Reset</button>
+                    </div>
+
+                    <div class="simulation-message" id="simMessage">
+                        <p>Press <strong>"Emergency Shutdown"</strong> to insert control rods and stop the fission reaction. Watch the heat level carefully.</p>
+                    </div>
+
+                    <div class="timeline-container" id="timelineContainer" style="display: none;">
+                        <div class="timeline-header">
+                            <span class="timeline-title">Time Since Shutdown</span>
+                            <span class="timeline-elapsed" id="timeElapsed">0 seconds</span>
+                        </div>
+                        <div class="timeline-bar">
+                            <div class="timeline-progress" id="timelineProgress" style="width: 0%"></div>
+                        </div>
+                        <div class="timeline-markers">
+                            <span>0</span>
+                            <span>1 hour</span>
+                            <span>1 day</span>
+                            <span>1 week</span>
+                            <span>1 month</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Explanation -->
+                <div class="content-grid animate-on-scroll">
+                    <div class="content-image">
+                        <svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto;">
+                            <!-- Background -->
+                            <rect width="600" height="320" fill="#2d3a47" rx="8"/>
+                            
+                            <!-- Grid lines -->
+                            <g stroke="#4a5d6b" stroke-width="1" opacity="0.5">
+                                <line x1="70" y1="40" x2="70" y2="260"/>
+                                <line x1="70" y1="260" x2="570" y2="260"/>
+                                <!-- Horizontal grid -->
+                                <line x1="70" y1="84" x2="570" y2="84" stroke-dasharray="4,4"/>
+                                <line x1="70" y1="128" x2="570" y2="128" stroke-dasharray="4,4"/>
+                                <line x1="70" y1="172" x2="570" y2="172" stroke-dasharray="4,4"/>
+                                <line x1="70" y1="216" x2="570" y2="216" stroke-dasharray="4,4"/>
+                            </g>
+                            
+                            <!-- Y-axis labels -->
+                            <g fill="#9babc2" font-family="JetBrains Mono, monospace" font-size="11">
+                                <text x="60" y="44" text-anchor="end">100%</text>
+                                <text x="60" y="88" text-anchor="end">75%</text>
+                                <text x="60" y="132" text-anchor="end">50%</text>
+                                <text x="60" y="176" text-anchor="end">25%</text>
+                                <text x="60" y="220" text-anchor="end">7%</text>
+                                <text x="60" y="264" text-anchor="end">0%</text>
+                            </g>
+                            
+                            <!-- X-axis labels -->
+                            <g fill="#9babc2" font-family="JetBrains Mono, monospace" font-size="10">
+                                <text x="70" y="280" text-anchor="middle">0</text>
+                                <text x="170" y="280" text-anchor="middle">1 sec</text>
+                                <text x="270" y="280" text-anchor="middle">1 min</text>
+                                <text x="370" y="280" text-anchor="middle">1 hour</text>
+                                <text x="470" y="280" text-anchor="middle">1 day</text>
+                                <text x="560" y="280" text-anchor="middle">1 week</text>
+                            </g>
+                            
+                            <!-- Axis titles -->
+                            <text x="320" y="305" fill="#9babc2" font-family="Rajdhani, sans-serif" font-size="12" text-anchor="middle">Time After Shutdown</text>
+                            <text x="20" y="150" fill="#9babc2" font-family="Rajdhani, sans-serif" font-size="12" text-anchor="middle" transform="rotate(-90, 20, 150)">Heat Output</text>
+                            
+                            <!-- Decay heat curve -->
+                            <defs>
+                                <linearGradient id="curveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#e54545"/>
+                                    <stop offset="30%" stop-color="#cc5500"/>
+                                    <stop offset="100%" stop-color="#f4c255"/>
+                                </linearGradient>
+                                <filter id="glow">
+                                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                    <feMerge>
+                                        <feMergeNode in="coloredBlur"/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
+                            </defs>
+                            
+                            <!-- Area under curve -->
+                            <path d="M70,40 Q120,180 170,205 Q220,218 270,225 Q370,235 470,242 L570,248 L570,260 L70,260 Z" 
+                                  fill="url(#curveGradient)" opacity="0.15"/>
+                            
+                            <!-- Main curve -->
+                            <path d="M70,40 Q120,180 170,205 Q220,218 270,225 Q370,235 470,242 L570,248" 
+                                  stroke="url(#curveGradient)" stroke-width="3" fill="none" filter="url(#glow)"/>
+                            
+                            <!-- Key point markers -->
+                            <circle cx="70" cy="40" r="5" fill="#e54545"/>
+                            <circle cx="170" cy="205" r="4" fill="#cc5500"/>
+                            <circle cx="370" cy="235" r="4" fill="#f4c255"/>
+                            
+                            <!-- Annotations -->
+                            <g font-family="Rajdhani, sans-serif" font-size="11">
+                                <text x="85" y="35" fill="#e54545" font-weight="600">SCRAM</text>
+                                <text x="175" y="195" fill="#cc5500">~7%</text>
+                                <text x="375" y="225" fill="#f4c255">~1.5%</text>
+                            </g>
+                            
+                            <!-- Title -->
+                            <text x="320" y="22" fill="#f7f8fa" font-family="Rajdhani, sans-serif" font-size="14" font-weight="600" text-anchor="middle">Decay Heat After Reactor Shutdown</text>
+                            
+                            <!-- Legend note -->
+                            <rect x="400" y="50" width="160" height="45" fill="#1f2937" rx="4" opacity="0.8"/>
+                            <text x="410" y="68" fill="#f4c255" font-family="Rajdhani, sans-serif" font-size="11" font-weight="600">⚠ Key Insight</text>
+                            <text x="410" y="83" fill="#9babc2" font-family="Inter, sans-serif" font-size="10">Heat never reaches zero</text>
+                            <text x="410" y="93" fill="#9babc2" font-family="Inter, sans-serif" font-size="10">Cooling must continue</text>
+                        </svg>
+                    </div>
+                    
+                    <div class="content-text">
+                        <h3>Why Does Decay Heat Happen?</h3>
+                        <p>When uranium atoms split (fission), they create smaller atoms called <strong>fission products</strong>. Many of these are radioactive and unstable.</p>
+                        <p>As these fission products decay into stable atoms, they release energy — mostly as heat. This process can't be stopped or controlled; it's governed by the laws of physics.</p>
+                        <p><strong>Key insight:</strong> Even though you can stop the chain reaction instantly by inserting control rods, you can't stop the decay heat. You can only <strong>remove</strong> it by cooling.</p>
+                    </div>
+                </div>
+
+                <div class="card card-accent-orange animate-on-scroll" style="margin-top: var(--space-xl);">
+                    <h4>📊 Decay Heat Numbers</h4>
+                    <p>Immediately after shutdown, decay heat is about <strong>7% of full power</strong>. For a 3,000 MW reactor, that's still 210 MW — enough to power a small city!</p>
+                    <p style="margin-bottom: 0;">After one hour: ~1.5% | After one day: ~0.4% | After one week: ~0.2%</p>
+                </div>
+
+                <div class="section-nav">
+                    <button class="btn btn-ghost" onclick="goToPage(2)">
+                        <span class="btn-icon">←</span> Previous
+                    </button>
+                    <button class="btn btn-primary" onclick="goToPage(4)">
+                        Continue: Radioactivity <span class="btn-icon">→</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ========================================
+         PAGE 4: Radioactivity
+         ======================================== -->
+    <div class="page" id="page4" data-page="4">
+        <section class="section">
+            <div class="section-container">
+                <div class="section-tag animate-on-scroll">
+                    <span>03</span> Radioactivity
+                </div>
+                <h2 class="section-title animate-on-scroll">Invisible Energy, Visible Responsibility</h2>
+                <p class="section-intro animate-on-scroll">
+                    The third unique characteristic of nuclear: the fission products that create decay heat are also <strong>radioactive</strong>. They emit radiation that can be hazardous to human health if not properly contained.
+                </p>
+
+                <div class="content-grid animate-on-scroll">
+                    <div class="content-text">
+                        <h3>What is Radiation?</h3>
+                        <p>Radiation is energy emitted by unstable atoms as they decay into more stable forms. There are several types:</p>
+                        <ul style="color: var(--text-secondary); margin-left: var(--space-lg);">
+                            <li><strong>Alpha particles</strong> — stopped by paper or skin</li>
+                            <li><strong>Beta particles</strong> — stopped by aluminium or plastic</li>
+                            <li><strong>Gamma rays</strong> — need thick lead or concrete</li>
+                            <li><strong>Neutrons</strong> — need water or specialised materials</li>
+                        </ul>
+                        <p>The key challenge: you can't see, smell, or feel radiation. This is why we need sophisticated monitoring and multiple layers of protection.</p>
+                    </div>
+                    
+                    <div class="content-image">
+                        <!-- Radiation Types & Shielding SVG -->
+                        <svg viewBox="0 0 650 340" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto;">
+                            <defs>
+                                <filter id="rayGlow">
+                                    <feGaussianBlur stdDeviation="2" result="blur"/>
+                                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                                </filter>
+                                <!-- Barrier patterns -->
+                                <pattern id="paperPattern" patternUnits="userSpaceOnUse" width="8" height="8">
+                                    <rect width="8" height="8" fill="#d4c4a8"/>
+                                    <path d="M0 0L8 8M8 0L0 8" stroke="#c4b498" stroke-width="0.5"/>
+                                </pattern>
+                                <pattern id="aluminiumPattern" patternUnits="userSpaceOnUse" width="4" height="4">
+                                    <rect width="4" height="4" fill="#a8b4c4"/>
+                                    <rect x="0" y="0" width="2" height="4" fill="#98a4b4"/>
+                                </pattern>
+                                <pattern id="leadPattern" patternUnits="userSpaceOnUse" width="6" height="6">
+                                    <rect width="6" height="6" fill="#5a6068"/>
+                                    <circle cx="3" cy="3" r="1.5" fill="#4a5058"/>
+                                </pattern>
+                                <pattern id="waterPattern" patternUnits="userSpaceOnUse" width="20" height="10">
+                                    <rect width="20" height="10" fill="#1a5a7a"/>
+                                    <path d="M0 5 Q5 3 10 5 T20 5" stroke="#2a7a9a" stroke-width="1.5" fill="none" opacity="0.6"/>
+                                </pattern>
+                            </defs>
+                            
+                            <!-- Background -->
+                            <rect width="650" height="340" fill="#2d3a47" rx="8"/>
+                            
+                            <!-- Title -->
+                            <text x="325" y="28" text-anchor="middle" fill="#f7f8fa" font-family="Rajdhani, sans-serif" font-size="16" font-weight="600">Radiation Types &amp; Shielding</text>
+                            
+                            <!-- Column headers -->
+                            <text x="60" y="55" text-anchor="middle" fill="#6b7d8f" font-family="JetBrains Mono, monospace" font-size="9">TYPE</text>
+                            <text x="325" y="55" text-anchor="middle" fill="#6b7d8f" font-family="JetBrains Mono, monospace" font-size="9">BARRIER MATERIALS</text>
+                            
+                            <!-- Barrier labels at top -->
+                            <text x="200" y="55" text-anchor="middle" fill="#d4c4a8" font-family="Inter, sans-serif" font-size="10">Paper</text>
+                            <text x="295" y="55" text-anchor="middle" fill="#a8b4c4" font-family="Inter, sans-serif" font-size="10">Aluminium</text>
+                            <text x="405" y="55" text-anchor="middle" fill="#8090a0" font-family="Inter, sans-serif" font-size="10">Lead</text>
+                            <text x="530" y="55" text-anchor="middle" fill="#4a9aba" font-family="Inter, sans-serif" font-size="10">Water/Concrete</text>
+                            
+                            <!-- Barrier columns -->
+                            <!-- Paper -->
+                            <rect x="190" y="65" width="20" height="240" fill="url(#paperPattern)" opacity="0.9"/>
+                            <!-- Aluminium -->
+                            <rect x="280" y="65" width="30" height="240" fill="url(#aluminiumPattern)" opacity="0.9"/>
+                            <!-- Lead -->
+                            <rect x="385" y="65" width="45" height="240" fill="url(#leadPattern)" opacity="0.9"/>
+                            <!-- Water/Concrete -->
+                            <rect x="500" y="65" width="70" height="240" fill="url(#waterPattern)" opacity="0.9"/>
+                            
+                            <!-- ALPHA - Row 1 -->
+                            <g transform="translate(0, 80)">
+                                <!-- Label -->
+                                <rect x="15" y="0" width="70" height="28" fill="#e54545" rx="4"/>
+                                <text x="50" y="19" text-anchor="middle" fill="#ffffff" font-family="Rajdhani, sans-serif" font-size="14" font-weight="600">Alpha α</text>
+                                
+                                <!-- Particles and ray -->
+                                <g filter="url(#rayGlow)">
+                                    <circle cx="100" cy="14" r="6" fill="#e54545"/>
+                                    <circle cx="115" cy="14" r="6" fill="#e54545"/>
+                                    <circle cx="130" cy="14" r="6" fill="#e54545"/>
+                                    <line x1="140" y1="14" x2="188" y2="14" stroke="#e54545" stroke-width="3" stroke-linecap="round"/>
+                                    <polygon points="185,8 195,14 185,20" fill="#e54545"/>
+                                </g>
+                                <!-- Stopped indicator -->
+                                <text x="200" y="19" text-anchor="middle" fill="#e54545" font-size="18" font-weight="bold">✕</text>
+                                <text x="200" y="38" text-anchor="middle" fill="#9babc2" font-family="Inter, sans-serif" font-size="9">Stopped</text>
+                            </g>
+                            
+                            <!-- BETA - Row 2 -->
+                            <g transform="translate(0, 145)">
+                                <!-- Label -->
+                                <rect x="15" y="0" width="70" height="28" fill="#00b0f0" rx="4"/>
+                                <text x="50" y="19" text-anchor="middle" fill="#ffffff" font-family="Rajdhani, sans-serif" font-size="14" font-weight="600">Beta β</text>
+                                
+                                <!-- Particles and ray -->
+                                <g filter="url(#rayGlow)">
+                                    <circle cx="105" cy="14" r="4" fill="#00b0f0"/>
+                                    <circle cx="118" cy="14" r="4" fill="#00b0f0"/>
+                                    <circle cx="131" cy="14" r="4" fill="#00b0f0"/>
+                                    <line x1="140" y1="14" x2="278" y2="14" stroke="#00b0f0" stroke-width="2" stroke-linecap="round"/>
+                                    <polygon points="275,9 283,14 275,19" fill="#00b0f0"/>
+                                </g>
+                                <!-- Passes paper -->
+                                <text x="200" y="19" text-anchor="middle" fill="#00b0f0" font-size="14">→</text>
+                                <!-- Stopped indicator -->
+                                <text x="295" y="19" text-anchor="middle" fill="#00b0f0" font-size="18" font-weight="bold">✕</text>
+                                <text x="295" y="38" text-anchor="middle" fill="#9babc2" font-family="Inter, sans-serif" font-size="9">Stopped</text>
+                            </g>
+                            
+                            <!-- GAMMA - Row 3 -->
+                            <g transform="translate(0, 210)">
+                                <!-- Label -->
+                                <rect x="15" y="0" width="70" height="28" fill="#92d050" rx="4"/>
+                                <text x="50" y="19" text-anchor="middle" fill="#1f2937" font-family="Rajdhani, sans-serif" font-size="14" font-weight="600">Gamma γ</text>
+                                
+                                <!-- Wave -->
+                                <g filter="url(#rayGlow)">
+                                    <path d="M95 14 Q102 4 109 14 T123 14 T137 14 T151 14 T165 14 T179 14 T193 14 T207 14 T221 14 T235 14 T249 14 T263 14 T277 14 T291 14 T305 14 T319 14 T333 14 T347 14 T361 14 T375 14 T383 14" 
+                                          stroke="#92d050" stroke-width="2.5" fill="none"/>
+                                    <polygon points="380,9 390,14 380,19" fill="#92d050"/>
+                                </g>
+                                <!-- Passes paper & aluminium -->
+                                <text x="200" y="19" text-anchor="middle" fill="#92d050" font-size="14">→</text>
+                                <text x="295" y="19" text-anchor="middle" fill="#92d050" font-size="14">→</text>
+                                <!-- Stopped/reduced -->
+                                <text x="407" y="19" text-anchor="middle" fill="#92d050" font-size="16" font-weight="bold">✕</text>
+                                <text x="407" y="38" text-anchor="middle" fill="#9babc2" font-family="Inter, sans-serif" font-size="9">Stopped</text>
+                            </g>
+                            
+                            <!-- NEUTRON - Row 4 -->
+                            <g transform="translate(0, 275)">
+                                <!-- Label -->
+                                <rect x="15" y="0" width="70" height="28" fill="#f4c255" rx="4"/>
+                                <text x="50" y="19" text-anchor="middle" fill="#1f2937" font-family="Rajdhani, sans-serif" font-size="14" font-weight="600">Neutron</text>
+                                
+                                <!-- Particles and ray -->
+                                <g filter="url(#rayGlow)">
+                                    <circle cx="105" cy="14" r="5" fill="none" stroke="#f4c255" stroke-width="2"/>
+                                    <circle cx="120" cy="14" r="5" fill="none" stroke="#f4c255" stroke-width="2"/>
+                                    <circle cx="135" cy="14" r="5" fill="none" stroke="#f4c255" stroke-width="2"/>
+                                    <line x1="145" y1="14" x2="498" y2="14" stroke="#f4c255" stroke-width="2" stroke-dasharray="8,4"/>
+                                    <polygon points="495,9 505,14 495,19" fill="#f4c255"/>
+                                </g>
+                                <!-- Passes through most -->
+                                <text x="200" y="19" text-anchor="middle" fill="#f4c255" font-size="14">→</text>
+                                <text x="295" y="19" text-anchor="middle" fill="#f4c255" font-size="14">→</text>
+                                <text x="407" y="19" text-anchor="middle" fill="#f4c255" font-size="14">→</text>
+                                <!-- Stopped -->
+                                <text x="535" y="19" text-anchor="middle" fill="#f4c255" font-size="16" font-weight="bold">✕</text>
+                                <text x="535" y="38" text-anchor="middle" fill="#9babc2" font-family="Inter, sans-serif" font-size="9">Stopped</text>
+                            </g>
+                            
+                            <!-- Legend -->
+                            <g transform="translate(15, 315)">
+                                <text x="0" y="12" fill="#6b7d8f" font-family="Inter, sans-serif" font-size="10">→ Passes through</text>
+                                <text x="120" y="12" fill="#6b7d8f" font-family="Inter, sans-serif" font-size="10">✕ Blocked/Absorbed</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Before/After Containment -->
+                <div class="comparison-container animate-on-scroll">
+                    <div class="comparison-title">
+                        <h3>The Importance of Containment</h3>
+                    </div>
+                    
+                    <div class="comparison-visual">
+                        <div class="comparison-item">
+                            <div class="comparison-image">
+                                <!-- Uncontained SVG -->
+                                <svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg" style="max-height: 200px; width: auto;">
+                                    <defs>
+                                        <radialGradient id="dangerGlow" cx="50%" cy="50%" r="50%">
+                                            <stop offset="0%" stop-color="#e54545" stop-opacity="0.4"/>
+                                            <stop offset="100%" stop-color="#e54545" stop-opacity="0"/>
+                                        </radialGradient>
+                                        <filter id="particleGlow">
+                                            <feGaussianBlur stdDeviation="2" result="blur"/>
+                                            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                                        </filter>
+                                    </defs>
+                                    
+                                    <!-- Danger glow background -->
+                                    <circle cx="120" cy="100" r="95" fill="url(#dangerGlow)"/>
+                                    
+                                    <!-- Damaged container -->
+                                    <rect x="85" y="65" width="70" height="70" fill="#4a5d6b" stroke="#6b7d8f" stroke-width="2" rx="4"/>
+                                    <path d="M140 80 L155 65 L155 75 L145 85 Z" fill="#2d3a47" stroke="#e54545" stroke-width="1"/>
+                                    <line x1="140" y1="80" x2="150" y2="70" stroke="#e54545" stroke-width="2"/>
+                                    
+                                    <!-- Radiation symbol in container -->
+                                    <circle cx="120" cy="100" r="8" fill="none" stroke="#f4c255" stroke-width="2"/>
+                                    <path d="M120 92 L120 85 M126 96 L132 92 M126 104 L132 108 M120 108 L120 115 M114 104 L108 108 M114 96 L108 92" stroke="#f4c255" stroke-width="2"/>
+                                    
+                                    <!-- Escaping particles -->
+                                    <g filter="url(#particleGlow)">
+                                        <circle cx="165" cy="55" r="4" fill="#e54545"><animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/></circle>
+                                        <circle cx="180" cy="75" r="3" fill="#cc5500"><animate attributeName="opacity" values="0.5;1;0.5" dur="1.2s" repeatCount="indefinite"/></circle>
+                                        <circle cx="190" cy="95" r="3.5" fill="#e54545"><animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.8s" repeatCount="indefinite"/></circle>
+                                        <circle cx="175" cy="115" r="3" fill="#f4c255"><animate attributeName="opacity" values="1;0.4;1" dur="1.3s" repeatCount="indefinite"/></circle>
+                                        <circle cx="185" cy="60" r="2.5" fill="#cc5500"><animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/></circle>
+                                        <circle cx="200" cy="85" r="2" fill="#e54545"><animate attributeName="opacity" values="0.4;0.9;0.4" dur="1.6s" repeatCount="indefinite"/></circle>
+                                        <circle cx="55" cy="60" r="3" fill="#e54545"><animate attributeName="opacity" values="0.7;0.2;0.7" dur="1.4s" repeatCount="indefinite"/></circle>
+                                        <circle cx="45" cy="90" r="2.5" fill="#cc5500"><animate attributeName="opacity" values="1;0.5;1" dur="1.7s" repeatCount="indefinite"/></circle>
+                                        <circle cx="50" cy="120" r="3" fill="#f4c255"><animate attributeName="opacity" values="0.5;1;0.5" dur="1.9s" repeatCount="indefinite"/></circle>
+                                        <circle cx="170" cy="145" r="2.5" fill="#e54545"><animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.5s" repeatCount="indefinite"/></circle>
+                                        <circle cx="65" cy="145" r="3" fill="#cc5500"><animate attributeName="opacity" values="0.6;1;0.6" dur="1.4s" repeatCount="indefinite"/></circle>
+                                    </g>
+                                    
+                                    <!-- Warning indicator -->
+                                    <circle cx="120" cy="175" r="12" fill="#e54545" opacity="0.2"/>
+                                    <text x="120" y="180" text-anchor="middle" fill="#e54545" font-family="sans-serif" font-size="16">⚠</text>
+                                </svg>
+                            </div>
+                            <div class="comparison-label" style="color: var(--color-danger);">Without Containment</div>
+                            <div class="comparison-value">Radioactive release → Hazard</div>
+                        </div>
+                        
+                        <div class="comparison-vs">→</div>
+                        
+                        <div class="comparison-item">
+                            <div class="comparison-image">
+                                <!-- Contained SVG -->
+                                <svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg" style="max-height: 200px; width: auto;">
+                                    <defs>
+                                        <radialGradient id="safeGlow" cx="50%" cy="50%" r="50%">
+                                            <stop offset="0%" stop-color="#92d050" stop-opacity="0.15"/>
+                                            <stop offset="100%" stop-color="#92d050" stop-opacity="0"/>
+                                        </radialGradient>
+                                    </defs>
+                                    
+                                    <!-- Safe glow background -->
+                                    <circle cx="120" cy="100" r="95" fill="url(#safeGlow)"/>
+                                    
+                                    <!-- Outer containment building -->
+                                    <rect x="45" y="35" width="150" height="130" fill="none" stroke="#92d050" stroke-width="3" rx="8" stroke-dasharray="none"/>
+                                    <text x="120" y="28" text-anchor="middle" fill="#6b7d8f" font-family="Rajdhani, sans-serif" font-size="9">CONTAINMENT BUILDING</text>
+                                    
+                                    <!-- Reactor vessel -->
+                                    <rect x="65" y="55" width="110" height="90" fill="none" stroke="#00b0f0" stroke-width="2" rx="4"/>
+                                    <text x="120" y="52" text-anchor="middle" fill="#6b7d8f" font-family="Rajdhani, sans-serif" font-size="8">REACTOR VESSEL</text>
+                                    
+                                    <!-- Fuel cladding -->
+                                    <rect x="85" y="75" width="70" height="50" fill="#4a5d6b" stroke="#f4c255" stroke-width="2" rx="2"/>
+                                    <text x="120" y="72" text-anchor="middle" fill="#6b7d8f" font-family="Rajdhani, sans-serif" font-size="8">CLADDING</text>
+                                    
+                                    <!-- Fuel pellet core -->
+                                    <rect x="100" y="88" width="40" height="24" fill="#364451" stroke="#cc5500" stroke-width="2" rx="2"/>
+                                    
+                                    <!-- Radiation symbol (contained) -->
+                                    <circle cx="120" cy="100" r="6" fill="none" stroke="#f4c255" stroke-width="1.5"/>
+                                    <circle cx="120" cy="100" r="2" fill="#f4c255"/>
+                                    
+                                    <!-- Contained particles (not escaping) -->
+                                    <g opacity="0.6">
+                                        <circle cx="108" cy="95" r="2" fill="#cc5500"/>
+                                        <circle cx="132" cy="102" r="2" fill="#cc5500"/>
+                                        <circle cx="115" cy="108" r="1.5" fill="#f4c255"/>
+                                        <circle cx="125" cy="92" r="1.5" fill="#f4c255"/>
+                                    </g>
+                                    
+                                    <!-- Barrier labels on right -->
+                                    <g font-family="JetBrains Mono, sans-serif" font-size="8" fill="#9babc2">
+                                        <line x1="200" y1="100" x2="215" y2="100" stroke="#92d050" stroke-width="1"/>
+                                        <text x="218" y="103">1</text>
+                                        <line x1="200" y1="85" x2="215" y2="70" stroke="#00b0f0" stroke-width="1"/>
+                                        <text x="218" y="73">2</text>
+                                        <line x1="200" y1="70" x2="215" y2="50" stroke="#f4c255" stroke-width="1"/>
+                                        <text x="218" y="53">3</text>
+                                        <line x1="200" y1="55" x2="215" y2="35" stroke="#cc5500" stroke-width="1"/>
+                                        <text x="218" y="38">4</text>
+                                    </g>
+                                    
+                                    <!-- Checkmark indicator -->
+                                    <circle cx="120" cy="175" r="12" fill="#92d050" opacity="0.2"/>
+                                    <text x="120" y="180" text-anchor="middle" fill="#92d050" font-family="sans-serif" font-size="14">✓</text>
+                                </svg>
+                            </div>
+                            <div class="comparison-label" style="color: var(--accent-green);">With Containment</div>
+                            <div class="comparison-value">Multiple barriers → Safe</div>
+                        </div>
+                    </div>
+
+                    <div class="comparison-takeaway">
+                        <p>Containment isn't just one wall — it's <strong>multiple barriers</strong>: the fuel pellet itself, the fuel cladding, the reactor vessel, and the containment building.</p>
+                    </div>
+                </div>
+
+                <div class="card card-accent-blue animate-on-scroll">
+                    <h4>💡 The Bottom Line</h4>
+                    <p style="margin-bottom: 0;">Radioactivity isn't something to fear — it's something to <strong>respect and manage</strong>. With proper shielding and containment, nuclear power plants release far less radiation to the environment than coal plants (which release naturally-occurring radioactive materials in coal ash).</p>
+                </div>
+
+                <!-- NEW: Why Radiation Matters Section -->
+                <div class="dna-damage-section animate-on-scroll" style="margin-top: var(--space-2xl);">
+                    <div class="section-tag">
+                        <span>🔬</span> Deep Dive
+                    </div>
+                    <h3 style="margin-bottom: var(--space-md);">But Why is Radiation Harmful?</h3>
+                    <p class="section-intro" style="margin-bottom: var(--space-xl);">
+                        Understanding <em>how</em> radiation damages living tissue helps explain why containment is so critical. It all comes down to <strong>DNA</strong>.
+                    </p>
+
+                    <!-- Interactive DNA Damage Visualization -->
+                    <div class="dna-interactive-container" style="background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: var(--space-xl); margin-bottom: var(--space-xl);">
+                        <div style="text-align: center; margin-bottom: var(--space-lg);">
+                            <h4 style="margin-bottom: var(--space-sm);">⚡ How Radiation Damages DNA</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Click each step to see the process</p>
+                        </div>
+
+                        <svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto;" id="dnaSvg">
+                            <defs>
+                                <linearGradient id="dnaGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#00b0f0"/>
+                                    <stop offset="100%" stop-color="#92d050"/>
+                                </linearGradient>
+                                <filter id="glowEffect">
+                                    <feGaussianBlur stdDeviation="3" result="blur"/>
+                                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                                </filter>
+                                <filter id="damageGlow">
+                                    <feGaussianBlur stdDeviation="4" result="blur"/>
+                                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                                </filter>
+                            </defs>
+
+                            <!-- Background -->
+                            <rect width="800" height="420" fill="#1f2937" rx="8"/>
+
+                            <!-- Step indicators at top -->
+                            <g id="stepIndicators" font-family="Rajdhani, sans-serif">
+                                <g id="step1Indicator" style="cursor: pointer;" onclick="showDnaStep(1)">
+                                    <circle cx="160" cy="30" r="18" fill="#cc5500" stroke="#cc5500" stroke-width="2"/>
+                                    <text x="160" y="36" text-anchor="middle" fill="white" font-size="14" font-weight="600">1</text>
+                                    <text x="160" y="58" text-anchor="middle" fill="#f7f8fa" font-size="11">Healthy DNA</text>
+                                </g>
+                                <line x1="180" y1="30" x2="290" y2="30" stroke="#4a5d6b" stroke-width="2" stroke-dasharray="4,4"/>
+                                <g id="step2Indicator" style="cursor: pointer;" onclick="showDnaStep(2)">
+                                    <circle cx="310" cy="30" r="18" fill="#2d3a47" stroke="#4a5d6b" stroke-width="2"/>
+                                    <text x="310" y="36" text-anchor="middle" fill="#9babc2" font-size="14" font-weight="600">2</text>
+                                    <text x="310" y="58" text-anchor="middle" fill="#9babc2" font-size="11">Radiation Strike</text>
+                                </g>
+                                <line x1="330" y1="30" x2="440" y2="30" stroke="#4a5d6b" stroke-width="2" stroke-dasharray="4,4"/>
+                                <g id="step3Indicator" style="cursor: pointer;" onclick="showDnaStep(3)">
+                                    <circle cx="460" cy="30" r="18" fill="#2d3a47" stroke="#4a5d6b" stroke-width="2"/>
+                                    <text x="460" y="36" text-anchor="middle" fill="#9babc2" font-size="14" font-weight="600">3</text>
+                                    <text x="460" y="58" text-anchor="middle" fill="#9babc2" font-size="11">DNA Damage</text>
+                                </g>
+                                <line x1="480" y1="30" x2="590" y2="30" stroke="#4a5d6b" stroke-width="2" stroke-dasharray="4,4"/>
+                                <g id="step4Indicator" style="cursor: pointer;" onclick="showDnaStep(4)">
+                                    <circle cx="610" cy="30" r="18" fill="#2d3a47" stroke="#4a5d6b" stroke-width="2"/>
+                                    <text x="610" y="36" text-anchor="middle" fill="#9babc2" font-size="14" font-weight="600">4</text>
+                                    <text x="610" y="58" text-anchor="middle" fill="#9babc2" font-size="11">Cell Response</text>
+                                </g>
+                            </g>
+
+                            <!-- STEP 1: Healthy DNA -->
+                            <g id="dnaStep1" class="dna-step active">
+                                <!-- DNA Double Helix - Healthy -->
+                                <g transform="translate(100, 100)">
+                                    <!-- Left strand -->
+                                    <path d="M50 0 Q80 40 50 80 Q20 120 50 160 Q80 200 50 240" stroke="#00b0f0" stroke-width="4" fill="none" filter="url(#glowEffect)"/>
+                                    <!-- Right strand -->
+                                    <path d="M150 0 Q120 40 150 80 Q180 120 150 160 Q120 200 150 240" stroke="#92d050" stroke-width="4" fill="none" filter="url(#glowEffect)"/>
+                                    <!-- Base pairs (rungs) -->
+                                    <g stroke="#f4c255" stroke-width="3">
+                                        <line x1="58" y1="20" x2="142" y2="20"/>
+                                        <line x1="45" y1="60" x2="155" y2="60"/>
+                                        <line x1="58" y1="100" x2="142" y2="100"/>
+                                        <line x1="45" y1="140" x2="155" y2="140"/>
+                                        <line x1="58" y1="180" x2="142" y2="180"/>
+                                        <line x1="45" y1="220" x2="155" y2="220"/>
+                                    </g>
+                                    <!-- Base pair labels -->
+                                    <g font-family="JetBrains Mono, monospace" font-size="10" fill="#9babc2">
+                                        <text x="85" y="24">A-T</text>
+                                        <text x="85" y="64">G-C</text>
+                                        <text x="85" y="104">T-A</text>
+                                        <text x="85" y="144">C-G</text>
+                                        <text x="85" y="184">A-T</text>
+                                        <text x="85" y="224">G-C</text>
+                                    </g>
+                                </g>
+                                
+                                <!-- Info panel -->
+                                <g transform="translate(350, 120)">
+                                    <rect x="0" y="0" width="380" height="180" fill="#2d3a47" stroke="#4a5d6b" stroke-width="1" rx="8"/>
+                                    <text x="20" y="35" fill="#92d050" font-family="Rajdhani, sans-serif" font-size="18" font-weight="600">Healthy DNA</text>
+                                    <text x="20" y="65" fill="#f7f8fa" font-family="Inter, sans-serif" font-size="13">Your DNA is the instruction manual for your body.</text>
+                                    <text x="20" y="90" fill="#9babc2" font-family="Inter, sans-serif" font-size="12">- Two strands twisted in a double helix</text>
+                                    <text x="20" y="110" fill="#9babc2" font-family="Inter, sans-serif" font-size="12">- Base pairs (A-T, G-C) carry genetic code</text>
+                                    <text x="20" y="130" fill="#9babc2" font-family="Inter, sans-serif" font-size="12">- Tells cells how to grow and function</text>
+                                    <text x="20" y="160" fill="#00b0f0" font-family="Inter, sans-serif" font-size="11" font-style="italic">Click step 2 to see what happens when radiation arrives</text>
+                                </g>
+                            </g>
+
+                            <!-- STEP 2: Radiation Strike -->
+                            <g id="dnaStep2" class="dna-step" style="display: none;">
+                                <!-- DNA with incoming radiation -->
+                                <g transform="translate(100, 100)">
+                                    <!-- Left strand -->
+                                    <path d="M50 0 Q80 40 50 80 Q20 120 50 160 Q80 200 50 240" stroke="#00b0f0" stroke-width="4" fill="none"/>
+                                    <!-- Right strand -->
+                                    <path d="M150 0 Q120 40 150 80 Q180 120 150 160 Q120 200 150 240" stroke="#92d050" stroke-width="4" fill="none"/>
+                                    <!-- Base pairs -->
+                                    <g stroke="#f4c255" stroke-width="3">
+                                        <line x1="58" y1="20" x2="142" y2="20"/>
+                                        <line x1="45" y1="60" x2="155" y2="60"/>
+                                        <line x1="58" y1="100" x2="142" y2="100"/>
+                                        <line x1="45" y1="140" x2="155" y2="140"/>
+                                        <line x1="58" y1="180" x2="142" y2="180"/>
+                                        <line x1="45" y1="220" x2="155" y2="220"/>
+                                    </g>
+                                    
+                                    <!-- Incoming radiation particle -->
+                                    <g filter="url(#damageGlow)">
+                                        <circle cx="-30" cy="100" r="12" fill="#e54545">
+                                            <animate attributeName="cx" values="-30;85" dur="1.5s" repeatCount="indefinite"/>
+                                        </circle>
+                                        <path d="M-50 100 L-35 100" stroke="#e54545" stroke-width="3">
+                                            <animate attributeName="d" values="M-50 100 L-35 100;M55 100 L70 100" dur="1.5s" repeatCount="indefinite"/>
+                                        </path>
+                                    </g>
+                                    
+                                    <!-- Impact zone highlight -->
+                                    <circle cx="100" cy="100" r="35" fill="#e54545" opacity="0.15">
+                                        <animate attributeName="opacity" values="0;0.2;0" dur="1.5s" repeatCount="indefinite"/>
+                                    </circle>
+                                </g>
+                                
+                                <!-- Info panel -->
+                                <g transform="translate(350, 100)">
+                                    <rect x="0" y="0" width="380" height="220" fill="#2d3a47" stroke="#e54545" stroke-width="1" rx="8"/>
+                                    <text x="20" y="35" fill="#e54545" font-family="Rajdhani, sans-serif" font-size="18" font-weight="600">Radiation Strike</text>
+                                    <text x="20" y="65" fill="#f7f8fa" font-family="Inter, sans-serif" font-size="13">Radiation particles travel at extreme speeds:</text>
+                                    <text x="20" y="90" fill="#9babc2" font-family="Inter, sans-serif" font-size="12">- Alpha: ~5% speed of light (15,000 km/s)</text>
+                                    <text x="20" y="110" fill="#9babc2" font-family="Inter, sans-serif" font-size="12">- Beta: up to 99% speed of light</text>
+                                    <text x="20" y="130" fill="#9babc2" font-family="Inter, sans-serif" font-size="12">- Gamma: actual speed of light (300,000 km/s)</text>
+                                    <line x1="20" y1="145" x2="360" y2="145" stroke="#4a5d6b" stroke-width="1"/>
+                                    <text x="20" y="170" fill="#f4c255" font-family="Inter, sans-serif" font-size="12" font-weight="500">Two damage pathways:</text>
+                                    <text x="20" y="190" fill="#9babc2" font-family="Inter, sans-serif" font-size="11">Direct (~30%): Particle hits DNA directly</text>
+                                    <text x="20" y="208" fill="#9babc2" font-family="Inter, sans-serif" font-size="11">Indirect (~70%): Particle hits water - free radicals - DNA</text>
+                                </g>
+                            </g>
+
+                            <!-- STEP 3: DNA Damage -->
+                            <g id="dnaStep3" class="dna-step" style="display: none;">
+                                <!-- Damaged DNA -->
+                                <g transform="translate(100, 100)">
+                                    <!-- Left strand - broken -->
+                                    <path d="M50 0 Q80 40 50 80" stroke="#00b0f0" stroke-width="4" fill="none"/>
+                                    <path d="M42 95 Q15 130 45 165 Q75 200 45 240" stroke="#00b0f0" stroke-width="4" fill="none" opacity="0.5"/>
+                                    <!-- Right strand - damaged -->
+                                    <path d="M150 0 Q120 40 150 80 Q180 120 150 160 Q120 200 150 240" stroke="#92d050" stroke-width="4" fill="none"/>
+                                    
+                                    <!-- Base pairs - some broken -->
+                                    <g stroke-width="3">
+                                        <line x1="58" y1="20" x2="142" y2="20" stroke="#f4c255"/>
+                                        <line x1="45" y1="60" x2="155" y2="60" stroke="#f4c255"/>
+                                        <!-- Broken base pair -->
+                                        <line x1="52" y1="95" x2="75" y2="92" stroke="#e54545" stroke-dasharray="4,2"/>
+                                        <line x1="110" y1="105" x2="145" y2="102" stroke="#e54545" stroke-dasharray="4,2"/>
+                                        <!-- Damage indicator -->
+                                        <circle cx="92" cy="98" r="20" fill="none" stroke="#e54545" stroke-width="2" stroke-dasharray="3,3">
+                                            <animate attributeName="stroke-dashoffset" values="0;12" dur="1s" repeatCount="indefinite"/>
+                                        </circle>
+                                        <text x="92" y="103" text-anchor="middle" fill="#e54545" font-size="14">X</text>
+                                        
+                                        <line x1="45" y1="140" x2="155" y2="140" stroke="#f4c255"/>
+                                        <line x1="58" y1="180" x2="142" y2="180" stroke="#f4c255"/>
+                                        <line x1="45" y1="220" x2="155" y2="220" stroke="#f4c255"/>
+                                    </g>
+                                    
+                                    <!-- Free radicals floating -->
+                                    <g fill="#e54545" font-family="JetBrains Mono, monospace" font-size="9">
+                                        <text x="170" y="90">OH</text>
+                                        <text x="180" y="115">H</text>
+                                        <text x="165" y="75">OH</text>
+                                    </g>
+                                </g>
+                                
+                                <!-- Info panel -->
+                                <g transform="translate(350, 100)">
+                                    <rect x="0" y="0" width="380" height="220" fill="#2d3a47" stroke="#e54545" stroke-width="1" rx="8"/>
+                                    <text x="20" y="35" fill="#e54545" font-family="Rajdhani, sans-serif" font-size="18" font-weight="600">DNA Damage</text>
+                                    <text x="20" y="65" fill="#f7f8fa" font-family="Inter, sans-serif" font-size="13">The radiation has damaged the DNA:</text>
+                                    <text x="20" y="95" fill="#9babc2" font-family="Inter, sans-serif" font-size="12">- Single-strand break (SSB) - usually repairable</text>
+                                    <text x="20" y="115" fill="#9babc2" font-family="Inter, sans-serif" font-size="12">- Double-strand break (DSB) - harder to fix</text>
+                                    <text x="20" y="135" fill="#9babc2" font-family="Inter, sans-serif" font-size="12">- Base damage - changed genetic letters</text>
+                                    <text x="20" y="155" fill="#9babc2" font-family="Inter, sans-serif" font-size="12">- Clustered damage - multiple hits, very serious</text>
+                                    <line x1="20" y1="170" x2="360" y2="170" stroke="#4a5d6b" stroke-width="1"/>
+                                    <text x="20" y="195" fill="#f4c255" font-family="Inter, sans-serif" font-size="12">Free radicals (OH, H) continue attacking</text>
+                                    <text x="20" y="213" fill="#9babc2" font-family="Inter, sans-serif" font-size="11">nearby molecules for microseconds after the initial hit</text>
+                                </g>
+                            </g>
+
+                            <!-- STEP 4: Cell Response -->
+                            <g id="dnaStep4" class="dna-step" style="display: none;">
+                                <!-- Three outcome paths -->
+                                <g transform="translate(50, 85)">
+                                    <!-- Outcome 1: Repair -->
+                                    <g transform="translate(0, 0)">
+                                        <rect x="0" y="0" width="200" height="110" fill="#2d3a47" stroke="#92d050" stroke-width="2" rx="6"/>
+                                        <text x="100" y="25" text-anchor="middle" fill="#92d050" font-family="Rajdhani, sans-serif" font-size="14" font-weight="600">REPAIR</text>
+                                        <text x="100" y="45" text-anchor="middle" fill="#9babc2" font-family="Inter, sans-serif" font-size="10">Cell fixes the damage</text>
+                                        <text x="100" y="65" text-anchor="middle" fill="#6b7d8f" font-family="Inter, sans-serif" font-size="9">(Most common outcome)</text>
+                                        <!-- Mini helix repaired -->
+                                        <path d="M80 80 Q90 90 80 100" stroke="#00b0f0" stroke-width="2" fill="none"/>
+                                        <path d="M120 80 Q110 90 120 100" stroke="#92d050" stroke-width="2" fill="none"/>
+                                        <line x1="84" y1="85" x2="116" y2="85" stroke="#f4c255" stroke-width="1.5"/>
+                                        <line x1="84" y1="95" x2="116" y2="95" stroke="#f4c255" stroke-width="1.5"/>
+                                    </g>
+                                    
+                                    <!-- Outcome 2: Cell Death (Apoptosis) -->
+                                    <g transform="translate(230, 0)">
+                                        <rect x="0" y="0" width="200" height="110" fill="#2d3a47" stroke="#00b0f0" stroke-width="2" rx="6"/>
+                                        <text x="100" y="25" text-anchor="middle" fill="#00b0f0" font-family="Rajdhani, sans-serif" font-size="14" font-weight="600">CELL DEATH</text>
+                                        <text x="100" y="45" text-anchor="middle" fill="#9babc2" font-family="Inter, sans-serif" font-size="10">Apoptosis (programmed death)</text>
+                                        <text x="100" y="65" text-anchor="middle" fill="#6b7d8f" font-family="Inter, sans-serif" font-size="9">(Safety mechanism)</text>
+                                        <!-- Cell breaking apart icon -->
+                                        <circle cx="100" cy="88" r="12" fill="none" stroke="#00b0f0" stroke-width="1.5" stroke-dasharray="3,3"/>
+                                        <line x1="92" y1="80" x2="85" y2="73" stroke="#00b0f0" stroke-width="1.5"/>
+                                        <line x1="108" y1="80" x2="115" y2="73" stroke="#00b0f0" stroke-width="1.5"/>
+                                        <line x1="100" y1="100" x2="100" y2="108" stroke="#00b0f0" stroke-width="1.5"/>
+                                    </g>
+                                    
+                                    <!-- Outcome 3: Mutation/Cancer -->
+                                    <g transform="translate(460, 0)">
+                                        <rect x="0" y="0" width="200" height="110" fill="#2d3a47" stroke="#e54545" stroke-width="2" rx="6"/>
+                                        <text x="100" y="25" text-anchor="middle" fill="#e54545" font-family="Rajdhani, sans-serif" font-size="14" font-weight="600">MUTATION</text>
+                                        <text x="100" y="45" text-anchor="middle" fill="#9babc2" font-family="Inter, sans-serif" font-size="10">Incorrect repair - cancer risk</text>
+                                        <text x="100" y="65" text-anchor="middle" fill="#6b7d8f" font-family="Inter, sans-serif" font-size="9">(Rare but serious)</text>
+                                        <!-- Mutated cells dividing -->
+                                        <circle cx="85" cy="88" r="10" fill="#e54545" opacity="0.3" stroke="#e54545" stroke-width="1"/>
+                                        <circle cx="100" cy="88" r="10" fill="#e54545" opacity="0.4" stroke="#e54545" stroke-width="1"/>
+                                        <circle cx="115" cy="88" r="10" fill="#e54545" opacity="0.5" stroke="#e54545" stroke-width="1"/>
+                                    </g>
+                                </g>
+                                
+                                <!-- Summary box -->
+                                <g transform="translate(50, 220)">
+                                    <rect x="0" y="0" width="610" height="90" fill="#1f2937" stroke="#cc5500" stroke-width="2" rx="6"/>
+                                    <text x="20" y="28" fill="#cc5500" font-family="Rajdhani, sans-serif" font-size="16" font-weight="600">Key Insight</text>
+                                    <text x="20" y="52" fill="#f7f8fa" font-family="Inter, sans-serif" font-size="12">Our bodies have evolved excellent DNA repair mechanisms. Low doses of radiation are usually</text>
+                                    <text x="20" y="70" fill="#f7f8fa" font-family="Inter, sans-serif" font-size="12">repaired successfully. The danger comes from high doses or prolonged exposure that overwhelm</text>
+                                    <text x="20" y="88" fill="#f7f8fa" font-family="Inter, sans-serif" font-size="12">repair mechanisms - which is why containment is so important.</text>
+                                </g>
+
+                                <!-- Probability indicators -->
+                                <g transform="translate(700, 100)" font-family="JetBrains Mono, monospace" font-size="10">
+                                    <text x="0" y="15" fill="#92d050">~99%</text>
+                                    <text x="0" y="125" fill="#00b0f0">~0.9%</text>
+                                    <text x="0" y="235" fill="#e54545">~0.1%</text>
+                                </g>
+                            </g>
+
+                            <!-- Navigation hint -->
+                            <text x="400" y="400" text-anchor="middle" fill="#6b7d8f" font-family="Inter, sans-serif" font-size="11">Click the numbered steps above to explore each stage</text>
+                        </svg>
+                    </div>
+
+                    <!-- Quick facts -->
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); margin-top: var(--space-lg);">
+                        <div class="card" style="padding: var(--space-md); text-align: center; border-left: 3px solid var(--accent-blue);">
+                            <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">💧</div>
+                            <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; color: var(--accent-blue); font-weight: 600;">70%</div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">of damage is indirect<br>(via water to free radicals)</div>
+                        </div>
+                        <div class="card" style="padding: var(--space-md); text-align: center; border-left: 3px solid var(--accent-green);">
+                            <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🔧</div>
+                            <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; color: var(--accent-green); font-weight: 600;">99%+</div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">of DNA damage is<br>successfully repaired</div>
+                        </div>
+                        <div class="card" style="padding: var(--space-md); text-align: center; border-left: 3px solid var(--accent-orange);">
+                            <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">⚡</div>
+                            <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; color: var(--accent-orange); font-weight: 600;">10^-12 sec</div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">time for initial damage<br>(one trillionth of a second)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-nav">
+                    <button class="btn btn-ghost" onclick="goToPage(3)">
+                        <span class="btn-icon">←</span> Previous
+                    </button>
+                    <button class="btn btn-primary" onclick="goToPage(5)">
+                        Continue: The 3 C's <span class="btn-icon">→</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ========================================
+         PAGE 5: The 3 C's Framework
+         ======================================== -->
+    <div class="page" id="page5" data-page="5">
+        <section class="section">
+            <div class="section-container">
+                <div class="section-tag animate-on-scroll">
+                    <span>04</span> The Framework
+                </div>
+                <h2 class="section-title animate-on-scroll">The 3 C's of Nuclear Safety</h2>
+                <p class="section-intro animate-on-scroll">
+                    Everything we've learned about what makes nuclear different leads to one elegant framework. All nuclear safety measures exist to achieve three things: <strong>Control, Cooling, and Containment</strong>.
+                </p>
+
+                <div class="framework-container">
+                    <div class="framework-grid animate-on-scroll">
+                        <!-- Control -->
+                        <div class="framework-card control">
+                            <div class="framework-icon">🎛️</div>
+                            <h3 class="framework-title">Control</h3>
+                            <p class="framework-subtitle">Manage the chain reaction</p>
+                            <p class="framework-description">
+                                Control the rate of fission to regulate energy release. Control rods absorb neutrons to slow or stop the chain reaction.
+                            </p>
+                            <div class="framework-risk">
+                                <div class="framework-risk-label">Addresses</div>
+                                <p>Stored Energy — prevents uncontrolled power excursion</p>
+                            </div>
+                        </div>
+
+                        <!-- Cooling -->
+                        <div class="framework-card cooling">
+                            <div class="framework-icon">❄️</div>
+                            <h3 class="framework-title">Cooling</h3>
+                            <p class="framework-subtitle">Remove the heat</p>
+                            <p class="framework-description">
+                                Continuously remove heat from the reactor core — both during operation and after shutdown (decay heat removal).
+                            </p>
+                            <div class="framework-risk">
+                                <div class="framework-risk-label">Addresses</div>
+                                <p>Decay Heat — prevents fuel damage from overheating</p>
+                            </div>
+                        </div>
+
+                        <!-- Containment -->
+                        <div class="framework-card containment">
+                            <div class="framework-icon">🛡️</div>
+                            <h3 class="framework-title">Containment</h3>
+                            <p class="framework-subtitle">Keep radioactivity inside</p>
+                            <p class="framework-description">
+                                Multiple barriers prevent radioactive materials from reaching the environment and the public.
+                            </p>
+                            <div class="framework-risk">
+                                <div class="framework-risk-label">Addresses</div>
+                                <p>Radioactivity — prevents harmful releases</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="framework-summary animate-on-scroll">
+                        <h4>🎯 Remember This</h4>
+                        <p>Every safety system, every procedure, every design decision in nuclear power serves at least one of the 3 C's. When you understand this framework, you understand the "why" behind nuclear safety.</p>
+                    </div>
+                </div>
+
+                <!-- Visual diagram -->
+                <div class="content-image animate-on-scroll" style="max-width: 700px; margin: var(--space-2xl) auto;">
+                    <svg viewBox="0 0 700 380" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto;">
+                        <defs>
+                            <filter id="cardShadow">
+                                <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.3"/>
+                            </filter>
+                            <linearGradient id="controlGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#cc5500" stop-opacity="0.2"/>
+                                <stop offset="100%" stop-color="#cc5500" stop-opacity="0.05"/>
+                            </linearGradient>
+                            <linearGradient id="coolingGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#00b0f0" stop-opacity="0.2"/>
+                                <stop offset="100%" stop-color="#00b0f0" stop-opacity="0.05"/>
+                            </linearGradient>
+                            <linearGradient id="containGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#92d050" stop-opacity="0.2"/>
+                                <stop offset="100%" stop-color="#92d050" stop-opacity="0.05"/>
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- Background -->
+                        <rect width="700" height="380" fill="#2d3a47" rx="12"/>
+                        
+                        <!-- Title -->
+                        <text x="350" y="35" text-anchor="middle" fill="#f7f8fa" font-family="Rajdhani, sans-serif" font-size="20" font-weight="600">The 3 C's of Nuclear Safety</text>
+                        
+                        <!-- Central connecting element -->
+                        <circle cx="350" cy="200" r="45" fill="#1f2937" stroke="#4a5d6b" stroke-width="2"/>
+                        <text x="350" y="195" text-anchor="middle" fill="#f7f8fa" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">NUCLEAR</text>
+                        <text x="350" y="210" text-anchor="middle" fill="#9babc2" font-family="Rajdhani, sans-serif" font-size="11">SAFETY</text>
+                        
+                        <!-- Connecting lines -->
+                        <line x1="305" y1="200" x2="230" y2="200" stroke="#cc5500" stroke-width="2" stroke-dasharray="4,4"/>
+                        <line x1="395" y1="200" x2="470" y2="200" stroke="#92d050" stroke-width="2" stroke-dasharray="4,4"/>
+                        <line x1="350" y1="155" x2="350" y2="90" stroke="#00b0f0" stroke-width="2" stroke-dasharray="4,4"/>
+                        
+                        <!-- CONTROL Card (Left) -->
+                        <g filter="url(#cardShadow)">
+                            <rect x="30" y="130" width="200" height="140" fill="url(#controlGrad)" stroke="#cc5500" stroke-width="2" rx="8"/>
+                            <rect x="30" y="130" width="200" height="4" fill="#cc5500" rx="8 8 0 0"/>
+                        </g>
+                        <text x="130" y="165" text-anchor="middle" fill="#cc5500" font-family="Rajdhani, sans-serif" font-size="24" font-weight="700">CONTROL</text>
+                        <text x="130" y="185" text-anchor="middle" fill="#9babc2" font-family="Inter, sans-serif" font-size="11">Manage the chain reaction</text>
+                        <line x1="60" y1="200" x2="200" y2="200" stroke="#4a5d6b" stroke-width="1"/>
+                        <text x="130" y="220" text-anchor="middle" fill="#6b7d8f" font-family="JetBrains Mono, monospace" font-size="9">ADDRESSES:</text>
+                        <text x="130" y="238" text-anchor="middle" fill="#f7f8fa" font-family="Inter, sans-serif" font-size="11">Stored Energy</text>
+                        <text x="130" y="255" text-anchor="middle" fill="#9babc2" font-family="Inter, sans-serif" font-size="10">→ Control rods</text>
+                        
+                        <!-- Control icon -->
+                        <circle cx="130" cy="295" r="18" fill="#1f2937" stroke="#cc5500" stroke-width="1.5"/>
+                        <text x="130" y="300" text-anchor="middle" fill="#cc5500" font-size="18">🎛️</text>
+                        
+                        <!-- COOLING Card (Top) -->
+                        <g filter="url(#cardShadow)">
+                            <rect x="250" y="55" width="200" height="90" fill="url(#coolingGrad)" stroke="#00b0f0" stroke-width="2" rx="8"/>
+                            <rect x="250" y="55" width="200" height="4" fill="#00b0f0" rx="8 8 0 0"/>
+                        </g>
+                        <text x="350" y="85" text-anchor="middle" fill="#00b0f0" font-family="Rajdhani, sans-serif" font-size="24" font-weight="700">COOLING</text>
+                        <text x="350" y="105" text-anchor="middle" fill="#9babc2" font-family="Inter, sans-serif" font-size="11">Remove the heat</text>
+                        <text x="350" y="125" text-anchor="middle" fill="#f7f8fa" font-family="Inter, sans-serif" font-size="11">Addresses: Decay Heat</text>
+                        
+                        <!-- Cooling icon -->
+                        <circle cx="470" cy="80" r="18" fill="#1f2937" stroke="#00b0f0" stroke-width="1.5"/>
+                        <text x="470" y="85" text-anchor="middle" fill="#00b0f0" font-size="18">❄️</text>
+                        
+                        <!-- CONTAINMENT Card (Right) -->
+                        <g filter="url(#cardShadow)">
+                            <rect x="470" y="130" width="200" height="140" fill="url(#containGrad)" stroke="#92d050" stroke-width="2" rx="8"/>
+                            <rect x="470" y="130" width="200" height="4" fill="#92d050" rx="8 8 0 0"/>
+                        </g>
+                        <text x="570" y="165" text-anchor="middle" fill="#92d050" font-family="Rajdhani, sans-serif" font-size="22" font-weight="700">CONTAINMENT</text>
+                        <text x="570" y="185" text-anchor="middle" fill="#9babc2" font-family="Inter, sans-serif" font-size="11">Keep radioactivity inside</text>
+                        <line x1="500" y1="200" x2="640" y2="200" stroke="#4a5d6b" stroke-width="1"/>
+                        <text x="570" y="220" text-anchor="middle" fill="#6b7d8f" font-family="JetBrains Mono, monospace" font-size="9">ADDRESSES:</text>
+                        <text x="570" y="238" text-anchor="middle" fill="#f7f8fa" font-family="Inter, sans-serif" font-size="11">Radioactivity</text>
+                        <text x="570" y="255" text-anchor="middle" fill="#9babc2" font-family="Inter, sans-serif" font-size="10">→ Multiple barriers</text>
+                        
+                        <!-- Containment icon -->
+                        <circle cx="570" cy="295" r="18" fill="#1f2937" stroke="#92d050" stroke-width="1.5"/>
+                        <text x="570" y="300" text-anchor="middle" fill="#92d050" font-size="18">🛡️</text>
+                        
+                        <!-- Bottom summary -->
+                        <rect x="150" y="330" width="400" height="35" fill="#1f2937" stroke="#4a5d6b" stroke-width="1" rx="4"/>
+                        <text x="350" y="352" text-anchor="middle" fill="#9babc2" font-family="Inter, sans-serif" font-size="12">Every safety system serves at least one of the 3 C's</text>
+                    </svg>
+                </div>
+
+                <div class="section-nav">
+                    <button class="btn btn-ghost" onclick="goToPage(4)">
+                        <span class="btn-icon">←</span> Previous
+                    </button>
+                    <button class="btn btn-primary" onclick="goToPage(6)">
+                        Test Yourself: Match Game <span class="btn-icon">→</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ========================================
+         PAGE 6: Matching Game
+         ======================================== -->
+    <div class="page" id="page6" data-page="6">
+        <section class="section">
+            <div class="section-container">
+                <div class="section-tag animate-on-scroll">
+                    <span>🎮</span> Interactive
+                </div>
+                <h2 class="section-title animate-on-scroll">Match the Risk to Its Mitigation</h2>
+                <p class="section-intro animate-on-scroll">
+                    Now that you know the 3 C's, let's put your understanding to the test. Match each nuclear risk to the C that addresses it.
+                </p>
+
+                <div class="game-container animate-on-scroll">
+                    <div class="game-header">
+                        <h4>🧩 Drag & Match Challenge</h4>
+                    </div>
+
+                    <div class="game-instruction">
+                        <span>👆</span>
+                        <span>Click a risk on the left, then click the matching C on the right</span>
+                    </div>
+
+                    <div class="game-grid">
+                        <!-- Risks Column -->
+                        <div class="game-column">
+                            <div class="game-column-title">Nuclear Risks</div>
+                            <div class="game-item" data-risk="energy" onclick="selectRisk(this)">
+                                ⚡ Extreme energy density in fuel
+                            </div>
+                            <div class="game-item" data-risk="heat" onclick="selectRisk(this)">
+                                🔥 Heat continues after shutdown
+                            </div>
+                            <div class="game-item" data-risk="radiation" onclick="selectRisk(this)">
+                                ☢️ Harmful radioactive emissions
+                            </div>
+                        </div>
+
+                        <!-- Arrows -->
+                        <div class="game-arrows">
+                            <span class="game-arrow">→</span>
+                            <span class="game-arrow">→</span>
+                            <span class="game-arrow">→</span>
+                        </div>
+
+                        <!-- Solutions Column -->
+                        <div class="game-column">
+                            <div class="game-column-title">The 3 C's</div>
+                            <div class="game-item" data-solution="control" onclick="selectSolution(this)">
+                                🎛️ Control
+                            </div>
+                            <div class="game-item" data-solution="cooling" onclick="selectSolution(this)">
+                                ❄️ Cooling
+                            </div>
+                            <div class="game-item" data-solution="containment" onclick="selectSolution(this)">
+                                🛡️ Containment
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-result" id="gameResult">
+                        <h4>🎉 Excellent Work!</h4>
+                        <div class="game-score" id="gameScore">3/3 Correct</div>
+                        <p>You've demonstrated a solid understanding of the 3 C's framework.</p>
+                        <button class="btn btn-secondary" onclick="resetGame()">Play Again</button>
+                    </div>
+                </div>
+
+                <div class="section-nav">
+                    <button class="btn btn-ghost" onclick="goToPage(5)">
+                        <span class="btn-icon">←</span> Previous
+                    </button>
+                    <button class="btn btn-primary" onclick="goToPage(7)">
+                        Continue: Knowledge Check <span class="btn-icon">→</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ========================================
+         PAGE 7: Knowledge Check Quiz
+         ======================================== -->
+    <div class="page" id="page7" data-page="7">
+        <section class="section">
+            <div class="section-container">
+                <div class="section-tag animate-on-scroll">
+                    <span>📝</span> Assessment
+                </div>
+                <h2 class="section-title animate-on-scroll">Knowledge Check</h2>
+                <p class="section-intro animate-on-scroll">
+                    Let's check your understanding of why nuclear is different. Answer these questions to see how well you've grasped the key concepts.
+                </p>
+
+                <div class="quiz-container animate-on-scroll">
+                    <!-- Progress Dots -->
+                    <div class="quiz-progress">
+                        <div class="quiz-dot active" data-q="1"></div>
+                        <div class="quiz-dot" data-q="2"></div>
+                        <div class="quiz-dot" data-q="3"></div>
+                        <div class="quiz-dot" data-q="4"></div>
+                    </div>
+
+                    <!-- Question 1 -->
+                    <div class="quiz-question active" data-question="1">
+                        <div class="quiz-number">Question 1 of 4</div>
+                        <p class="quiz-text">A single uranium fuel pellet contains approximately the same energy as:</p>
+                        
+                        <div class="quiz-options">
+                            <div class="quiz-option" data-answer="a" onclick="selectAnswer(this, 1)">
+                                <div class="quiz-radio"></div>
+                                <span class="quiz-option-text">10 kilograms of coal</span>
+                            </div>
+                            <div class="quiz-option" data-answer="b" onclick="selectAnswer(this, 1)">
+                                <div class="quiz-radio"></div>
+                                <span class="quiz-option-text">100 kilograms of coal</span>
+                            </div>
+                            <div class="quiz-option" data-answer="c" onclick="selectAnswer(this, 1)">
+                                <div class="quiz-radio"></div>
+                                <span class="quiz-option-text">1 tonne of coal</span>
+                            </div>
+                            <div class="quiz-option" data-answer="d" onclick="selectAnswer(this, 1)">
+                                <div class="quiz-radio"></div>
+                                <span class="quiz-option-text">10 tonnes of coal</span>
+                            </div>
+                        </div>
+
+                        <div class="quiz-feedback" id="feedback1">
+                            <p></p>
+                        </div>
+
+                        <div class="quiz-actions">
+                            <button class="btn btn-primary" id="nextBtn1" onclick="nextQuestion(2)" disabled>
+                                Next Question <span class="btn-icon">→</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="quiz-question" data-question="2">
+                        <div class="quiz-number">Question 2 of 4</div>
+                        <p class="quiz-text">What is "decay heat" and why is it important?</p>
+                        
+                        <div class="quiz-options">
+                            <div class="quiz-option" data-answer="a" onclick="selectAnswer(this, 2)">
+                                <div class="quiz-radio"></div>
+                                <span class="quiz-option-text">Heat from friction in reactor components — requires lubrication</span>
+                            </div>
+                            <div class="quiz-option" data-answer="b" onclick="selectAnswer(this, 2)">
+                                <div class="quiz-radio"></div>
+                                <span class="quiz-option-text">Heat from radioactive decay that continues after shutdown — requires continuous cooling</span>
+                            </div>
+                            <div class="quiz-option" data-answer="c" onclick="selectAnswer(this, 2)">
+                                <div class="quiz-radio"></div>
+                                <span class="quiz-option-text">Heat lost through the reactor walls — requires better insulation</span>
+                            </div>
+                            <div class="quiz-option" data-answer="d" onclick="selectAnswer(this, 2)">
+                                <div class="quiz-radio"></div>
+                                <span class="quiz-option-text">Heat from the control rod movement — requires mechanical cooling</span>
+                            </div>
+                        </div>
+
+                        <div class="quiz-feedback" id="feedback2">
+                            <p></p>
+                        </div>
+
+                        <div class="quiz-actions">
+                            <button class="btn btn-primary" id="nextBtn2" onclick="nextQuestion(3)" disabled>
+                                Next Question <span class="btn-icon">→</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="quiz-question" data-question="3">
+                        <div class="quiz-number">Question 3 of 4</div>
+                        <p class="quiz-text">Which of the 3 C's primarily addresses the risk of radioactive materials reaching the environment?</p>
+                        
+                        <div class="quiz-options">
+                            <div class="quiz-option" data-answer="a" onclick="selectAnswer(this, 3)">
+                                <div class="quiz-radio"></div>
+                                <span class="quiz-option-text">Control</span>
+                            </div>
+                            <div class="quiz-option" data-answer="b" onclick="selectAnswer(this, 3)">
+                                <div class="quiz-radio"></div>
+                                <span class="quiz-option-text">Cooling</span>
+                            </div>
+                            <div class="quiz-option" data-answer="c" onclick="selectAnswer(this, 3)">
+                                <div class="quiz-radio"></div>
+                                <span class="quiz-option-text">Containment</span>
+                            </div>
+                            <div class="quiz-option" data-answer="d" onclick="selectAnswer(this, 3)">
+                                <div class="quiz-radio"></div>
+                                <span class="quiz-option-text">All three equally</span>
+                            </div>
+                        </div>
+
+                        <div class="quiz-feedback" id="feedback3">
+                            <p></p>
+                        </div>
+
+                        <div class="quiz-actions">
+                            <button class="btn btn-primary" id="nextBtn3" onclick="nextQuestion(4)" disabled>
+                                Next Question <span class="btn-icon">→</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 4 -->
+                    <div class="quiz-question" data-question="4">
+                        <div class="quiz-number">Question 4 of 4</div>
+                        <p class="quiz-text">What are the THREE unique characteristics that make nuclear power fundamentally different from conventional power generation?</p>
+                        
+                        <div class="quiz-options">
+                            <div class="quiz-option" data-answer="a" onclick="selectAnswer(this, 4)">
+                                <div class="quiz-radio"></div>
+                                <span class="quiz-option-text">Cost, complexity, and public perception</span>
+                            </div>
+                            <div class="quiz-option" data-answer="b" onclick="selectAnswer(this, 4)">
+                                <div class="quiz-radio"></div>
+                                <span class="quiz-option-text">Extreme energy density, decay heat, and radioactivity</span>
+                            </div>
+                            <div class="quiz-option" data-answer="c" onclick="selectAnswer(this, 4)">
+                                <div class="quiz-radio"></div>
+                                <span class="quiz-option-text">Steam generation, turbine efficiency, and cooling towers</span>
+                            </div>
+                            <div class="quiz-option" data-answer="d" onclick="selectAnswer(this, 4)">
+                                <div class="quiz-radio"></div>
+                                <span class="quiz-option-text">Uranium mining, enrichment, and waste storage</span>
+                            </div>
+                        </div>
+
+                        <div class="quiz-feedback" id="feedback4">
+                            <p></p>
+                        </div>
+
+                        <div class="quiz-actions">
+                            <button class="btn btn-primary" id="nextBtn4" onclick="showResults()" disabled>
+                                See Results <span class="btn-icon">→</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Results -->
+                    <div class="quiz-results" id="quizResults">
+                        <div class="results-icon">🏆</div>
+                        <div class="results-score" id="resultsScore">4/4</div>
+                        <p class="results-message" id="resultsMessage">Outstanding! You've mastered the fundamentals.</p>
+                        <div style="display: flex; gap: var(--space-md); justify-content: center; margin-top: var(--space-lg);">
+                            <button class="btn btn-ghost" onclick="retakeQuiz()">Retake Quiz</button>
+                            <button class="btn btn-primary" onclick="goToPage(8)">
+                                View Key Takeaways <span class="btn-icon">→</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ========================================
+         PAGE 8: Key Takeaways
+         ======================================== -->
+    <div class="page" id="page8" data-page="8">
+        <section class="section">
+            <div class="section-container">
+                <div class="section-tag animate-on-scroll">
+                    <span>🎯</span> Summary
+                </div>
+                <h2 class="section-title animate-on-scroll">Key Takeaways</h2>
+                <p class="section-intro animate-on-scroll">
+                    Congratulations on completing Module 1! Here's what you should remember about why nuclear is different.
+                </p>
+
+                <div class="takeaways-container animate-on-scroll">
+                    <div class="takeaway-grid">
+                        <div class="takeaway-card">
+                            <div class="takeaway-number">1</div>
+                            <div class="takeaway-content">
+                                <h4>Extreme Energy Density</h4>
+                                <p>Nuclear fuel contains millions of times more energy per kilogram than fossil fuels. This is both its greatest strength and its greatest responsibility.</p>
+                            </div>
+                        </div>
+
+                        <div class="takeaway-card">
+                            <div class="takeaway-number">2</div>
+                            <div class="takeaway-content">
+                                <h4>Decay Heat Continues</h4>
+                                <p>Even after shutdown, radioactive fission products continue generating heat. Cooling must be maintained for days to weeks after reactor shutdown.</p>
+                            </div>
+                        </div>
+
+                        <div class="takeaway-card">
+                            <div class="takeaway-number">3</div>
+                            <div class="takeaway-content">
+                                <h4>Radioactivity Requires Containment</h4>
+                                <p>Fission products are radioactive. Multiple barriers (fuel, cladding, vessel, containment building) keep radioactive materials safely contained.</p>
+                            </div>
+                        </div>
+
+                        <div class="takeaway-card">
+                            <div class="takeaway-number">4</div>
+                            <div class="takeaway-content">
+                                <h4>The 3 C's Framework</h4>
+                                <p>All nuclear safety exists to achieve Control, Cooling, and Containment. Understanding this framework is the foundation of nuclear safety.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Completion Card -->
+                <div class="card animate-on-scroll" style="text-align: center; border: 2px solid var(--accent-orange); margin-bottom: var(--space-2xl);">
+                    <div style="font-size: 3rem; margin-bottom: var(--space-md);">🎓</div>
+                    <h3 style="margin-bottom: var(--space-sm);">Module 1 Complete</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: var(--space-lg);">Why Nuclear is Different</p>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">
+                        You now understand the three fundamental characteristics that make nuclear power unique, and the 3 C's framework that guides all nuclear safety.
+                    </p>
+                </div>
+
+                <!-- Next Module Preview -->
+                <div class="card card-accent-blue animate-on-scroll">
+                    <h4>📚 Up Next: Module 2 — History & Development</h4>
+                    <p style="margin-bottom: 0;">Learn how nuclear power evolved from wartime research to the global energy source we rely on today. Understand the key events that shaped nuclear safety culture.</p>
+                </div>
+
+                <div class="section-nav">
+                    <button class="btn btn-ghost" onclick="goToPage(7)">
+                        <span class="btn-icon">←</span> Previous
+                    </button>
+                    <button class="btn btn-primary" onclick="goToPage(1)">
+                        <span class="btn-icon">↺</span> Review Module
+                    </button>
+                </div>
+
+                <!-- Footer -->
+                <div style="text-align: center; padding-top: var(--space-2xl); border-top: 1px solid var(--border-subtle); margin-top: var(--space-2xl);">
+                    <img src="https://raw.githubusercontent.com/megtomazela-create/DfMDfADfO-Training/main/00_images/Logo_white.png" alt="The Nuclear House" style="height: 40px; opacity: 0.7; margin-bottom: var(--space-md);">
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Module 1 • TNH Intro to Nuclear</p>
+                    <p style="font-size: 0.75rem; color: var(--text-muted); opacity: 0.7;">© The Nuclear House Academy</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ========================================
+         JAVASCRIPT
+         ======================================== -->
+    <script>
+        // ==================== STATE ====================
+        let currentPage = 1;
+        const totalPages = 8;
+        let visitedPages = new Set([1]);
+
+        // Audio files mapping
+        const audioFiles = {
+            1: 'audio/AUDIO_01_intro.mp3',
+            2: 'audio/AUDIO_02_stored_energy.mp3',
+            3: 'audio/AUDIO_03_decay_heat.mp3',
+            4: 'audio/AUDIO_04_radioactivity.mp3',
+            5: 'audio/AUDIO_05_three_cs.mp3',
+            6: 'audio/AUDIO_06_game.mp3',
+            7: 'audio/AUDIO_07_quiz.mp3',
+            8: 'audio/AUDIO_08_takeaways.mp3'
+        };
+
+        // ==================== NAVIGATION ====================
+        function goToPage(pageNum) {
+            if (pageNum < 1 || pageNum > totalPages) return;
+
+            document.getElementById(`page${currentPage}`).classList.remove('active');
+            currentPage = pageNum;
+            document.getElementById(`page${pageNum}`).classList.add('active');
+
+            visitedPages.add(pageNum);
+            updateProgress();
+            updateNavigation();
+            closeMenu();
+            loadAudioForPage(pageNum);
+
+            window.scrollTo({ top: 0, behavior: 'instant' });
+
+            setTimeout(() => triggerAnimations(), 100);
+        }
+
+        function updateProgress() {
+            const progress = Math.round((visitedPages.size / totalPages) * 100);
+            document.getElementById('progressFill').style.width = `${progress}%`;
+            document.getElementById('progressText').textContent = `${progress}%`;
+        }
+
+        function updateNavigation() {
+            document.querySelectorAll('.nav-menu a[data-page]').forEach(link => {
+                const pageNum = parseInt(link.getAttribute('data-page'));
+                link.classList.remove('active', 'completed');
+                if (pageNum === currentPage) {
+                    link.classList.add('active');
+                } else if (visitedPages.has(pageNum)) {
+                    link.classList.add('completed');
+                }
+            });
+        }
+
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('open');
+            document.getElementById('menuToggle').classList.toggle('active');
+        }
+
+        function closeMenu() {
+            document.getElementById('navMenu').classList.remove('open');
+            document.getElementById('menuToggle').classList.remove('active');
+        }
+
+        // ==================== AUDIO ====================
+        let currentAudioPage = 0;
+
+        function loadAudioForPage(pageNum) {
+            const audio = document.getElementById('narrationAudio');
+            const playBtn = document.getElementById('audioPlayPause');
+            
+            if (currentAudioPage === pageNum) return;
+            currentAudioPage = pageNum;
+
+            audio.pause();
+            audio.currentTime = 0;
+            playBtn.classList.remove('playing');
+            document.getElementById('audioProgress').style.width = '0%';
+            document.getElementById('audioTime').textContent = '0:00';
+
+            if (audioFiles[pageNum]) {
+                audio.src = audioFiles[pageNum];
+                audio.load();
+            }
+        }
+
+        function toggleAudio() {
+            const audio = document.getElementById('narrationAudio');
+            const playBtn = document.getElementById('audioPlayPause');
+            
+            if (audio.paused) {
+                audio.play().catch(e => console.log('Audio play failed:', e));
+                playBtn.classList.add('playing');
+            } else {
+                audio.pause();
+                playBtn.classList.remove('playing');
+            }
+        }
+
+        function toggleMute() {
+            const audio = document.getElementById('narrationAudio');
+            const muteBtn = document.getElementById('audioMute');
+            audio.muted = !audio.muted;
+            muteBtn.textContent = audio.muted ? '🔇' : '🔊';
+            muteBtn.classList.toggle('muted', audio.muted);
+        }
+
+        function seekAudio(event) {
+            const audio = document.getElementById('narrationAudio');
+            const container = event.currentTarget;
+            const percent = event.offsetX / container.offsetWidth;
+            if (audio.duration) {
+                audio.currentTime = percent * audio.duration;
+            }
+        }
+
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return '0:00';
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // ==================== ENERGY SLIDER ====================
+        function updateEnergyComparison(value) {
+            const uranium = parseInt(value);
+            const coal = uranium * 2000;
+            const gas = uranium * 960000;
+            
+            document.getElementById('uraniumAmount').textContent = `${uranium} kg`;
+            document.getElementById('coalAmount').textContent = `${coal.toLocaleString()} tonnes`;
+            document.getElementById('gasAmount').textContent = `${gas.toLocaleString()} m³`;
+            document.getElementById('sliderValue').textContent = `${uranium} kg`;
+        }
+
+        // ==================== DECAY HEAT SIMULATION ====================
+        let simInterval = null;
+        let simState = 'idle'; // idle, running, shutdown
+        let shutdownTime = 0;
+
+        function runReactor() {
+            if (simState === 'running') return;
+            
+            clearInterval(simInterval);
+            simState = 'running';
+            
+            document.getElementById('reactorIcon').className = 'reactor-icon running';
+            document.getElementById('heatFill').style.width = '100%';
+            document.getElementById('heatValue').textContent = '100%';
+            document.getElementById('timelineContainer').style.display = 'none';
+            document.getElementById('simMessage').innerHTML = '<p>Reactor running at full power. Press <strong>"Emergency Shutdown"</strong> to insert control rods.</p>';
+        }
+
+        function shutdownReactor() {
+            if (simState !== 'running') return;
+            
+            simState = 'shutdown';
+            shutdownTime = 0;
+            
+            document.getElementById('reactorIcon').className = 'reactor-icon shutdown';
+            document.getElementById('timelineContainer').style.display = 'block';
+            document.getElementById('simMessage').innerHTML = '<p>⚠️ <strong>Control rods inserted!</strong> Fission stopped. But watch the heat level...</p>';
+            
+            simInterval = setInterval(() => {
+                shutdownTime++;
+                
+                // Decay heat approximation
+                let heatPercent;
+                if (shutdownTime < 10) {
+                    heatPercent = 100 - (shutdownTime * 3); // Quick drop to ~70%
+                } else if (shutdownTime < 30) {
+                    heatPercent = 70 - ((shutdownTime - 10) * 2); // Slower to ~30%
+                } else if (shutdownTime < 60) {
+                    heatPercent = 30 - ((shutdownTime - 30) * 0.5); // Even slower
+                } else {
+                    heatPercent = Math.max(5, 15 - ((shutdownTime - 60) * 0.1));
+                }
+                
+                document.getElementById('heatFill').style.width = `${heatPercent}%`;
+                document.getElementById('heatValue').textContent = `${Math.round(heatPercent)}%`;
+                
+                // Timeline
+                const timelinePercent = Math.min(100, (shutdownTime / 100) * 100);
+                document.getElementById('timelineProgress').style.width = `${timelinePercent}%`;
+                
+                // Time display
+                let timeText;
+                if (shutdownTime < 60) {
+                    timeText = `${shutdownTime} seconds`;
+                } else if (shutdownTime < 120) {
+                    timeText = `${Math.floor(shutdownTime / 60)} minute${shutdownTime >= 120 ? 's' : ''}`;
+                } else {
+                    timeText = `${Math.floor(shutdownTime / 60)} minutes`;
+                }
+                document.getElementById('timeElapsed').textContent = timeText;
+                
+                // Update icon based on heat
+                if (heatPercent < 20) {
+                    document.getElementById('reactorIcon').className = 'reactor-icon cooled';
+                }
+                
+                // Message updates
+                if (shutdownTime === 5) {
+                    document.getElementById('simMessage').innerHTML = '<p>💡 Notice: Heat is still at <strong>~85%</strong>! The fission stopped, but decay heat continues.</p>';
+                } else if (shutdownTime === 20) {
+                    document.getElementById('simMessage').innerHTML = '<p>⏱️ Even after "shutdown", decay heat requires <strong>continuous cooling</strong> for hours to days.</p>';
+                } else if (shutdownTime === 50) {
+                    document.getElementById('simMessage').innerHTML = '<p>✅ This is why nuclear plants have multiple backup cooling systems — cooling must <strong>never</strong> stop.</p>';
+                }
+                
+                if (shutdownTime >= 100) {
+                    clearInterval(simInterval);
+                }
+            }, 200);
+        }
+
+        function resetSimulation() {
+            clearInterval(simInterval);
+            simState = 'idle';
+            shutdownTime = 0;
+            
+            document.getElementById('reactorIcon').className = 'reactor-icon running';
+            document.getElementById('heatFill').style.width = '100%';
+            document.getElementById('heatValue').textContent = '100%';
+            document.getElementById('timelineContainer').style.display = 'none';
+            document.getElementById('timelineProgress').style.width = '0%';
+            document.getElementById('timeElapsed').textContent = '0 seconds';
+            document.getElementById('simMessage').innerHTML = '<p>Press <strong>"Emergency Shutdown"</strong> to insert control rods and stop the fission reaction. Watch the heat level carefully.</p>';
+        }
+
+        // ==================== MATCHING GAME ====================
+        let selectedRisk = null;
+        let matchedPairs = 0;
+
+        const correctMatches = {
+            'energy': 'control',
+            'heat': 'cooling',
+            'radiation': 'containment'
+        };
+
+        function selectRisk(element) {
+            if (element.classList.contains('matched')) return;
+            
+            document.querySelectorAll('.game-item[data-risk]').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            element.classList.add('selected');
+            selectedRisk = element.dataset.risk;
+        }
+
+        function selectSolution(element) {
+            if (!selectedRisk || element.classList.contains('matched')) return;
+            
+            const solution = element.dataset.solution;
+            const riskElement = document.querySelector(`.game-item[data-risk="${selectedRisk}"]`);
+            
+            if (correctMatches[selectedRisk] === solution) {
+                // Correct match
+                riskElement.classList.remove('selected');
+                riskElement.classList.add('matched');
+                element.classList.add('matched');
+                matchedPairs++;
+                
+                if (matchedPairs === 3) {
+                    document.getElementById('gameResult').classList.add('show');
+                }
+            } else {
+                // Wrong match
+                element.classList.add('wrong');
+                setTimeout(() => {
+                    element.classList.remove('wrong');
+                }, 500);
+            }
+            
+            selectedRisk = null;
+        }
+
+        function resetGame() {
+            selectedRisk = null;
+            matchedPairs = 0;
+            
+            document.querySelectorAll('.game-item').forEach(el => {
+                el.classList.remove('selected', 'matched', 'wrong');
+            });
+            
+            document.getElementById('gameResult').classList.remove('show');
+        }
+
+        // ==================== QUIZ ====================
+        let quizAnswers = {};
+        const correctAnswers = {
+            1: 'c',
+            2: 'b',
+            3: 'c',
+            4: 'b'
+        };
+
+        const feedbackMessages = {
+            1: {
+                correct: "Correct! A single fuel pellet (~7g) contains the same energy as approximately 1 tonne of coal.",
+                incorrect: "Not quite. A uranium fuel pellet contains the same energy as about 1 tonne of coal — that's the incredible energy density of nuclear fuel."
+            },
+            2: {
+                correct: "Correct! Decay heat is generated by radioactive fission products and continues even after the chain reaction is stopped. This is why cooling must be maintained.",
+                incorrect: "Not quite. Decay heat is the heat produced by radioactive decay of fission products — it continues after shutdown and requires continuous cooling."
+            },
+            3: {
+                correct: "Correct! Containment — the multiple barriers (fuel, cladding, vessel, containment building) — specifically prevents radioactive materials from reaching the environment.",
+                incorrect: "Not quite. While all three C's work together, Containment is specifically designed to keep radioactive materials inside the plant."
+            },
+            4: {
+                correct: "Correct! The three unique characteristics are: extreme energy density, decay heat that continues after shutdown, and radioactivity that requires containment.",
+                incorrect: "Not quite. The three fundamental differences are: extreme energy density, decay heat, and radioactivity."
+            }
+        };
+
+        function selectAnswer(element, questionNum) {
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            
+            const answer = element.dataset.answer;
+            quizAnswers[questionNum] = answer;
+            
+            // Check answer
+            const isCorrect = answer === correctAnswers[questionNum];
+            const feedback = document.getElementById(`feedback${questionNum}`);
+            
+            // Disable all options
+            options.forEach(opt => {
+                opt.classList.add('disabled');
+                if (opt.dataset.answer === correctAnswers[questionNum]) {
+                    opt.classList.add('correct');
+                } else if (opt === element && !isCorrect) {
+                    opt.classList.add('incorrect');
+                }
+            });
+            
+            // Show feedback
+            feedback.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+            feedback.querySelector('p').textContent = isCorrect 
+                ? feedbackMessages[questionNum].correct 
+                : feedbackMessages[questionNum].incorrect;
+            
+            // Update progress dot
+            const dot = document.querySelector(`.quiz-dot[data-q="${questionNum}"]`);
+            dot.classList.remove('active');
+            dot.classList.add(isCorrect ? 'correct' : 'incorrect');
+            
+            // Enable next button
+            document.getElementById(`nextBtn${questionNum}`).disabled = false;
+        }
+
+        function nextQuestion(nextNum) {
+            document.querySelector(`.quiz-question[data-question="${nextNum - 1}"]`).classList.remove('active');
+            document.querySelector(`.quiz-question[data-question="${nextNum}"]`).classList.add('active');
+            document.querySelector(`.quiz-dot[data-q="${nextNum}"]`).classList.add('active');
+        }
+
+        function showResults() {
+            document.querySelector('.quiz-question[data-question="4"]').classList.remove('active');
+            
+            const score = Object.keys(correctAnswers).filter(q => 
+                quizAnswers[q] === correctAnswers[q]
+            ).length;
+            
+            document.getElementById('resultsScore').textContent = `${score}/4`;
+            
+            let message;
+            if (score === 4) {
+                message = "Outstanding! You've mastered the fundamentals of why nuclear is different.";
+            } else if (score >= 3) {
+                message = "Great job! You have a solid understanding of nuclear fundamentals.";
+            } else if (score >= 2) {
+                message = "Good effort! Consider reviewing the material to strengthen your understanding.";
+            } else {
+                message = "Keep learning! Review the module and try again.";
+            }
+            
+            document.getElementById('resultsMessage').textContent = message;
+            document.getElementById('quizResults').classList.add('show');
+        }
+
+        function retakeQuiz() {
+            quizAnswers = {};
+            
+            document.querySelectorAll('.quiz-question').forEach((q, i) => {
+                q.classList.remove('active');
+                if (i === 0) q.classList.add('active');
+            });
+            
+            document.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'incorrect', 'disabled');
+            });
+            
+            document.querySelectorAll('.quiz-feedback').forEach(fb => {
+                fb.classList.remove('show', 'correct', 'incorrect');
+            });
+            
+            document.querySelectorAll('.quiz-dot').forEach((dot, i) => {
+                dot.classList.remove('correct', 'incorrect');
+                if (i === 0) dot.classList.add('active');
+                else dot.classList.remove('active');
+            });
+            
+            document.querySelectorAll('[id^="nextBtn"]').forEach(btn => {
+                btn.disabled = true;
+            });
+            
+            document.getElementById('quizResults').classList.remove('show');
+        }
+
+        // ==================== ANIMATIONS ====================
+        function triggerAnimations() {
+            const page = document.getElementById(`page${currentPage}`);
+            page.querySelectorAll('.animate-on-scroll').forEach((el, i) => {
+                setTimeout(() => {
+                    el.classList.add('animated');
+                }, i * 100);
+            });
+        }
+
+        // ==================== DNA DAMAGE INTERACTIVE ====================
+        function showDnaStep(step) {
+            // Hide all steps
+            document.querySelectorAll('.dna-step').forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            // Show selected step
+            const selectedStep = document.getElementById(`dnaStep${step}`);
+            if (selectedStep) {
+                selectedStep.style.display = 'block';
+            }
+            
+            // Update step indicators
+            const colors = {
+                active: '#cc5500',
+                inactive: '#2d3a47',
+                activeBorder: '#cc5500',
+                inactiveBorder: '#4a5d6b',
+                activeText: 'white',
+                inactiveText: '#9babc2'
+            };
+            
+            for (let i = 1; i <= 4; i++) {
+                const indicator = document.getElementById(`step${i}Indicator`);
+                if (indicator) {
+                    const circle = indicator.querySelector('circle');
+                    const numberText = indicator.querySelectorAll('text')[0];
+                    const labelText = indicator.querySelectorAll('text')[1];
+                    
+                    if (i === step) {
+                        circle.setAttribute('fill', colors.active);
+                        circle.setAttribute('stroke', colors.activeBorder);
+                        numberText.setAttribute('fill', colors.activeText);
+                        labelText.setAttribute('fill', '#f7f8fa');
+                    } else {
+                        circle.setAttribute('fill', colors.inactive);
+                        circle.setAttribute('stroke', colors.inactiveBorder);
+                        numberText.setAttribute('fill', colors.inactiveText);
+                        labelText.setAttribute('fill', colors.inactiveText);
+                    }
+                }
+            }
+        }
+
+        // ==================== INIT ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            updateNavigation();
+            loadAudioForPage(1);
+            
+            const audio = document.getElementById('narrationAudio');
+            audio.addEventListener('timeupdate', function() {
+                if (audio.duration) {
+                    const percent = (audio.currentTime / audio.duration) * 100;
+                    document.getElementById('audioProgress').style.width = percent + '%';
+                    document.getElementById('audioTime').textContent = formatTime(audio.currentTime);
+                }
+            });
+            
+            audio.addEventListener('ended', function() {
+                document.getElementById('audioPlayPause').classList.remove('playing');
+                document.getElementById('audioProgress').style.width = '0%';
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowRight' && currentPage < totalPages) goToPage(currentPage + 1);
+                if (e.key === 'ArrowLeft' && currentPage > 1) goToPage(currentPage - 1);
+                if (e.key === 'Escape') closeMenu();
+            });
+            
+            // Click outside menu to close
+            document.addEventListener('click', function(e) {
+                const nav = document.getElementById('navMenu');
+                const toggle = document.getElementById('menuToggle');
+                if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+                    closeMenu();
+                }
+            });
+            
+            triggerAnimations();
+        });
+    </script>
+</body>
+</html>
