@@ -1490,6 +1490,365 @@
         }
 
         /* ========================================
+           CHALLENGE GAMES - NEW
+           ======================================== */
+        /* Investigator Game */
+        .scenario { display: none; }
+        .scenario.active { display: block; }
+        
+        .evidence-panel {
+            background: var(--bg-darker);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .evidence-item {
+            padding: var(--space-md);
+            background: var(--bg-elevated);
+            border-left: 3px solid var(--accent-blue);
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            margin-bottom: var(--space-md);
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        
+        .evidence-item:last-child { margin-bottom: 0; }
+        
+        .answer-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .answer-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-lg);
+            background: var(--bg-card);
+            border: 2px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .answer-btn:hover:not(.disabled) {
+            border-color: var(--accent-orange);
+            background: rgba(204, 85, 0, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .answer-btn.correct {
+            border-color: var(--accent-green);
+            background: rgba(146, 208, 80, 0.2);
+        }
+        
+        .answer-btn.wrong {
+            border-color: var(--color-danger);
+            background: rgba(229, 69, 69, 0.15);
+            opacity: 0.6;
+        }
+        
+        .answer-btn.disabled {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+        
+        .answer-icon {
+            font-size: 2rem;
+        }
+        
+        .scenario-feedback {
+            display: none;
+            padding: var(--space-lg);
+            background: rgba(146, 208, 80, 0.1);
+            border: 1px solid var(--accent-green);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .scenario-feedback.show { display: block; }
+        
+        .scenario-feedback p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+        
+        .scenario-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--border-subtle);
+        }
+        
+        #scenarioCounter {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .investigator-result {
+            display: none;
+            text-align: center;
+            padding: var(--space-xl);
+            background: rgba(146, 208, 80, 0.1);
+            border: 2px solid var(--accent-green);
+            border-radius: var(--radius-lg);
+            margin-top: var(--space-xl);
+        }
+        
+        .investigator-result.show { display: block; }
+        
+        .result-score {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-green);
+        }
+        
+        /* Chain Builder Game */
+        .chain-slots {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+            margin-bottom: var(--space-xl);
+            padding: var(--space-lg);
+            background: var(--bg-darker);
+            border-radius: var(--radius-lg);
+        }
+        
+        .chain-slot {
+            position: relative;
+            min-width: 140px;
+            min-height: 80px;
+            background: var(--bg-elevated);
+            border: 2px dashed var(--border-medium);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: var(--space-sm);
+        }
+        
+        .chain-slot.filled {
+            border-style: solid;
+            border-color: var(--accent-green);
+            background: rgba(146, 208, 80, 0.1);
+        }
+        
+        .slot-number {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 24px;
+            height: 24px;
+            background: var(--accent-orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .slot-content {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        .chain-slot.filled .slot-content {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        
+        .chain-arrow {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+        }
+        
+        .chain-events {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            justify-content: center;
+        }
+        
+        .chain-event {
+            padding: var(--space-md) var(--space-lg);
+            background: var(--bg-card);
+            border: 2px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-size: 0.9rem;
+        }
+        
+        .chain-event:hover:not(.used) {
+            border-color: var(--accent-blue);
+            background: rgba(0, 176, 240, 0.1);
+        }
+        
+        .chain-event.selected {
+            border-color: var(--accent-orange);
+            background: rgba(204, 85, 0, 0.2);
+        }
+        
+        .chain-event.used {
+            opacity: 0.4;
+            cursor: default;
+            text-decoration: line-through;
+        }
+        
+        .chain-result {
+            display: none;
+            padding: var(--space-lg);
+            background: rgba(146, 208, 80, 0.1);
+            border: 1px solid var(--accent-green);
+            border-radius: var(--radius-md);
+            margin-top: var(--space-xl);
+        }
+        
+        .chain-result.show { display: block; }
+        
+        /* Improvement Matcher */
+        .improvement-question { display: none; }
+        .improvement-question.active { display: block; }
+        
+        .improvement-card {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+            padding: var(--space-xl);
+            background: var(--bg-darker);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .improvement-icon {
+            font-size: 3rem;
+            flex-shrink: 0;
+        }
+        
+        .improvement-text strong {
+            display: block;
+            font-size: 1.25rem;
+            color: var(--accent-orange);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .improvement-text p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+        
+        .improvement-options {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+        
+        .imp-btn {
+            flex: 1;
+            padding: var(--space-md) var(--space-lg);
+            background: var(--bg-card);
+            border: 2px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .imp-btn:hover:not(.disabled) {
+            border-color: var(--accent-orange);
+            background: rgba(204, 85, 0, 0.15);
+        }
+        
+        .imp-btn.correct {
+            border-color: var(--accent-green);
+            background: rgba(146, 208, 80, 0.2);
+        }
+        
+        .imp-btn.wrong {
+            border-color: var(--color-danger);
+            background: rgba(229, 69, 69, 0.15);
+        }
+        
+        .imp-btn.disabled {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+        
+        .imp-feedback {
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-md);
+            display: none;
+        }
+        
+        .imp-feedback.show { display: block; }
+        .imp-feedback.correct { background: rgba(146, 208, 80, 0.1); color: var(--accent-green); }
+        .imp-feedback.wrong { background: rgba(229, 69, 69, 0.1); color: var(--color-danger); }
+        
+        .improvement-progress {
+            text-align: center;
+            padding: var(--space-md);
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .improvement-result {
+            display: none;
+            padding: var(--space-lg);
+            background: rgba(146, 208, 80, 0.1);
+            border: 1px solid var(--accent-green);
+            border-radius: var(--radius-md);
+            text-align: center;
+        }
+        
+        .improvement-result.show { display: block; }
+
+        @media (max-width: 768px) {
+            .answer-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .chain-slots {
+                flex-direction: column;
+            }
+            
+            .chain-arrow {
+                transform: rotate(90deg);
+            }
+            
+            .improvement-options {
+                flex-direction: column;
+            }
+            
+            .improvement-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* ========================================
            TAKEAWAYS PAGE
            ======================================== */
         .takeaways-grid {
@@ -1801,7 +2160,7 @@
                 <p class="hero-subtitle">From wartime origins to modern safety culture: how eight decades of nuclear power shaped the industry we know today—and the lessons written in accident reports.</p>
                 
                 <div class="hero-image-container">
-                    <img src="images/AI_02_hero_history_timeline.png.png" alt="History of nuclear power - from Manhattan Project to modern reactors" class="hero-image" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="images/AI_02_hero_history_timeline.png" alt="History of nuclear power - from Manhattan Project to modern reactors" class="hero-image" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
 
                 <div class="hero-stats">
@@ -1855,68 +2214,68 @@
 
             <!-- Manhattan Project Timeline SVG -->
             <div class="diagram-container">
-                <svg viewBox="0 0 900 250" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 1000 280" xmlns="http://www.w3.org/2000/svg">
                     <!-- Timeline track -->
-                    <line x1="50" y1="125" x2="850" y2="125" stroke="#4a5d6b" stroke-width="4" stroke-linecap="round"/>
+                    <line x1="50" y1="150" x2="950" y2="150" stroke="#4a5d6b" stroke-width="4" stroke-linecap="round"/>
                     
                     <!-- 1939 - Einstein Letter -->
                     <g class="timeline-node" style="cursor: pointer;">
-                        <circle cx="100" cy="125" r="12" fill="#8b4513" stroke="#1f2937" stroke-width="3"/>
-                        <text x="100" y="165" fill="#9babc2" font-family="JetBrains Mono" font-size="12" text-anchor="middle">1939</text>
-                        <text x="100" y="100" fill="#f7f8fa" font-family="Rajdhani" font-size="13" font-weight="600" text-anchor="middle">Einstein</text>
-                        <text x="100" y="85" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">Letter</text>
+                        <circle cx="100" cy="150" r="14" fill="#8b4513" stroke="#1f2937" stroke-width="3"/>
+                        <text x="100" y="195" fill="#9babc2" font-family="JetBrains Mono" font-size="12" text-anchor="middle">1939</text>
+                        <text x="100" y="115" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">Letter</text>
+                        <text x="100" y="130" fill="#f7f8fa" font-family="Rajdhani" font-size="14" font-weight="600" text-anchor="middle">Einstein</text>
                     </g>
                     
-                    <!-- 1942 - Manhattan Project -->
+                    <!-- 1942 - Manhattan Project Begins -->
                     <g class="timeline-node" style="cursor: pointer;">
-                        <circle cx="270" cy="125" r="12" fill="#8b4513" stroke="#1f2937" stroke-width="3"/>
-                        <text x="270" y="165" fill="#9babc2" font-family="JetBrains Mono" font-size="12" text-anchor="middle">1942</text>
-                        <text x="270" y="100" fill="#f7f8fa" font-family="Rajdhani" font-size="13" font-weight="600" text-anchor="middle">Manhattan</text>
-                        <text x="270" y="85" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">Project Begins</text>
+                        <circle cx="250" cy="150" r="14" fill="#8b4513" stroke="#1f2937" stroke-width="3"/>
+                        <text x="250" y="195" fill="#9babc2" font-family="JetBrains Mono" font-size="12" text-anchor="middle">1942</text>
+                        <text x="250" y="115" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">Project Begins</text>
+                        <text x="250" y="130" fill="#f7f8fa" font-family="Rajdhani" font-size="14" font-weight="600" text-anchor="middle">Manhattan</text>
                     </g>
                     
-                    <!-- 1942 - Chicago Pile -->
+                    <!-- Dec 1942 - Chicago Pile -->
                     <g class="timeline-node" style="cursor: pointer;">
-                        <circle cx="340" cy="125" r="15" fill="#cc5500" stroke="#1f2937" stroke-width="3">
-                            <animate attributeName="r" values="15;18;15" dur="2s" repeatCount="indefinite"/>
+                        <circle cx="400" cy="150" r="16" fill="#cc5500" stroke="#1f2937" stroke-width="3">
+                            <animate attributeName="r" values="16;19;16" dur="2s" repeatCount="indefinite"/>
                         </circle>
-                        <text x="340" y="165" fill="#9babc2" font-family="JetBrains Mono" font-size="12" text-anchor="middle">Dec 1942</text>
-                        <text x="340" y="100" fill="#cc5500" font-family="Rajdhani" font-size="13" font-weight="600" text-anchor="middle">Chicago Pile-1</text>
-                        <text x="340" y="85" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">First Chain Reaction</text>
+                        <text x="400" y="195" fill="#9babc2" font-family="JetBrains Mono" font-size="12" text-anchor="middle">Dec 1942</text>
+                        <text x="400" y="115" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">First Chain Reaction</text>
+                        <text x="400" y="130" fill="#cc5500" font-family="Rajdhani" font-size="14" font-weight="600" text-anchor="middle">Chicago Pile-1</text>
                     </g>
                     
-                    <!-- 1945 - Trinity -->
+                    <!-- Jul 1945 - Trinity -->
                     <g class="timeline-node" style="cursor: pointer;">
-                        <circle cx="550" cy="125" r="12" fill="#dc2626" stroke="#1f2937" stroke-width="3"/>
-                        <text x="550" y="165" fill="#9babc2" font-family="JetBrains Mono" font-size="12" text-anchor="middle">Jul 1945</text>
-                        <text x="550" y="100" fill="#f7f8fa" font-family="Rajdhani" font-size="13" font-weight="600" text-anchor="middle">Trinity Test</text>
-                        <text x="550" y="85" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">First Nuclear Explosion</text>
+                        <circle cx="580" cy="150" r="14" fill="#dc2626" stroke="#1f2937" stroke-width="3"/>
+                        <text x="580" y="195" fill="#9babc2" font-family="JetBrains Mono" font-size="12" text-anchor="middle">Jul 1945</text>
+                        <text x="580" y="115" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">First Nuclear Explosion</text>
+                        <text x="580" y="130" fill="#f7f8fa" font-family="Rajdhani" font-size="14" font-weight="600" text-anchor="middle">Trinity Test</text>
                     </g>
                     
-                    <!-- 1945 - Hiroshima/Nagasaki -->
+                    <!-- Aug 1945 - Hiroshima/Nagasaki -->
                     <g class="timeline-node" style="cursor: pointer;">
-                        <circle cx="650" cy="125" r="12" fill="#dc2626" stroke="#1f2937" stroke-width="3"/>
-                        <text x="650" y="165" fill="#9babc2" font-family="JetBrains Mono" font-size="12" text-anchor="middle">Aug 1945</text>
-                        <text x="650" y="100" fill="#f7f8fa" font-family="Rajdhani" font-size="13" font-weight="600" text-anchor="middle">Hiroshima &</text>
-                        <text x="650" y="85" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">Nagasaki</text>
+                        <circle cx="720" cy="150" r="14" fill="#dc2626" stroke="#1f2937" stroke-width="3"/>
+                        <text x="720" y="195" fill="#9babc2" font-family="JetBrains Mono" font-size="12" text-anchor="middle">Aug 1945</text>
+                        <text x="720" y="115" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">Nagasaki</text>
+                        <text x="720" y="130" fill="#f7f8fa" font-family="Rajdhani" font-size="14" font-weight="600" text-anchor="middle">Hiroshima &</text>
                     </g>
                     
                     <!-- 1953 - Atoms for Peace -->
                     <g class="timeline-node" style="cursor: pointer;">
-                        <circle cx="800" cy="125" r="15" fill="#4a90d9" stroke="#1f2937" stroke-width="3">
-                            <animate attributeName="r" values="15;18;15" dur="2s" repeatCount="indefinite"/>
+                        <circle cx="900" cy="150" r="16" fill="#4a90d9" stroke="#1f2937" stroke-width="3">
+                            <animate attributeName="r" values="16;19;16" dur="2s" repeatCount="indefinite"/>
                         </circle>
-                        <text x="800" y="165" fill="#9babc2" font-family="JetBrains Mono" font-size="12" text-anchor="middle">1953</text>
-                        <text x="800" y="100" fill="#4a90d9" font-family="Rajdhani" font-size="13" font-weight="600" text-anchor="middle">Atoms for Peace</text>
-                        <text x="800" y="85" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">Eisenhower Speech</text>
+                        <text x="900" y="195" fill="#9babc2" font-family="JetBrains Mono" font-size="12" text-anchor="middle">1953</text>
+                        <text x="900" y="115" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">Eisenhower Speech</text>
+                        <text x="900" y="130" fill="#4a90d9" font-family="Rajdhani" font-size="14" font-weight="600" text-anchor="middle">Atoms for Peace</text>
                     </g>
                     
                     <!-- Era labels -->
-                    <text x="375" y="210" fill="#8b4513" font-family="Rajdhani" font-size="14" font-weight="600" text-anchor="middle">WEAPONS ERA</text>
-                    <text x="800" y="210" fill="#4a90d9" font-family="Rajdhani" font-size="14" font-weight="600" text-anchor="middle">CIVILIAN ERA</text>
+                    <text x="410" y="245" fill="#8b4513" font-family="Rajdhani" font-size="14" font-weight="600" text-anchor="middle">WEAPONS ERA</text>
+                    <text x="900" y="245" fill="#4a90d9" font-family="Rajdhani" font-size="14" font-weight="600" text-anchor="middle">CIVILIAN ERA</text>
                     
                     <!-- Dividing line -->
-                    <line x1="720" y1="50" x2="720" y2="200" stroke="#4a5d6b" stroke-width="1" stroke-dasharray="5,5" opacity="0.5"/>
+                    <line x1="810" y1="70" x2="810" y2="230" stroke="#4a5d6b" stroke-width="1" stroke-dasharray="5,5" opacity="0.5"/>
                 </svg>
             </div>
 
@@ -2300,63 +2659,63 @@
             <!-- RBMK vs PWR Interactive Diagram -->
             <div class="diagram-container">
                 <h4 style="margin-bottom: var(--space-lg);">Reactor Design Comparison</h4>
-                <svg viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg">
                     <!-- PWR Side -->
-                    <g transform="translate(50, 20)">
-                        <text x="150" y="20" fill="#92d050" font-family="Rajdhani" font-size="18" font-weight="700" text-anchor="middle">PWR (Western Design)</text>
+                    <g transform="translate(50, 30)">
+                        <text x="170" y="20" fill="#92d050" font-family="Rajdhani" font-size="20" font-weight="700" text-anchor="middle">PWR (Western Design)</text>
                         
                         <!-- Containment dome -->
-                        <path d="M50 300 L50 150 Q150 50 250 150 L250 300 Z" fill="rgba(146, 208, 80, 0.1)" stroke="#92d050" stroke-width="3"/>
-                        <text x="150" y="80" fill="#92d050" font-family="Inter" font-size="10" text-anchor="middle">CONTAINMENT DOME</text>
+                        <path d="M50 310 L50 140 Q170 40 290 140 L290 310 Z" fill="rgba(146, 208, 80, 0.1)" stroke="#92d050" stroke-width="3"/>
+                        <text x="170" y="75" fill="#92d050" font-family="Inter" font-size="11" font-weight="600" text-anchor="middle">CONTAINMENT DOME</text>
                         
                         <!-- Reactor vessel -->
-                        <rect x="100" y="140" width="100" height="130" rx="5" fill="#4a5d6b" stroke="#6b7d8f" stroke-width="2"/>
-                        <text x="150" y="200" fill="#f7f8fa" font-family="Inter" font-size="9" text-anchor="middle">Reactor</text>
-                        <text x="150" y="215" fill="#f7f8fa" font-family="Inter" font-size="9" text-anchor="middle">Vessel</text>
+                        <rect x="110" y="130" width="120" height="150" rx="8" fill="#4a5d6b" stroke="#6b7d8f" stroke-width="2"/>
+                        <text x="170" y="200" fill="#f7f8fa" font-family="Inter" font-size="12" font-weight="600" text-anchor="middle">Reactor</text>
+                        <text x="170" y="218" fill="#f7f8fa" font-family="Inter" font-size="12" font-weight="600" text-anchor="middle">Vessel</text>
                         
                         <!-- Water moderator indication -->
-                        <rect x="110" y="155" width="80" height="100" fill="rgba(0, 176, 240, 0.3)" rx="3"/>
-                        <text x="150" y="245" fill="#00b0f0" font-family="Inter" font-size="8" text-anchor="middle">Water Moderator</text>
+                        <rect x="125" y="150" width="90" height="100" fill="rgba(0, 176, 240, 0.35)" rx="4"/>
+                        <text x="170" y="265" fill="#00b0f0" font-family="Inter" font-size="10" font-weight="500" text-anchor="middle">Water Moderator</text>
                         
                         <!-- Negative void label -->
-                        <rect x="60" y="285" width="180" height="35" rx="5" fill="rgba(146, 208, 80, 0.2)" stroke="#92d050"/>
-                        <text x="150" y="307" fill="#92d050" font-family="JetBrains Mono" font-size="11" text-anchor="middle">NEGATIVE VOID COEFFICIENT</text>
+                        <rect x="55" y="295" width="230" height="40" rx="6" fill="rgba(146, 208, 80, 0.2)" stroke="#92d050" stroke-width="2"/>
+                        <text x="170" y="320" fill="#92d050" font-family="JetBrains Mono" font-size="12" font-weight="600" text-anchor="middle">NEGATIVE VOID COEFFICIENT</text>
                         
                         <!-- Safety arrow -->
-                        <text x="150" y="335" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">Steam → Power ↓ (Self-limiting)</text>
+                        <text x="170" y="360" fill="#9babc2" font-family="Inter" font-size="11" text-anchor="middle">Steam → Power ↓ (Self-limiting)</text>
                     </g>
                     
                     <!-- VS Divider -->
-                    <line x1="400" y1="40" x2="400" y2="330" stroke="#4a5d6b" stroke-width="2" stroke-dasharray="10,5"/>
-                    <circle cx="400" cy="180" r="25" fill="#1f2937" stroke="#4a5d6b" stroke-width="2"/>
-                    <text x="400" y="185" fill="#9babc2" font-family="Rajdhani" font-size="14" font-weight="700" text-anchor="middle">VS</text>
+                    <line x1="450" y1="50" x2="450" y2="350" stroke="#4a5d6b" stroke-width="2" stroke-dasharray="10,5"/>
+                    <circle cx="450" cy="200" r="28" fill="#1f2937" stroke="#4a5d6b" stroke-width="2"/>
+                    <text x="450" y="206" fill="#9babc2" font-family="Rajdhani" font-size="16" font-weight="700" text-anchor="middle">VS</text>
                     
                     <!-- RBMK Side -->
-                    <g transform="translate(450, 20)">
-                        <text x="150" y="20" fill="#dc2626" font-family="Rajdhani" font-size="18" font-weight="700" text-anchor="middle">RBMK (Soviet Design)</text>
+                    <g transform="translate(510, 30)">
+                        <text x="170" y="20" fill="#dc2626" font-family="Rajdhani" font-size="20" font-weight="700" text-anchor="middle">RBMK (Soviet Design)</text>
                         
                         <!-- Simple building (no dome) -->
-                        <rect x="50" y="100" width="200" height="200" fill="rgba(220, 38, 38, 0.05)" stroke="#dc2626" stroke-width="2" stroke-dasharray="5,3"/>
-                        <text x="150" y="120" fill="#dc2626" font-family="Inter" font-size="10" text-anchor="middle">NO CONTAINMENT</text>
+                        <rect x="50" y="90" width="240" height="220" fill="rgba(220, 38, 38, 0.05)" stroke="#dc2626" stroke-width="2" stroke-dasharray="6,4"/>
+                        <text x="170" y="115" fill="#dc2626" font-family="Inter" font-size="11" font-weight="600" text-anchor="middle">NO CONTAINMENT</text>
                         
                         <!-- Graphite core -->
-                        <rect x="80" y="140" width="140" height="130" rx="5" fill="#6b7280" stroke="#9ca3af" stroke-width="2"/>
-                        <text x="150" y="200" fill="#f7f8fa" font-family="Inter" font-size="9" text-anchor="middle">Graphite</text>
-                        <text x="150" y="215" fill="#f7f8fa" font-family="Inter" font-size="9" text-anchor="middle">Core</text>
+                        <rect x="85" y="135" width="170" height="140" rx="8" fill="#6b7280" stroke="#9ca3af" stroke-width="2"/>
+                        <text x="170" y="195" fill="#f7f8fa" font-family="Inter" font-size="12" font-weight="600" text-anchor="middle">Graphite</text>
+                        <text x="170" y="213" fill="#f7f8fa" font-family="Inter" font-size="12" font-weight="600" text-anchor="middle">Core</text>
                         
                         <!-- Pressure tubes -->
-                        <line x1="100" y1="150" x2="100" y2="260" stroke="#00b0f0" stroke-width="4"/>
-                        <line x1="130" y1="150" x2="130" y2="260" stroke="#00b0f0" stroke-width="4"/>
-                        <line x1="160" y1="150" x2="160" y2="260" stroke="#00b0f0" stroke-width="4"/>
-                        <line x1="190" y1="150" x2="190" y2="260" stroke="#00b0f0" stroke-width="4"/>
-                        <text x="150" y="245" fill="#00b0f0" font-family="Inter" font-size="8" text-anchor="middle">Pressure Tubes</text>
+                        <line x1="115" y1="145" x2="115" y2="265" stroke="#00b0f0" stroke-width="6"/>
+                        <line x1="150" y1="145" x2="150" y2="265" stroke="#00b0f0" stroke-width="6"/>
+                        <line x1="185" y1="145" x2="185" y2="265" stroke="#00b0f0" stroke-width="6"/>
+                        <line x1="220" y1="145" x2="220" y2="265" stroke="#00b0f0" stroke-width="6"/>
+                        <text x="170" y="255" fill="#00b0f0" font-family="Inter" font-size="10" font-weight="500" text-anchor="middle">Pressure Tubes</text>
                         
                         <!-- Positive void label -->
-                        <rect x="60" y="285" width="180" height="35" rx="5" fill="rgba(220, 38, 38, 0.2)" stroke="#dc2626"/>
-                        <text x="150" y="307" fill="#dc2626" font-family="JetBrains Mono" font-size="11" text-anchor="middle">POSITIVE VOID COEFFICIENT</text>
+                        <rect x="55" y="295" width="230" height="40" rx="6" fill="rgba(220, 38, 38, 0.2)" stroke="#dc2626" stroke-width="2"/>
+                        <text x="170" y="320" fill="#dc2626" font-family="JetBrains Mono" font-size="12" font-weight="600" text-anchor="middle">POSITIVE VOID COEFFICIENT</text>
                         
                         <!-- Danger arrow -->
-                        <text x="150" y="335" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">Steam → Power ↑ (Runaway!)</text>
+                        <text x="170" y="360" fill="#9babc2" font-family="Inter" font-size="11" text-anchor="middle">Steam → Power ↑ (Runaway!)</text>
                     </g>
                 </svg>
             </div>
@@ -2485,72 +2844,65 @@
             <!-- Fukushima Timeline Visual -->
             <div class="diagram-container">
                 <h4 style="margin-bottom: var(--space-lg);">Timeline: 11-15 March 2011</h4>
-                <svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 1000 320" xmlns="http://www.w3.org/2000/svg">
                     <!-- Timeline base -->
-                    <line x1="50" y1="150" x2="850" y2="150" stroke="#4a5d6b" stroke-width="4"/>
+                    <line x1="80" y1="160" x2="920" y2="160" stroke="#4a5d6b" stroke-width="4"/>
                     
                     <!-- Day markers -->
-                    <g fill="#9babc2" font-family="JetBrains Mono" font-size="11">
-                        <text x="100" y="180">Mar 11</text>
-                        <text x="275" y="180">Mar 12</text>
-                        <text x="450" y="180">Mar 13</text>
-                        <text x="625" y="180">Mar 14</text>
-                        <text x="800" y="180">Mar 15</text>
+                    <g fill="#6b7d8f" font-family="JetBrains Mono" font-size="12">
+                        <text x="140" y="195" text-anchor="middle">Mar 11</text>
+                        <text x="350" y="195" text-anchor="middle">Mar 12</text>
+                        <text x="560" y="195" text-anchor="middle">Mar 13</text>
+                        <text x="710" y="195" text-anchor="middle">Mar 14</text>
+                        <text x="870" y="195" text-anchor="middle">Mar 15</text>
                     </g>
                     
-                    <!-- Events -->
                     <!-- Earthquake -->
                     <g>
-                        <circle cx="100" cy="150" r="15" fill="#0284c7" stroke="#1f2937" stroke-width="3">
-                            <animate attributeName="r" values="15;18;15" dur="2s" repeatCount="indefinite"/>
+                        <circle cx="120" cy="160" r="16" fill="#0284c7" stroke="#1f2937" stroke-width="3">
+                            <animate attributeName="r" values="16;19;16" dur="2s" repeatCount="indefinite"/>
                         </circle>
-                        <text x="100" y="115" fill="#f7f8fa" font-family="Rajdhani" font-size="12" font-weight="600" text-anchor="middle">14:46</text>
-                        <text x="100" y="100" fill="#0284c7" font-family="Inter" font-size="11" text-anchor="middle">M9.0 Earthquake</text>
-                        <text x="100" y="210" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">Reactors</text>
-                        <text x="100" y="225" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">shut down ✓</text>
+                        <text x="120" y="95" fill="#0284c7" font-family="Inter" font-size="11" font-weight="600" text-anchor="middle">M9.0 Earthquake</text>
+                        <text x="120" y="115" fill="#f7f8fa" font-family="Rajdhani" font-size="13" font-weight="600" text-anchor="middle">14:46</text>
+                        <text x="120" y="225" fill="#92d050" font-family="Inter" font-size="10" text-anchor="middle">Reactors</text>
+                        <text x="120" y="240" fill="#92d050" font-family="Inter" font-size="10" text-anchor="middle">shut down ✓</text>
                     </g>
                     
                     <!-- Tsunami -->
                     <g>
-                        <circle cx="175" cy="150" r="15" fill="#dc2626" stroke="#1f2937" stroke-width="3">
-                            <animate attributeName="r" values="15;18;15" dur="2s" repeatCount="indefinite"/>
+                        <circle cx="200" cy="160" r="16" fill="#dc2626" stroke="#1f2937" stroke-width="3">
+                            <animate attributeName="r" values="16;19;16" dur="2s" repeatCount="indefinite"/>
                         </circle>
-                        <text x="175" y="115" fill="#f7f8fa" font-family="Rajdhani" font-size="12" font-weight="600" text-anchor="middle">15:35</text>
-                        <text x="175" y="100" fill="#dc2626" font-family="Inter" font-size="11" text-anchor="middle">14m Tsunami</text>
-                        <text x="175" y="210" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">All power</text>
-                        <text x="175" y="225" fill="#9babc2" font-family="Inter" font-size="10" text-anchor="middle">lost ✗</text>
+                        <text x="200" y="95" fill="#dc2626" font-family="Inter" font-size="11" font-weight="600" text-anchor="middle">14m Tsunami</text>
+                        <text x="200" y="115" fill="#f7f8fa" font-family="Rajdhani" font-size="13" font-weight="600" text-anchor="middle">15:35</text>
+                        <text x="200" y="225" fill="#e54545" font-family="Inter" font-size="10" text-anchor="middle">All power</text>
+                        <text x="200" y="240" fill="#e54545" font-family="Inter" font-size="10" text-anchor="middle">lost ✗</text>
                     </g>
                     
                     <!-- Unit 1 explosion -->
                     <g>
-                        <circle cx="350" cy="150" r="12" fill="#f59e0b" stroke="#1f2937" stroke-width="3"/>
-                        <text x="350" y="115" fill="#f7f8fa" font-family="Rajdhani" font-size="12" font-weight="600" text-anchor="middle">15:36</text>
-                        <text x="350" y="100" fill="#f59e0b" font-family="Inter" font-size="11" text-anchor="middle">Unit 1 H₂ Explosion</text>
+                        <circle cx="400" cy="160" r="14" fill="#f59e0b" stroke="#1f2937" stroke-width="3"/>
+                        <text x="400" y="95" fill="#f59e0b" font-family="Inter" font-size="11" font-weight="600" text-anchor="middle">Unit 1 H₂ Explosion</text>
+                        <text x="400" y="115" fill="#f7f8fa" font-family="Rajdhani" font-size="13" font-weight="600" text-anchor="middle">15:36</text>
                     </g>
                     
                     <!-- Unit 3 explosion -->
                     <g>
-                        <circle cx="650" cy="150" r="12" fill="#f59e0b" stroke="#1f2937" stroke-width="3"/>
-                        <text x="650" y="115" fill="#f7f8fa" font-family="Rajdhani" font-size="12" font-weight="600" text-anchor="middle">11:01</text>
-                        <text x="650" y="100" fill="#f59e0b" font-family="Inter" font-size="11" text-anchor="middle">Unit 3 H₂ Explosion</text>
+                        <circle cx="710" cy="160" r="14" fill="#f59e0b" stroke="#1f2937" stroke-width="3"/>
+                        <text x="710" y="95" fill="#f59e0b" font-family="Inter" font-size="11" font-weight="600" text-anchor="middle">Unit 3 H₂ Explosion</text>
+                        <text x="710" y="115" fill="#f7f8fa" font-family="Rajdhani" font-size="13" font-weight="600" text-anchor="middle">11:01</text>
                     </g>
                     
                     <!-- Unit 2 & 4 -->
                     <g>
-                        <circle cx="825" cy="150" r="12" fill="#f59e0b" stroke="#1f2937" stroke-width="3"/>
-                        <text x="825" y="115" fill="#f7f8fa" font-family="Rajdhani" font-size="12" font-weight="600" text-anchor="middle">06:00</text>
-                        <text x="825" y="100" fill="#f59e0b" font-family="Inter" font-size="11" text-anchor="middle">Unit 2 & 4 Damage</text>
+                        <circle cx="870" cy="160" r="14" fill="#f59e0b" stroke="#1f2937" stroke-width="3"/>
+                        <text x="870" y="95" fill="#f59e0b" font-family="Inter" font-size="11" font-weight="600" text-anchor="middle">Unit 2 & 4 Damage</text>
+                        <text x="870" y="115" fill="#f7f8fa" font-family="Rajdhani" font-size="13" font-weight="600" text-anchor="middle">06:00</text>
                     </g>
                     
-                    <!-- Core melt indicators -->
-                    <g fill="none" stroke="#dc2626" stroke-width="2">
-                        <path d="M200 240 Q 275 280 350 240" stroke-dasharray="5,3"/>
-                        <text x="275" y="270" fill="#dc2626" font-family="Inter" font-size="10" text-anchor="middle">Unit 1 core melts</text>
-                    </g>
-                    <g fill="none" stroke="#dc2626" stroke-width="2">
-                        <path d="M200 255 Q 400 295 600 255" stroke-dasharray="5,3"/>
-                        <text x="400" y="290" fill="#dc2626" font-family="Inter" font-size="10" text-anchor="middle">Units 2 & 3 cores melt</text>
-                    </g>
+                    <!-- Core melt zone indicator -->
+                    <rect x="220" y="260" width="550" height="40" rx="8" fill="rgba(220, 38, 38, 0.15)" stroke="#dc2626" stroke-width="2" stroke-dasharray="6,3"/>
+                    <text x="495" y="285" fill="#dc2626" font-family="Rajdhani" font-size="13" font-weight="600" text-anchor="middle">CORE MELT ZONE: Units 1, 2 & 3 — No cooling for 3+ days</text>
                 </svg>
             </div>
 
@@ -2730,80 +3082,258 @@
             </div>
         </section>
 
-        <!-- PAGE 8: Matching Game -->
+        <!-- PAGE 8: Interactive Challenges -->
         <section class="page" id="page8">
             <div class="section-header">
                 <div class="section-badge">
                     <span>🎯</span>
-                    <span>ACTIVITY</span>
+                    <span>CHALLENGE</span>
                 </div>
-                <h2>Match the Accident to the Lesson</h2>
-                <p class="section-intro">Each major accident taught the industry something different. Match the event to its primary lesson.</p>
+                <h2>Test Your Understanding</h2>
+                <p class="section-intro">Apply what you've learned with these scenario-based challenges.</p>
             </div>
 
-            <div class="game-container">
-                <div class="game-instruction">
-                    <span>💡</span>
-                    Click an accident, then click the matching lesson
-                </div>
-
-                <div class="game-grid">
-                    <div class="game-column">
-                        <div class="game-column-title">Accidents</div>
-                        <div class="game-item" data-match="tmi" onclick="selectGameItem(this, 'left')">
-                            Three Mile Island (1979)
-                        </div>
-                        <div class="game-item" data-match="chernobyl" onclick="selectGameItem(this, 'left')">
-                            Chernobyl (1986)
-                        </div>
-                        <div class="game-item" data-match="fukushima" onclick="selectGameItem(this, 'left')">
-                            Fukushima (2011)
-                        </div>
-                    </div>
-
-                    <div class="game-arrows">
-                        <span class="game-arrow">↔</span>
-                        <span class="game-arrow">↔</span>
-                        <span class="game-arrow">↔</span>
-                    </div>
-
-                    <div class="game-column">
-                        <div class="game-column-title">Key Lessons</div>
-                        <div class="game-item" data-match="fukushima" onclick="selectGameItem(this, 'right')">
-                            Prepare for beyond design basis events; passive safety systems
-                        </div>
-                        <div class="game-item" data-match="tmi" onclick="selectGameItem(this, 'right')">
-                            Human factors matter; operators need clear information and training
-                        </div>
-                        <div class="game-item" data-match="chernobyl" onclick="selectGameItem(this, 'right')">
-                            Design flaws can be fatal; containment is essential
-                        </div>
-                    </div>
-                </div>
-
-                <div class="game-result" id="gameResult">
-                    <h4>🎉 Excellent Work!</h4>
-                    <div class="game-score" id="gameScoreDisplay">3/3</div>
-                    <p>You've matched all the accidents to their key lessons correctly.</p>
-                </div>
-            </div>
-
-            <!-- Second Game: Timeline Order -->
+            <!-- Challenge 1: Accident Investigation -->
             <div class="content-card">
-                <h3>Quick Recall: Put These in Order</h3>
-                <p style="color: var(--text-secondary); margin-bottom: var(--space-lg);">Click the events in chronological order (earliest first):</p>
+                <h3>🔍 Challenge 1: Accident Investigator</h3>
+                <p style="color: var(--text-secondary); margin-bottom: var(--space-lg);">You're an accident investigator. Based on the evidence below, identify which accident this describes:</p>
                 
-                <div id="orderGame" style="display: flex; flex-wrap: wrap; gap: var(--space-md);">
-                    <button class="diagram-btn" data-order="3" onclick="selectOrder(this)">Atoms for Peace Speech</button>
-                    <button class="diagram-btn" data-order="1" onclick="selectOrder(this)">Einstein-Szilárd Letter</button>
-                    <button class="diagram-btn" data-order="5" onclick="selectOrder(this)">INPO Created</button>
-                    <button class="diagram-btn" data-order="2" onclick="selectOrder(this)">Chicago Pile-1</button>
-                    <button class="diagram-btn" data-order="4" onclick="selectOrder(this)">First Commercial Nuclear Plant</button>
-                    <button class="diagram-btn" data-order="6" onclick="selectOrder(this)">WANO Created</button>
+                <div id="investigatorGame">
+                    <!-- Scenario 1 -->
+                    <div class="scenario active" id="scenario1">
+                        <div class="evidence-panel">
+                            <div class="evidence-item">📋 A relief valve indicator showed "closed" but the valve was actually stuck open</div>
+                            <div class="evidence-item">💧 Coolant was draining from the reactor for over 2 hours undetected</div>
+                            <div class="evidence-item">👷 Operators disabled emergency cooling systems believing they weren't needed</div>
+                            <div class="evidence-item">🏭 Despite severe core damage, public radiation exposure was minimal</div>
+                        </div>
+                        
+                        <div class="answer-options">
+                            <button class="answer-btn" onclick="checkInvestigator(this, 'tmi', true)">
+                                <span class="answer-icon">🇺🇸</span>
+                                Three Mile Island
+                            </button>
+                            <button class="answer-btn" onclick="checkInvestigator(this, 'chernobyl', false)">
+                                <span class="answer-icon">☢️</span>
+                                Chernobyl
+                            </button>
+                            <button class="answer-btn" onclick="checkInvestigator(this, 'fukushima', false)">
+                                <span class="answer-icon">🇯🇵</span>
+                                Fukushima
+                            </button>
+                        </div>
+                        
+                        <div class="scenario-feedback" id="feedback-s1">
+                            <p><strong>Correct!</strong> These are the hallmarks of TMI: misleading instrumentation, operator confusion, and containment that held despite a 52% core melt. This accident drove the human factors revolution in nuclear safety.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Scenario 2 -->
+                    <div class="scenario" id="scenario2">
+                        <div class="evidence-panel">
+                            <div class="evidence-item">⚛️ The reactor had a "positive void coefficient" - steam bubbles increased reactivity</div>
+                            <div class="evidence-item">🔴 Control rods had graphite tips that initially increased power when inserted</div>
+                            <div class="evidence-item">🧪 A safety test was conducted with most safety systems disabled</div>
+                            <div class="evidence-item">🔥 The graphite moderator caught fire and burned for 10 days</div>
+                        </div>
+                        
+                        <div class="answer-options">
+                            <button class="answer-btn" onclick="checkInvestigator(this, 'tmi', false)">
+                                <span class="answer-icon">🇺🇸</span>
+                                Three Mile Island
+                            </button>
+                            <button class="answer-btn" onclick="checkInvestigator(this, 'chernobyl', true)">
+                                <span class="answer-icon">☢️</span>
+                                Chernobyl
+                            </button>
+                            <button class="answer-btn" onclick="checkInvestigator(this, 'fukushima', false)">
+                                <span class="answer-icon">🇯🇵</span>
+                                Fukushima
+                            </button>
+                        </div>
+                        
+                        <div class="scenario-feedback" id="feedback-s2">
+                            <p><strong>Correct!</strong> The RBMK-1000's fatal design flaws: positive void coefficient and graphite-tipped control rods. No containment meant nothing to stop the release. This is why design fundamentals and containment are now non-negotiable.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Scenario 3 -->
+                    <div class="scenario" id="scenario3">
+                        <div class="evidence-panel">
+                            <div class="evidence-item">🌊 External power and all backup generators were destroyed simultaneously</div>
+                            <div class="evidence-item">✅ The reactors shut down correctly when the initiating event occurred</div>
+                            <div class="evidence-item">🔋 Battery power lasted only 8 hours before complete station blackout</div>
+                            <div class="evidence-item">💨 Hydrogen explosions damaged reactor buildings but not primary containment</div>
+                        </div>
+                        
+                        <div class="answer-options">
+                            <button class="answer-btn" onclick="checkInvestigator(this, 'tmi', false)">
+                                <span class="answer-icon">🇺🇸</span>
+                                Three Mile Island
+                            </button>
+                            <button class="answer-btn" onclick="checkInvestigator(this, 'chernobyl', false)">
+                                <span class="answer-icon">☢️</span>
+                                Chernobyl
+                            </button>
+                            <button class="answer-btn" onclick="checkInvestigator(this, 'fukushima', true)">
+                                <span class="answer-icon">🇯🇵</span>
+                                Fukushima
+                            </button>
+                        </div>
+                        
+                        <div class="scenario-feedback" id="feedback-s3">
+                            <p><strong>Correct!</strong> Fukushima showed that "beyond design basis" events can overwhelm multiple safety systems at once. The plant was designed for a 5.7m tsunami; a 14m wave hit. This drove the global adoption of passive safety systems and FLEX equipment.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="scenario-nav">
+                        <span id="scenarioCounter">Scenario 1 of 3</span>
+                        <button class="nav-btn" id="nextScenarioBtn" onclick="nextScenario()" style="display: none;">
+                            Next Scenario <span>→</span>
+                        </button>
+                    </div>
+                    
+                    <div class="investigator-result" id="investigatorResult">
+                        <div class="result-score" id="investigatorScore">0/3</div>
+                        <p id="investigatorMessage"></p>
+                    </div>
                 </div>
+            </div>
+
+            <!-- Challenge 2: Cause Chain Builder -->
+            <div class="content-card">
+                <h3>🔗 Challenge 2: Build the Cause Chain</h3>
+                <p style="color: var(--text-secondary); margin-bottom: var(--space-lg);">Accidents unfold as chains of cause and effect. Put these Fukushima events in the correct sequence:</p>
                 
-                <div id="orderResult" style="margin-top: var(--space-lg); display: none;">
-                    <p style="color: var(--accent-green);">✓ Correct order: Einstein Letter (1939) → Chicago Pile-1 (1942) → Atoms for Peace (1953) → Calder Hall (1956) → INPO (1979) → WANO (1989)</p>
+                <div id="chainGame">
+                    <div class="chain-slots">
+                        <div class="chain-slot" data-slot="1">
+                            <div class="slot-number">1</div>
+                            <div class="slot-content" id="slot1">Drop an event here</div>
+                        </div>
+                        <div class="chain-arrow">→</div>
+                        <div class="chain-slot" data-slot="2">
+                            <div class="slot-number">2</div>
+                            <div class="slot-content" id="slot2">Drop an event here</div>
+                        </div>
+                        <div class="chain-arrow">→</div>
+                        <div class="chain-slot" data-slot="3">
+                            <div class="slot-number">3</div>
+                            <div class="slot-content" id="slot3">Drop an event here</div>
+                        </div>
+                        <div class="chain-arrow">→</div>
+                        <div class="chain-slot" data-slot="4">
+                            <div class="slot-number">4</div>
+                            <div class="slot-content" id="slot4">Drop an event here</div>
+                        </div>
+                        <div class="chain-arrow">→</div>
+                        <div class="chain-slot" data-slot="5">
+                            <div class="slot-number">5</div>
+                            <div class="slot-content" id="slot5">Drop an event here</div>
+                        </div>
+                    </div>
+                    
+                    <div class="chain-events" id="chainEvents">
+                        <div class="chain-event" data-order="3" onclick="selectChainEvent(this)">
+                            💧 No cooling - decay heat builds
+                        </div>
+                        <div class="chain-event" data-order="1" onclick="selectChainEvent(this)">
+                            🌊 Tsunami floods generators
+                        </div>
+                        <div class="chain-event" data-order="5" onclick="selectChainEvent(this)">
+                            💥 Hydrogen explosions
+                        </div>
+                        <div class="chain-event" data-order="2" onclick="selectChainEvent(this)">
+                            🔌 Station blackout begins
+                        </div>
+                        <div class="chain-event" data-order="4" onclick="selectChainEvent(this)">
+                            🔥 Fuel rods overheat, zirconium reacts
+                        </div>
+                    </div>
+                    
+                    <div class="chain-result" id="chainResult">
+                        <p style="color: var(--accent-green);">✓ <strong>Correct sequence!</strong> Understanding cause chains helps identify where safety interventions can break the accident progression.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Challenge 3: Safety Improvement Matcher -->
+            <div class="content-card">
+                <h3>🛡️ Challenge 3: What Prompted This Change?</h3>
+                <p style="color: var(--text-secondary); margin-bottom: var(--space-lg);">Each safety improvement was prompted by a specific accident. Match the improvement to the event that caused it:</p>
+                
+                <div id="improvementGame">
+                    <div class="improvement-question active" id="imp1">
+                        <div class="improvement-card">
+                            <div class="improvement-icon">👁️</div>
+                            <div class="improvement-text">
+                                <strong>Control Room Redesign</strong>
+                                <p>Clear status displays, alarm prioritisation, symptom-based procedures</p>
+                            </div>
+                        </div>
+                        <div class="improvement-options">
+                            <button class="imp-btn" onclick="checkImprovement(1, 'tmi', true)">Three Mile Island</button>
+                            <button class="imp-btn" onclick="checkImprovement(1, 'chernobyl', false)">Chernobyl</button>
+                            <button class="imp-btn" onclick="checkImprovement(1, 'fukushima', false)">Fukushima</button>
+                        </div>
+                        <div class="imp-feedback" id="imp-feedback1"></div>
+                    </div>
+                    
+                    <div class="improvement-question" id="imp2">
+                        <div class="improvement-card">
+                            <div class="improvement-icon">🌍</div>
+                            <div class="improvement-text">
+                                <strong>WANO Established</strong>
+                                <p>Global sharing of operational experience across all nuclear nations</p>
+                            </div>
+                        </div>
+                        <div class="improvement-options">
+                            <button class="imp-btn" onclick="checkImprovement(2, 'tmi', false)">Three Mile Island</button>
+                            <button class="imp-btn" onclick="checkImprovement(2, 'chernobyl', true)">Chernobyl</button>
+                            <button class="imp-btn" onclick="checkImprovement(2, 'fukushima', false)">Fukushima</button>
+                        </div>
+                        <div class="imp-feedback" id="imp-feedback2"></div>
+                    </div>
+                    
+                    <div class="improvement-question" id="imp3">
+                        <div class="improvement-card">
+                            <div class="improvement-icon">🔋</div>
+                            <div class="improvement-text">
+                                <strong>FLEX Equipment</strong>
+                                <p>Portable pumps, generators, and batteries stored at every plant</p>
+                            </div>
+                        </div>
+                        <div class="improvement-options">
+                            <button class="imp-btn" onclick="checkImprovement(3, 'tmi', false)">Three Mile Island</button>
+                            <button class="imp-btn" onclick="checkImprovement(3, 'chernobyl', false)">Chernobyl</button>
+                            <button class="imp-btn" onclick="checkImprovement(3, 'fukushima', true)">Fukushima</button>
+                        </div>
+                        <div class="imp-feedback" id="imp-feedback3"></div>
+                    </div>
+                    
+                    <div class="improvement-question" id="imp4">
+                        <div class="improvement-card">
+                            <div class="improvement-icon">🏗️</div>
+                            <div class="improvement-text">
+                                <strong>Containment Standards</strong>
+                                <p>All new reactors must have robust containment structures</p>
+                            </div>
+                        </div>
+                        <div class="improvement-options">
+                            <button class="imp-btn" onclick="checkImprovement(4, 'tmi', false)">Three Mile Island</button>
+                            <button class="imp-btn" onclick="checkImprovement(4, 'chernobyl', true)">Chernobyl</button>
+                            <button class="imp-btn" onclick="checkImprovement(4, 'fukushima', false)">Fukushima</button>
+                        </div>
+                        <div class="imp-feedback" id="imp-feedback4"></div>
+                    </div>
+                    
+                    <div class="improvement-progress">
+                        <span id="impProgress">0 of 4 complete</span>
+                    </div>
+                    
+                    <div class="improvement-result" id="improvementResult">
+                        <p><strong>All matched!</strong> Each accident left a lasting mark on how the industry operates. These improvements weren't optional—they became requirements.</p>
+                    </div>
                 </div>
             </div>
 
@@ -2813,7 +3343,7 @@
                     Previous
                 </button>
                 <button class="nav-btn primary" onclick="goToPage(9)">
-                    Quiz
+                    Knowledge Check
                     <span>→</span>
                 </button>
             </div>
@@ -3024,23 +3554,19 @@
 
             <div class="content-card" style="text-align: center;">
                 <h3>Module Complete! 🎉</h3>
-                <p style="color: var(--text-secondary);">You've completed Module 2: History & Development. In the next module, we'll explore how nuclear reactors actually work—the physics that makes it all possible.</p>
+                <p style="color: var(--text-secondary);">You've completed Module 2: History & Development. You now understand the origins of nuclear power, how reactor technology evolved through four generations, and how three major accidents shaped today's safety culture.</p>
                 
                 <div style="display: flex; justify-content: center; gap: var(--space-lg); margin-top: var(--space-xl); flex-wrap: wrap;">
                     <button class="nav-btn" onclick="goToPage(1)">
                         <span>↺</span>
                         Review Module
                     </button>
-                    <button class="nav-btn primary">
-                        Next Module
-                        <span>→</span>
-                    </button>
                 </div>
             </div>
 
             <div class="footer">
                 <p>© 2024 The Nuclear House Academy. All rights reserved.</p>
-                <div class="version-number">v0.3</div>
+                <div class="version-number">v0.4</div>
             </div>
         </section>
     </main>
@@ -3251,92 +3777,184 @@
         }
 
         // ========================================
-        // MATCHING GAME
+        // CHALLENGE 1: ACCIDENT INVESTIGATOR
         // ========================================
-        let selectedLeft = null;
-        let selectedRight = null;
-        let matchedCount = 0;
+        let currentScenario = 1;
+        let investigatorScore = 0;
+        const totalScenarios = 3;
 
-        function selectGameItem(element, side) {
-            if (element.classList.contains('matched')) return;
+        function checkInvestigator(btn, answer, isCorrect) {
+            const scenario = document.getElementById('scenario' + currentScenario);
+            const buttons = scenario.querySelectorAll('.answer-btn');
+            const feedback = document.getElementById('feedback-s' + currentScenario);
             
-            if (side === 'left') {
-                if (selectedLeft) selectedLeft.classList.remove('selected');
-                selectedLeft = element;
-                element.classList.add('selected');
+            // Disable all buttons
+            buttons.forEach(b => {
+                b.classList.add('disabled');
+                if (b === btn) {
+                    b.classList.add(isCorrect ? 'correct' : 'wrong');
+                }
+            });
+            
+            // Show correct answer if wrong
+            if (!isCorrect) {
+                buttons.forEach(b => {
+                    const onclick = b.getAttribute('onclick');
+                    if (onclick && onclick.includes('true')) {
+                        b.classList.add('correct');
+                    }
+                });
             } else {
-                if (selectedRight) selectedRight.classList.remove('selected');
-                selectedRight = element;
-                element.classList.add('selected');
+                investigatorScore++;
             }
             
-            // Check for match if both selected
-            if (selectedLeft && selectedRight) {
-                checkMatch();
+            // Show feedback
+            feedback.classList.add('show');
+            
+            // Show next button or final result
+            if (currentScenario < totalScenarios) {
+                document.getElementById('nextScenarioBtn').style.display = 'flex';
+            } else {
+                showInvestigatorResult();
             }
         }
 
-        function checkMatch() {
-            const leftMatch = selectedLeft.dataset.match;
-            const rightMatch = selectedRight.dataset.match;
+        function nextScenario() {
+            // Hide current scenario
+            document.getElementById('scenario' + currentScenario).classList.remove('active');
+            document.getElementById('nextScenarioBtn').style.display = 'none';
             
-            if (leftMatch === rightMatch) {
-                selectedLeft.classList.remove('selected');
-                selectedRight.classList.remove('selected');
-                selectedLeft.classList.add('matched');
-                selectedRight.classList.add('matched');
-                matchedCount++;
-                
-                if (matchedCount === 3) {
-                    document.getElementById('gameResult').classList.add('show');
-                }
-            } else {
-                selectedLeft.classList.add('wrong');
-                selectedRight.classList.add('wrong');
-                
-                setTimeout(() => {
-                    selectedLeft.classList.remove('wrong', 'selected');
-                    selectedRight.classList.remove('wrong', 'selected');
-                    selectedLeft = null;
-                    selectedRight = null;
-                }, 500);
-                return;
-            }
+            // Show next scenario
+            currentScenario++;
+            document.getElementById('scenario' + currentScenario).classList.add('active');
+            document.getElementById('scenarioCounter').textContent = 'Scenario ' + currentScenario + ' of ' + totalScenarios;
+        }
+
+        function showInvestigatorResult() {
+            document.getElementById('investigatorResult').classList.add('show');
+            document.getElementById('investigatorScore').textContent = investigatorScore + '/' + totalScenarios;
             
-            selectedLeft = null;
-            selectedRight = null;
+            const messages = {
+                3: "Perfect! You've demonstrated excellent understanding of each accident's unique characteristics.",
+                2: "Good work! You correctly identified most of the accidents from their evidence.",
+                1: "Keep studying - understanding what made each accident different helps prevent future ones.",
+                0: "Review the accident sections again - each one has distinct warning signs."
+            };
+            document.getElementById('investigatorMessage').textContent = messages[investigatorScore];
         }
 
         // ========================================
-        // ORDER GAME
+        // CHALLENGE 2: CAUSE CHAIN BUILDER
         // ========================================
-        let orderSelections = [];
-        const correctOrder = [1, 2, 3, 4, 5, 6];
+        let selectedChainEvent = null;
+        let currentSlot = 1;
+        let chainScore = 0;
 
-        function selectOrder(element) {
-            if (element.classList.contains('active')) return;
+        function selectChainEvent(element) {
+            if (element.classList.contains('used')) return;
             
-            const order = parseInt(element.dataset.order);
-            const expectedOrder = orderSelections.length + 1;
+            // Deselect previous
+            if (selectedChainEvent) {
+                selectedChainEvent.classList.remove('selected');
+            }
             
-            if (order === expectedOrder) {
-                element.classList.add('active');
-                element.style.borderColor = 'var(--accent-green)';
-                element.style.background = 'rgba(146, 208, 80, 0.2)';
-                orderSelections.push(order);
+            // Select this one
+            selectedChainEvent = element;
+            element.classList.add('selected');
+            
+            // Check if correct for current slot
+            const correctOrder = parseInt(element.dataset.order);
+            
+            if (correctOrder === currentSlot) {
+                // Correct! Place in slot
+                const slotContent = document.getElementById('slot' + currentSlot);
+                const slot = slotContent.closest('.chain-slot');
+                slotContent.textContent = element.textContent.trim();
+                slot.classList.add('filled');
+                element.classList.add('used');
+                element.classList.remove('selected');
+                selectedChainEvent = null;
+                chainScore++;
+                currentSlot++;
                 
-                if (orderSelections.length === 6) {
-                    document.getElementById('orderResult').style.display = 'block';
+                // Check if complete
+                if (currentSlot > 5) {
+                    document.getElementById('chainResult').classList.add('show');
                 }
             } else {
+                // Wrong - shake and reset
+                element.style.animation = 'shake 0.5s ease';
                 element.style.borderColor = 'var(--color-danger)';
-                element.style.background = 'rgba(229, 69, 69, 0.2)';
+                element.style.background = 'rgba(229, 69, 69, 0.15)';
                 
                 setTimeout(() => {
+                    element.style.animation = '';
                     element.style.borderColor = '';
                     element.style.background = '';
-                }, 500);
+                    element.classList.remove('selected');
+                    selectedChainEvent = null;
+                }, 600);
             }
+        }
+
+        // ========================================
+        // CHALLENGE 3: IMPROVEMENT MATCHER
+        // ========================================
+        let improvementAnswers = { 1: false, 2: false, 3: false, 4: false };
+        let improvementScore = 0;
+
+        function checkImprovement(questionNum, answer, isCorrect) {
+            if (improvementAnswers[questionNum]) return; // Already answered
+            
+            improvementAnswers[questionNum] = true;
+            const question = document.getElementById('imp' + questionNum);
+            const buttons = question.querySelectorAll('.imp-btn');
+            const feedback = document.getElementById('imp-feedback' + questionNum);
+            
+            // Mark buttons
+            buttons.forEach(btn => {
+                btn.classList.add('disabled');
+                const onclick = btn.getAttribute('onclick');
+                if (onclick && onclick.includes(answer)) {
+                    btn.classList.add(isCorrect ? 'correct' : 'wrong');
+                }
+                // Show correct answer
+                if (!isCorrect && onclick && onclick.includes('true')) {
+                    btn.classList.add('correct');
+                }
+            });
+            
+            // Show feedback
+            if (isCorrect) {
+                improvementScore++;
+                feedback.textContent = '✓ Correct!';
+                feedback.classList.add('correct', 'show');
+            } else {
+                feedback.textContent = '✗ Not quite - see the correct answer highlighted';
+                feedback.classList.add('wrong', 'show');
+            }
+            
+            // Update progress
+            const completed = Object.values(improvementAnswers).filter(Boolean).length;
+            document.getElementById('impProgress').textContent = completed + ' of 4 complete';
+            
+            // Move to next question after delay
+            setTimeout(() => {
+                question.classList.remove('active');
+                
+                // Find next unanswered question
+                let nextQ = questionNum + 1;
+                while (nextQ <= 4 && improvementAnswers[nextQ]) {
+                    nextQ++;
+                }
+                
+                if (nextQ <= 4) {
+                    document.getElementById('imp' + nextQ).classList.add('active');
+                } else if (completed === 4) {
+                    // All done
+                    document.getElementById('improvementResult').classList.add('show');
+                }
+            }, 1500);
         }
 
         // ========================================
